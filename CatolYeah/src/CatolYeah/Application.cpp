@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Logger.h"
 
 namespace CatolYeah {
 
@@ -12,6 +13,7 @@ namespace CatolYeah {
 
 	void Application::Run()
 	{
+		CY_CORE_TRACE("Application main loop");
 		while (true);
 	}
 }

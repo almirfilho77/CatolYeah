@@ -1,0 +1,3 @@
+[submodule "CatolYeah/vendor/spdlog"]
+	path = CatolYeah/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git

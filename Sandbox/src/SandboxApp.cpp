@@ -6,12 +6,12 @@ class Sandbox : public CatolYeah::Application
 public:
 	Sandbox()
 	{
-		std::cout << "Sandbox C'tor\n";
+		CY_TRACE("Sandbox c'tor");
 	}
 
 	~Sandbox()
 	{
-		std::cout << "Sandbox D'tor\n";
+		CY_TRACE("Sandbox d'tor");
 	}
 };
 
