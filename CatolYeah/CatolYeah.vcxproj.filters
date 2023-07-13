@@ -4,6 +4,9 @@
     <Filter Include="CatolYeah">
       <UniqueIdentifier>{1FCBC4DF-8B35-7956-D473-2AFC401D57AB}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CatolYeah\Events">
+      <UniqueIdentifier>{23DE8096-0FD7-9FE8-3809-856D24617FF4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CatolYeah.h" />
@@ -16,9 +19,16 @@
     <ClInclude Include="src\CatolYeah\EntryPoint.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\Events\Event.h">
+      <Filter>CatolYeah\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Logger.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\Events\KeyEvent.h" />
+    <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\CatolYeah\Events\MouseEvent.h" />
+    <ClInclude Include="src\CatolYeah\Events\MouseCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">

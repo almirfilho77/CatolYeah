@@ -11,4 +11,6 @@
 	#error CatolYeah only supports windows!
 #endif
 
+#define BIT(x) (x << 1)
+
 #endif /* __CORE_H__ */
