@@ -1,3 +1,4 @@
+#include "cypch.h"
 #include "Logger.h"
 
 #include "spdlog/sinks/stdout_sinks.h"

@@ -2,8 +2,6 @@
 #define __MOUSE_CODES_H__
 #pragma once
 
-#include <stdint.h>
-
 namespace CatolYeah
 {
 	using MouseCode = uint16_t;

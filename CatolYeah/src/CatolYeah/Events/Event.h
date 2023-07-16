@@ -4,11 +4,6 @@
 
 #include "CatolYeah/Core.h"
 
-/* Put this in the precompiled header */
-#include <string>
-#include <functional>
-/* ---------------------------------- */
-
 namespace CatolYeah {
 
 	enum class EventType

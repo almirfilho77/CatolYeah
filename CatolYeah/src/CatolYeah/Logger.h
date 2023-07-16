@@ -1,7 +1,6 @@
 #ifndef __LOGGER_H__
 #define __LOGGER_H__
-
-#include <memory>
+#pragma once
 
 #include "Core.h"
 

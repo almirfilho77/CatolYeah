@@ -19,16 +19,25 @@
     <ClInclude Include="src\CatolYeah\EntryPoint.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h">
+      <Filter>CatolYeah\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Events\Event.h">
+      <Filter>CatolYeah\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Events\KeyEvent.h">
+      <Filter>CatolYeah\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Events\MouseCodes.h">
+      <Filter>CatolYeah\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Events\MouseEvent.h">
       <Filter>CatolYeah\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\Logger.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\Events\KeyEvent.h" />
-    <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\CatolYeah\Events\MouseEvent.h" />
-    <ClInclude Include="src\CatolYeah\Events\MouseCodes.h" />
+    <ClInclude Include="src\cypch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
@@ -37,5 +46,6 @@
     <ClCompile Include="src\CatolYeah\Logger.cpp">
       <Filter>CatolYeah</Filter>
     </ClCompile>
+    <ClCompile Include="src\cypch.cpp" />
   </ItemGroup>
 </Project>

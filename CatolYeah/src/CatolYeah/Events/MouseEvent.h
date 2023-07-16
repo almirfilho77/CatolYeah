@@ -5,8 +5,6 @@
 #include "Event.h"
 #include "MouseCodes.h"
 
-#include <sstream>
-
 namespace CatolYeah {
 
 	/*
