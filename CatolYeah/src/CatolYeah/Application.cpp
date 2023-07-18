@@ -8,6 +8,8 @@ namespace CatolYeah {
 
 	Application::Application()
 	{
+		m_window = std::unique_ptr<Window>(Window::Create());
+		m_running = true;
 	}
 
 	Application::~Application()
@@ -17,8 +19,9 @@ namespace CatolYeah {
 	void Application::Run()
 	{
 		CY_CORE_TRACE("Application main loop");
-		WindowResizeEvent evnt(1260, 1080);
-		CY_CORE_DEBUG(evnt);
-		while (true);
+		while (m_running)
+		{
+			m_window->OnUpdate();
+		}
 	}
 }

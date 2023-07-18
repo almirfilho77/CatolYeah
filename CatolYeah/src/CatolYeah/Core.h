@@ -11,6 +11,13 @@
 	#error CatolYeah only supports windows!
 #endif
 
+/* Debug breakpoint */
+#ifdef CY_CONFIG_DEBUG
+#define DEBUGBREAK			__debugbreak();
+#else
+#define DEBUGBREAK
+#endif/* Debug breakpoint */
+
 #define BIT(x) (x << 1)
 
 #endif /* __CORE_H__ */

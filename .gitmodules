@@ -1,3 +1,6 @@
 [submodule "CatolYeah/vendor/spdlog"]
 	path = CatolYeah/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "CatolYeah/vendor/GLFW"]
+	path = CatolYeah/vendor/GLFW
+	url = https://github.com/almirfilho77/glfw

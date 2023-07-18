@@ -12,10 +12,18 @@ workspace "CatolYeah"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder
+IncludeDir = {}
+IncludeDir["GLFW"] = "CatolYeah/vendor/GLFW/include"
+
+-- Similar to "add_subdirectory" of CMake
+include "CatolYeah/vendor/GLFW"
+
 project "CatolYeah"
 	location "CatolYeah"
 	kind "SharedLib"
 	language "C++"
+	cppdialect "C++17"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -32,12 +40,19 @@ project "CatolYeah"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib",
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 		defines
@@ -69,6 +84,7 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -101,15 +117,15 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		defines "CY_DEBUG"
+		defines "CY_CONFIG_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "CY_RELEASE"
+		defines "CY_CONFIG_DEBUG"
 		symbols "Off"
 		optimize "On"
 
 	filter "configurations:Dist"
-		defines "CY_DIST"
+		defines "CY_CONFIG_DEBUG"
 		symbols "Off"
 		optimize "On"

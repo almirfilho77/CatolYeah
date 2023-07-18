@@ -77,11 +77,12 @@ namespace CatolYeah {
 		Event& m_event;
 	};
 
+#ifdef CY_CONFIG_DEBUG
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();
 	}
-
+#endif
 } //CatolYeah
 
 #endif /* __EVENT_H__ */

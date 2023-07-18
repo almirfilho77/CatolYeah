@@ -29,16 +29,27 @@ namespace CatolYeah {
 }
 
 /* Core macros */
-#define CY_CORE_TRACE(...)   SPDLOG_LOGGER_TRACE(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
-#define CY_CORE_DEBUG(...)   SPDLOG_LOGGER_DEBUG(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
+#ifdef CY_CONFIG_DEBUG /* CORE Debug only log levels */
+	#define CY_CORE_TRACE(...)   SPDLOG_LOGGER_TRACE(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
+	#define CY_CORE_DEBUG(...)   SPDLOG_LOGGER_DEBUG(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
+#else
+	#define CY_CORE_TRACE(...)   
+	#define CY_CORE_DEBUG(...)
+#endif /* CORE Debug only log levels */
+
 #define CY_CORE_INFO(...)    SPDLOG_LOGGER_INFO(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
 #define CY_CORE_WARN(...)    SPDLOG_LOGGER_WARN(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
 #define CY_CORE_ERROR(...)   SPDLOG_LOGGER_ERROR(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
 #define CY_CORE_FATAL(...)   SPDLOG_LOGGER_CRITICAL(::CatolYeah::Logger::GetCoreLogger(),__VA_ARGS__)
 
 /* Client macros */
-#define CY_TRACE(...)		 SPDLOG_LOGGER_TRACE(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
-#define CY_DEBUG(...)		 SPDLOG_LOGGER_DEBUG(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
+#ifdef CY_CONFIG_DEBUG /* CLIENT Debug only log levels */
+	#define CY_TRACE(...)		 SPDLOG_LOGGER_TRACE(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
+	#define CY_DEBUG(...)		 SPDLOG_LOGGER_DEBUG(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
+#else
+	#define CY_TRACE(...)
+	#define CY_DEBUG(...)
+#endif /* CLIENT Debug only log levels*/
 #define CY_INFO(...)		 SPDLOG_LOGGER_INFO(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
 #define CY_WARN(...)		 SPDLOG_LOGGER_WARN(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
 #define CY_ERROR(...)		 SPDLOG_LOGGER_ERROR(::CatolYeah::Logger::GetClientLogger(),__VA_ARGS__)
