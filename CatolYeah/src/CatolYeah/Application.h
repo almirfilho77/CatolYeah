@@ -3,7 +3,10 @@
 #pragma once
 
 #include "Core.h"
-#include "Window.h"
+#include "CatolYeah/Window.h"
+#include "CatolYeah/Events/ApplicationEvent.h"
+#include "CatolYeah/Events/KeyEvent.h"
+#include "CatolYeah/Events/MouseEvent.h"
 
 namespace CatolYeah {
 
@@ -14,6 +17,10 @@ namespace CatolYeah {
 		virtual ~Application();
 
 		void Run();
+
+		void OnEvent(Event& e);
+	private:
+		bool m_OnWindowClose(WindowCloseEvent &e);
 	private:
 		std::unique_ptr<Window> m_window;
 		bool m_running = false;

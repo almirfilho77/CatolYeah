@@ -31,7 +31,7 @@ namespace CatolYeah {
 	 * @class KeyPressedEvent
 	 * @brief Class to describe a "key pressed" event
 	 */
-	class CATOLYEAH_API KeyPressedEvent : KeyEvent
+	class CATOLYEAH_API KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeat_count)
@@ -68,7 +68,7 @@ namespace CatolYeah {
 	 * @class KeyReleasedEvent
 	 * @brief Class to describe a "key released" event
 	 */
-	class CATOLYEAH_API KeyReleasedEvent : KeyEvent
+	class CATOLYEAH_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
