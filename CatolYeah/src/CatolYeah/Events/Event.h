@@ -51,6 +51,8 @@ namespace CatolYeah {
 			return GetCategoryFlags() & category;
 		}
 
+		bool IsHandled() const { return t_handled; }
+
 	protected:
 		bool t_handled = false;
 	};

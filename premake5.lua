@@ -68,15 +68,18 @@ project "CatolYeah"
 
 	filter "configurations:Debug"
 		defines "CY_CONFIG_DEBUG"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CY_CONFIG_RELEASE"
+		runtime "Release"
 		symbols "Off"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CY_CONFIG_DIST"
+		runtime "Release"
 		symbols "Off"
 		optimize "On"
 
@@ -108,7 +111,7 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 		defines
@@ -118,14 +121,17 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "CY_CONFIG_DEBUG"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "CY_CONFIG_DEBUG"
+		runtime "Release"
 		symbols "Off"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "CY_CONFIG_DEBUG"
+		runtime "Release"
 		symbols "Off"
 		optimize "On"

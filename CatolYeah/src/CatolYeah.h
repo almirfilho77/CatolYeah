@@ -3,6 +3,7 @@
 
 /* To be used by Apps */
 #include "CatolYeah/Application.h"
+#include "CatolYeah/Layer.h"
 #include "CatolYeah/Logger.h"
 
 /* ----- Entry point -----*/

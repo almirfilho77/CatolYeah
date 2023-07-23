@@ -40,6 +40,12 @@
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h">
       <Filter>CatolYeah\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\Layer.h">
+      <Filter>CatolYeah</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\LayerStack.h">
+      <Filter>CatolYeah</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Logger.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
@@ -53,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
+      <Filter>CatolYeah</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\Layer.cpp">
+      <Filter>CatolYeah</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\LayerStack.cpp">
       <Filter>CatolYeah</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\Logger.cpp">

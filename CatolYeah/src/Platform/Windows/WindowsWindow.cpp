@@ -1,7 +1,6 @@
 #include "cypch.h"
 #include "WindowsWindow.h"
 
-#include "CatolYeah/Logger.h"
 #include "CatolYeah/Events/ApplicationEvent.h"
 #include "CatolYeah/Events/KeyEvent.h"
 #include "CatolYeah/Events/MouseEvent.h"

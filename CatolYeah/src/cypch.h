@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include <vector>
 
+#include "CatolYeah/Logger.h"
+
 
 #ifdef CY_PLATFORM_WINDOWS
 #include <Windows.h>
