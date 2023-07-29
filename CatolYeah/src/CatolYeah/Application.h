@@ -21,9 +21,14 @@ namespace CatolYeah {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
+
+		inline Window& GetWindow() { return *m_window; }
+
+		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool m_OnWindowClose(WindowCloseEvent &e);
 	private:
+		static Application* s_Instance;
 		std::unique_ptr<Window> m_window;
 		bool m_running = false;
 		LayerStack m_layerStack;

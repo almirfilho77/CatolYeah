@@ -4,9 +4,17 @@
 namespace CatolYeah {
 
 #define BIND_EVENT_FN(x)	std::bind(&Application::x, this, std::placeholders::_1)
+	
+	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
 	{
+		if (s_Instance != nullptr)
+		{
+			CY_CORE_ERROR("Application already exists");
+			DEBUGBREAK
+		}
+		s_Instance = this;
 		m_window = std::unique_ptr<Window>(Window::Create());
 		m_window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 		m_running = true;
@@ -36,12 +44,16 @@ namespace CatolYeah {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		CY_CORE_TRACE("Push regular layer into the stack");
 		m_layerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
+		CY_CORE_TRACE("Push overlay into the stack");
 		m_layerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 	void Application::Run()

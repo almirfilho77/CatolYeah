@@ -16,10 +16,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "CatolYeah/vendor/GLFW/include"
 IncludeDir["Glad"] = "CatolYeah/vendor/Glad/include"
+IncludeDir["ImGui"] = "CatolYeah/vendor/imgui/"
 
 -- Similar to "add_subdirectory" of CMake
 include "CatolYeah/vendor/GLFW"
 include "CatolYeah/vendor/Glad"
+include "CatolYeah/vendor/imgui"
 
 project "CatolYeah"
 	location "CatolYeah"
@@ -45,12 +47,14 @@ project "CatolYeah"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}",
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib",
 	}
 

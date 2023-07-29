@@ -5,6 +5,7 @@
 #include "CatolYeah/Application.h"
 #include "CatolYeah/Layer.h"
 #include "CatolYeah/Logger.h"
+#include "CatolYeah/ImGui/ImGuiLayer.h"
 
 /* ----- Entry point -----*/
 #include "CatolYeah/EntryPoint.h"

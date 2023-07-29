@@ -7,6 +7,11 @@ public:
 	ExampleLayer()
 		: Layer("Example") {}
 
+	void OnAttach() override
+	{
+		CY_INFO("ExampleLayer::OnAttach!");
+	}
+
 	void OnUpdate() override
 	{
 		CY_INFO("ExampleLayer::OnUpdate!");
@@ -25,6 +30,7 @@ public:
 	{
 		CY_TRACE("Sandbox c'tor");
 		PushLayer(new ExampleLayer());
+		PushOverlay(new CatolYeah::ImGuiLayer());
 	}
 
 	~Sandbox()
