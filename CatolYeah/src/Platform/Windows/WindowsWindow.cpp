@@ -5,6 +5,8 @@
 #include "CatolYeah/Events/KeyEvent.h"
 #include "CatolYeah/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace CatolYeah
 {
 	static bool s_ISGLFWInitialized = false;
@@ -81,6 +83,12 @@ namespace CatolYeah
 
 		m_window = glfwCreateWindow(m_windowData.Width, m_windowData.Height, m_windowData.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		if (status == 0)
+		{
+			CY_CORE_ERROR("Failed to initialize Glad");
+			DEBUGBREAK
+		}
 		glfwSetWindowUserPointer(m_window, &m_windowData);
 		SetVSync(true);
 

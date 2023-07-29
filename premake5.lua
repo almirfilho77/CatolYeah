@@ -15,9 +15,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder
 IncludeDir = {}
 IncludeDir["GLFW"] = "CatolYeah/vendor/GLFW/include"
+IncludeDir["Glad"] = "CatolYeah/vendor/Glad/include"
 
 -- Similar to "add_subdirectory" of CMake
 include "CatolYeah/vendor/GLFW"
+include "CatolYeah/vendor/Glad"
 
 project "CatolYeah"
 	location "CatolYeah"
@@ -41,12 +43,14 @@ project "CatolYeah"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib",
 	}
 
@@ -58,7 +62,8 @@ project "CatolYeah"
 		defines
 		{
 			"CY_PLATFORM_WINDOWS",
-			"CY_BUILD_DLL"
+			"CY_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
