@@ -9,17 +9,17 @@ public:
 
 	void OnAttach() override
 	{
-		CY_INFO("ExampleLayer::OnAttach!");
+		CY_TRACE("ExampleLayer::OnAttach!");
 	}
 
 	void OnUpdate() override
 	{
-		CY_INFO("ExampleLayer::OnUpdate!");
+		
 	}
 
 	void OnEvent(CatolYeah::Event& event) override
 	{
-		CY_TRACE("{0}", event);
+		
 	}
 };
 

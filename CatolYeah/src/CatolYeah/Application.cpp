@@ -1,9 +1,9 @@
 #include "cypch.h"
 #include "Application.h"
 
-namespace CatolYeah {
+#include "glad/glad.h"
 
-#define BIND_EVENT_FN(x)	std::bind(&Application::x, this, std::placeholders::_1)
+namespace CatolYeah {
 	
 	Application* Application::s_Instance = nullptr;
 
@@ -16,7 +16,7 @@ namespace CatolYeah {
 		}
 		s_Instance = this;
 		m_window = std::unique_ptr<Window>(Window::Create());
-		m_window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
 		m_running = true;
 	}
 
@@ -29,7 +29,7 @@ namespace CatolYeah {
 	{
 		CY_CORE_DEBUG("{0}", e);
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(m_OnWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(CY_BIND_EVENT_FN(Application::m_OnWindowClose));
 
 		for (auto it = m_layerStack.end(); it != m_layerStack.begin();)
 		{
@@ -61,6 +61,7 @@ namespace CatolYeah {
 		CY_CORE_TRACE("Application main loop");
 		while (m_running)
 		{
+			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
 			{
 				layer->OnUpdate();

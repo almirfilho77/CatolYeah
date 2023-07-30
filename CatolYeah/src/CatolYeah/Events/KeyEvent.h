@@ -91,6 +91,32 @@ namespace CatolYeah {
 		/* --------------- */
 	};
 
+	/*
+	 * @class KeyTypedEvent
+	 * @brief Class to describe a "key released" event
+	 */
+	class CATOLYEAH_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode) {}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+
+		/* For DEBUG only */
+#ifdef CY_CONFIG_DEBUG
+		virtual const char* GetName() const override { return "KeyTyped"; }
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << t_keyCode;
+			return ss.str();
+		}
+#endif
+		/* --------------- */
+	};
+
 }
 
 #endif /* __KEY_EVENT_H__ */

@@ -58,6 +58,11 @@ namespace CatolYeah
 		m_windowData.VSync = enabled;
 	}
 
+	bool WindowsWindow::GetKeyIsPressed(int keycode)
+	{
+		return glfwGetKey(m_window, keycode) == GLFW_PRESS;
+	}
+
 	void WindowsWindow::m_Init(const WindowProps& props)
 	{
 		m_windowData.Title = props.Title;
@@ -137,6 +142,14 @@ namespace CatolYeah
 						break;
 					}
 				}
+			}
+		);
+
+		glfwSetCharCallback(m_window,
+			[](GLFWwindow* window, unsigned int codepoint)
+			{
+				auto window_data_ptr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+				window_data_ptr->EventCallback(KeyTypedEvent(codepoint));
 			}
 		);
 

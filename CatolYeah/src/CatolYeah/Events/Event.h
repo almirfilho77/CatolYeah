@@ -6,11 +6,14 @@
 
 namespace CatolYeah {
 
+#define EVENT_RETURN_PASS_ON false
+#define EVENT_RETURN_HANDLED true
+
 	enum class EventType
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 

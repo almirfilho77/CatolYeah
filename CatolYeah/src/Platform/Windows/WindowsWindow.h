@@ -23,6 +23,8 @@ namespace CatolYeah {
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override { return m_windowData.VSync; }
 
+		bool GetKeyIsPressed(int keycode) override;
+
 	private:
 		virtual void m_Init(const WindowProps& props);
 		virtual void m_Shutdown();
