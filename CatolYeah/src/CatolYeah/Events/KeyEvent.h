@@ -17,7 +17,7 @@ namespace CatolYeah {
 		virtual int GetCategoryFlags() const override 
 		{
 			return (EventCategory::EventCategoryInput | 
-					EventCategory::EventCategoryKeyboard); 
+					EventCategory::EventCategoryKeyboard);
 		}
 
 	protected:

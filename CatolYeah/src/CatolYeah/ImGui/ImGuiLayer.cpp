@@ -6,6 +6,7 @@
 #include "GLFW/glfw3.h"
 
 #include "CatolYeah/Application.h"
+#include "CatolYeah/Input.h"
 
 namespace CatolYeah {
 
@@ -65,7 +66,10 @@ namespace CatolYeah {
 
 	void ImGuiLayer::OnEvent(Event& event)
 	{
-		CY_CORE_DEBUG("{0}", event);
+        if (event.IsInCategory(EventCategoryKeyboard) || event.IsInCategory(EventCategoryMouseButton))
+        {
+            CY_CORE_DEBUG("{0}", event);
+        }
 		EventDispatcher dispatcher(event);
 		/* Mouse Events */
 		dispatcher.Dispatch<MouseButtonPressedEvent>(CY_BIND_EVENT_FN(ImGuiLayer::m_OnMouseButtonPressedEvent));
@@ -265,11 +269,10 @@ namespace CatolYeah {
 
     void s_UpdateKeyModifiers()
     {
-        Application& app = Application::Get();
-        bool is_ctrl_key_pressed = (app.GetWindow().GetKeyIsPressed(GLFW_KEY_LEFT_CONTROL)) || (app.GetWindow().GetKeyIsPressed(GLFW_KEY_RIGHT_CONTROL));
-        bool is_shift_key_pressed = (app.GetWindow().GetKeyIsPressed(GLFW_KEY_LEFT_SHIFT)) || (app.GetWindow().GetKeyIsPressed(GLFW_KEY_RIGHT_SHIFT));
-        bool is_alt_key_pressed = (app.GetWindow().GetKeyIsPressed(GLFW_KEY_LEFT_ALT)) || (app.GetWindow().GetKeyIsPressed(GLFW_KEY_RIGHT_ALT));
-        bool is_super_key_pressed = (app.GetWindow().GetKeyIsPressed(GLFW_KEY_LEFT_SUPER)) || (app.GetWindow().GetKeyIsPressed(GLFW_KEY_RIGHT_SUPER));
+        bool is_ctrl_key_pressed = (Input::IsKeyPressed(GLFW_KEY_LEFT_CONTROL)) || (Input::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL));
+        bool is_shift_key_pressed = (Input::IsKeyPressed(GLFW_KEY_LEFT_SHIFT))  || (Input::IsKeyPressed(GLFW_KEY_RIGHT_SHIFT));
+        bool is_alt_key_pressed = (Input::IsKeyPressed(GLFW_KEY_LEFT_ALT))      || (Input::IsKeyPressed(GLFW_KEY_RIGHT_ALT));
+        bool is_super_key_pressed = (Input::IsKeyPressed(GLFW_KEY_LEFT_SUPER))  || (Input::IsKeyPressed(GLFW_KEY_RIGHT_SUPER));
 
         ImGuiIO& io = ImGui::GetIO();
         io.AddKeyEvent(ImGuiMod_Ctrl, is_ctrl_key_pressed);

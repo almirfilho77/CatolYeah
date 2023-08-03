@@ -58,11 +58,6 @@ namespace CatolYeah
 		m_windowData.VSync = enabled;
 	}
 
-	bool WindowsWindow::GetKeyIsPressed(int keycode)
-	{
-		return glfwGetKey(m_window, keycode) == GLFW_PRESS;
-	}
-
 	void WindowsWindow::m_Init(const WindowProps& props)
 	{
 		m_windowData.Title = props.Title;

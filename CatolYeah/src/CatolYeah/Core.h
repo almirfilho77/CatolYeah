@@ -18,7 +18,7 @@
 #define DEBUGBREAK
 #endif/* Debug breakpoint */
 
-#define BIT(x) (x << 1)
+#define BIT(x) (1 << x)
 
 #define CY_BIND_EVENT_FN(fn)	std::bind(&fn, this, std::placeholders::_1)
 

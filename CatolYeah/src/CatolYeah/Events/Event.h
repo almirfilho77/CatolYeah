@@ -51,7 +51,7 @@ namespace CatolYeah {
 
 		inline bool IsInCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & category;
+			return (GetCategoryFlags() & category);
 		}
 
 		bool IsHandled() const { return t_handled; }

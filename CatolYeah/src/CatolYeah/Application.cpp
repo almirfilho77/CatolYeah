@@ -5,16 +5,16 @@
 
 namespace CatolYeah {
 	
-	Application* Application::s_Instance = nullptr;
+	Application* Application::s_instance = nullptr;
 
 	Application::Application()
 	{
-		if (s_Instance != nullptr)
+		if (s_instance != nullptr)
 		{
 			CY_CORE_ERROR("Application already exists");
 			DEBUGBREAK
 		}
-		s_Instance = this;
+		s_instance = this;
 		m_window = std::unique_ptr<Window>(Window::Create());
 		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
 		m_running = true;
@@ -27,7 +27,10 @@ namespace CatolYeah {
 
 	void Application::OnEvent(Event& e)
 	{
-		CY_CORE_DEBUG("{0}", e);
+		if (e.IsInCategory(EventCategoryKeyboard) || e.IsInCategory(EventCategoryMouseButton))
+		{
+			CY_CORE_DEBUG("{0}", e);
+		}
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(CY_BIND_EVENT_FN(Application::m_OnWindowClose));
 

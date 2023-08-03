@@ -24,11 +24,11 @@ namespace CatolYeah {
 
 		inline Window& GetWindow() { return *m_window; }
 
-		inline static Application& Get() { return *s_Instance; }
+		inline static Application& Get() { return *s_instance; }
 	private:
 		bool m_OnWindowClose(WindowCloseEvent &e);
 	private:
-		static Application* s_Instance;
+		static Application* s_instance;
 		std::unique_ptr<Window> m_window;
 		bool m_running = false;
 		LayerStack m_layerStack;
