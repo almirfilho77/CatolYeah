@@ -163,10 +163,11 @@
     <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h" />
     <ClInclude Include="src\CatolYeah\Events\Event.h" />
     <ClInclude Include="src\CatolYeah\Events\KeyEvent.h" />
-    <ClInclude Include="src\CatolYeah\Events\MouseCodes.h" />
+    <ClInclude Include="src\CatolYeah\MouseCodes.h" />
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h" />
     <ClInclude Include="src\CatolYeah\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\CatolYeah\Input.h" />
+    <ClInclude Include="src\CatolYeah\KeyCodes.h" />
     <ClInclude Include="src\CatolYeah\Layer.h" />
     <ClInclude Include="src\CatolYeah\LayerStack.h" />
     <ClInclude Include="src\CatolYeah\Logger.h" />

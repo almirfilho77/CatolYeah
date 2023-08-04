@@ -40,7 +40,7 @@
     <ClInclude Include="src\CatolYeah\Events\KeyEvent.h">
       <Filter>CatolYeah\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\Events\MouseCodes.h">
+    <ClInclude Include="src\CatolYeah\MouseCodes.h">
       <Filter>CatolYeah\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h">
@@ -70,6 +70,7 @@
     <ClInclude Include="src\cypch.h" />
     <ClInclude Include="src\CatolYeah\Input.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\CatolYeah\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">

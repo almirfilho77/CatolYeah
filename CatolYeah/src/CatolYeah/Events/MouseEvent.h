@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Event.h"
-#include "MouseCodes.h"
+#include "CatolYeah/MouseCodes.h"
 
 namespace CatolYeah {
 

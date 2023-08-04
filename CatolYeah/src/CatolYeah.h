@@ -3,8 +3,13 @@
 
 /* To be used by Apps */
 #include "CatolYeah/Application.h"
-#include "CatolYeah/Layer.h"
 #include "CatolYeah/Logger.h"
+
+#include "CatolYeah/Input.h"
+#include "CatolYeah/KeyCodes.h"
+#include "CatolYeah/MouseCodes.h"
+
+#include "CatolYeah/Layer.h"
 #include "CatolYeah/ImGui/ImGuiLayer.h"
 
 /* ----- Entry point -----*/
