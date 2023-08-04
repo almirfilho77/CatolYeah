@@ -17,6 +17,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "CatolYeah/vendor/GLFW/include"
 IncludeDir["Glad"] = "CatolYeah/vendor/Glad/include"
 IncludeDir["ImGui"] = "CatolYeah/vendor/imgui/"
+IncludeDir["glm"] = "CatolYeah/vendor/glm/"
 
 -- Similar to "add_subdirectory" of CMake
 include "CatolYeah/vendor/GLFW"
@@ -48,6 +49,7 @@ project "CatolYeah"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -110,7 +112,8 @@ project "Sandbox"
 	includedirs
 	{
 		"CatolYeah/vendor/spdlog/include",
-		"CatolYeah/src"
+		"CatolYeah/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links

@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>cypch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>CY_PLATFORM_WINDOWS;CY_BUILD_DLL;GLFW_INCLUDE_NONE;CY_CONFIG_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -103,7 +103,7 @@
       <PrecompiledHeaderFile>cypch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>CY_PLATFORM_WINDOWS;CY_BUILD_DLL;GLFW_INCLUDE_NONE;CY_CONFIG_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -132,7 +132,7 @@
       <PrecompiledHeaderFile>cypch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>CY_PLATFORM_WINDOWS;CY_BUILD_DLL;GLFW_INCLUDE_NONE;CY_CONFIG_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -163,7 +163,6 @@
     <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h" />
     <ClInclude Include="src\CatolYeah\Events\Event.h" />
     <ClInclude Include="src\CatolYeah\Events\KeyEvent.h" />
-    <ClInclude Include="src\CatolYeah\MouseCodes.h" />
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h" />
     <ClInclude Include="src\CatolYeah\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\CatolYeah\Input.h" />
@@ -171,11 +170,12 @@
     <ClInclude Include="src\CatolYeah\Layer.h" />
     <ClInclude Include="src\CatolYeah\LayerStack.h" />
     <ClInclude Include="src\CatolYeah\Logger.h" />
+    <ClInclude Include="src\CatolYeah\MouseCodes.h" />
     <ClInclude Include="src\CatolYeah\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cypch.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp" />
@@ -184,11 +184,11 @@
     <ClCompile Include="src\CatolYeah\LayerStack.cpp" />
     <ClCompile Include="src\CatolYeah\Logger.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cypch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

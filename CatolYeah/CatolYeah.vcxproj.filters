@@ -40,14 +40,17 @@
     <ClInclude Include="src\CatolYeah\Events\KeyEvent.h">
       <Filter>CatolYeah\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\MouseCodes.h">
-      <Filter>CatolYeah\Events</Filter>
-    </ClInclude>
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h">
       <Filter>CatolYeah\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\ImGui\ImGuiLayer.h">
       <Filter>CatolYeah\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Input.h">
+      <Filter>CatolYeah</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\KeyCodes.h">
+      <Filter>CatolYeah</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\Layer.h">
       <Filter>CatolYeah</Filter>
@@ -58,19 +61,22 @@
     <ClInclude Include="src\CatolYeah\Logger.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\MouseCodes.h">
+      <Filter>CatolYeah</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Window.h">
       <Filter>CatolYeah</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\cypch.h" />
-    <ClInclude Include="src\CatolYeah\Input.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\CatolYeah\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
@@ -91,10 +97,12 @@
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\cypch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>
