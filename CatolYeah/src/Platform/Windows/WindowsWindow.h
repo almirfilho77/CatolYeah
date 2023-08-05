@@ -5,6 +5,8 @@
 #include "CatolYeah/Window.h"
 #include "GLFW/glfw3.h"
 
+#include "CatolYeah/Renderer/GraphicsContext.h"
+
 namespace CatolYeah {
 	
 	class WindowsWindow : public Window
@@ -31,6 +33,7 @@ namespace CatolYeah {
 
 	private:
 		GLFWwindow* m_window;
+		GraphicsContext* m_context;
 
 		struct WindowData
 		{

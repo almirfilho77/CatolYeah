@@ -5,7 +5,7 @@
 #include "CatolYeah/Events/KeyEvent.h"
 #include "CatolYeah/Events/MouseEvent.h"
 
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace CatolYeah
 {
@@ -36,7 +36,7 @@ namespace CatolYeah
 	bool WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_window);
+		m_context->SwapBuffers();
 		return true;
 	}
 
@@ -68,6 +68,7 @@ namespace CatolYeah
 																 m_windowData.Width,
 																 m_windowData.Height);
 
+
 		if (!s_ISGLFWInitialized)
 		{
 			CY_CORE_DEBUG("Initializing GLFW");
@@ -82,13 +83,10 @@ namespace CatolYeah
 		}
 
 		m_window = glfwCreateWindow(m_windowData.Width, m_windowData.Height, m_windowData.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		if (status == 0)
-		{
-			CY_CORE_ERROR("Failed to initialize Glad");
-			DEBUGBREAK
-		}
+
+		m_context = new OpenGLContext(m_window);
+		m_context->Init();
+		
 		glfwSetWindowUserPointer(m_window, &m_windowData);
 		SetVSync(true);
 

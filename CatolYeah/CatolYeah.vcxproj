@@ -143,6 +143,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\CatolYeah\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\CatolYeah.h" />
     <ClInclude Include="src\CatolYeah\Application.h" />
     <ClInclude Include="src\CatolYeah\Core.h" />
@@ -164,6 +166,7 @@
     <ClInclude Include="src\cypch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\CatolYeah\Application.cpp" />
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiLayer.cpp" />

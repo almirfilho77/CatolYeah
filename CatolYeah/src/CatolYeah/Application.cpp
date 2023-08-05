@@ -67,7 +67,7 @@ namespace CatolYeah {
 		CY_CORE_TRACE("Application main loop");
 		while (m_running)
 		{
-			//glClear(GL_COLOR_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
 			{
 				layer->OnUpdate();
