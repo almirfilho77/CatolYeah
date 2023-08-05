@@ -7,6 +7,8 @@
 #include "CatolYeah/LayerStack.h"
 #include "CatolYeah/Events/ApplicationEvent.h"
 
+#include "CatolYeah/ImGui/ImGuiLayer.h"
+
 namespace CatolYeah {
 
 	class CATOLYEAH_API Application
@@ -31,7 +33,10 @@ namespace CatolYeah {
 		static Application* s_instance;
 		std::unique_ptr<Window> m_window;
 		bool m_running = false;
+
 		LayerStack m_layerStack;
+		ImGuiLayer *m_ImGuiLayer;
+
 	};
 
 	Application* CreateApplication();

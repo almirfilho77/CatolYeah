@@ -113,6 +113,7 @@ project "Sandbox"
 	{
 		"CatolYeah/vendor/spdlog/include",
 		"CatolYeah/src",
+		"CatolYeah/vendor",
 		"%{IncludeDir.glm}"
 	}
 

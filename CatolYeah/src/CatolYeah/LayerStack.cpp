@@ -6,7 +6,6 @@ namespace CatolYeah
 	LayerStack::LayerStack()
 	{
 		CY_CORE_TRACE("Layer Stack c'tor");
-		m_layerInsert = m_layers.begin();
 	}
 
 	LayerStack::~LayerStack()
@@ -22,7 +21,8 @@ namespace CatolYeah
 	{
 		// m_layerInsert will always be at the back of the layer portion of the stack, but always
 		// in front of the overlays in the stack (rendered first)
-		m_layerInsert = m_layers.emplace(m_layerInsert, layer);
+		m_layers.emplace(m_layers.begin() + m_layerInsertIndex, layer);
+		m_layerInsertIndex++;
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay)
@@ -37,7 +37,7 @@ namespace CatolYeah
 		if (it != end())
 		{
 			m_layers.erase(it);
-			m_layerInsert--;
+			m_layerInsertIndex--;
 		}
 	}
 

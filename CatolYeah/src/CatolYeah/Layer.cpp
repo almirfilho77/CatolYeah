@@ -25,6 +25,11 @@ namespace CatolYeah
 
 	}
 
+	void Layer::OnImGuiRender()
+	{
+
+	}
+
 	void Layer::OnUpdate()
 	{
 

@@ -172,18 +172,17 @@
     <ClInclude Include="src\CatolYeah\Logger.h" />
     <ClInclude Include="src\CatolYeah\MouseCodes.h" />
     <ClInclude Include="src\CatolYeah\Window.h" />
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cypch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp" />
+    <ClCompile Include="src\CatolYeah\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\CatolYeah\Layer.cpp" />
     <ClCompile Include="src\CatolYeah\LayerStack.cpp" />
     <ClCompile Include="src\CatolYeah\Logger.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cypch.cpp">

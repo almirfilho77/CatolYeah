@@ -17,17 +17,11 @@ namespace CatolYeah {
 
 		void OnAttach() override;
 		void OnDetach() override;
-		void OnUpdate() override;
-		void OnEvent(Event& event) override;
+		void OnImGuiRender() override;
 
-	private:
-		bool m_OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-		bool m_OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-		bool m_OnMouseMovedEvent(MouseMovedEvent& e);
-		bool m_OnMouseScrolledEvent(MouseScrolledEvent& e);
-		bool m_OnKeyPressedEvent(KeyPressedEvent& e);
-		bool m_OnKeyReleasedEvent(KeyReleasedEvent& e);
-		bool m_OnKeyTypedEvent(KeyTypedEvent& e);
+		void Begin();
+		void End();
+
 	private:
 		float m_time = 0.0f;
 	};

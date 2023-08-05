@@ -1,5 +1,7 @@
 #include <CatolYeah.h>
-#include <iostream>O
+#include <iostream>
+
+#include "imgui/imgui.h"
 
 class ExampleLayer : public CatolYeah::Layer
 {
@@ -17,6 +19,13 @@ public:
 		
 	}
 
+	void OnImGuiRender() override
+	{
+		ImGui::Begin("Text");
+		ImGui::Text("This is a test!");
+		ImGui::End();
+	}
+
 	void OnEvent(CatolYeah::Event& event) override
 	{
 		
@@ -30,7 +39,6 @@ public:
 	{
 		CY_TRACE("Sandbox c'tor");
 		PushLayer(new ExampleLayer());
-		PushOverlay(new CatolYeah::ImGuiLayer());
 	}
 
 	~Sandbox()

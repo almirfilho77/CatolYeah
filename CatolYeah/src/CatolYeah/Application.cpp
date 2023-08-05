@@ -17,6 +17,9 @@ namespace CatolYeah {
 		s_instance = this;
 		m_window = std::unique_ptr<Window>(Window::Create());
 		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 		m_running = true;
 	}
 
@@ -64,11 +67,18 @@ namespace CatolYeah {
 		CY_CORE_TRACE("Application main loop");
 		while (m_running)
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
+			//glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
 			{
 				layer->OnUpdate();
 			}
+
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_layerStack)
+			{
+				layer->OnImGuiRender();
+			}
+			m_ImGuiLayer->End();
 
 			m_window->OnUpdate();
 		}
