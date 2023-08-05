@@ -6,7 +6,7 @@
 
 namespace CatolYeah
 {
-	class CATOLYEAH_API Input
+	class Input
 	{
 	public:
 		/* Keyboard related */

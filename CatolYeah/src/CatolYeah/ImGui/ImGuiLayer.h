@@ -9,7 +9,7 @@
 
 namespace CatolYeah {
 
-	class CATOLYEAH_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

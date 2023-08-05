@@ -10,7 +10,7 @@
 
 namespace CatolYeah {
 
-	class CATOLYEAH_API Logger
+	class Logger
 	{
 	public:
 		Logger() {}

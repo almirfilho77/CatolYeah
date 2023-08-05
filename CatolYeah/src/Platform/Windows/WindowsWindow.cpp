@@ -174,7 +174,7 @@ namespace CatolYeah
 			[](GLFWwindow* window, double xoffset, double yoffset)
 			{
 				auto window_data_ptr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
-				window_data_ptr->EventCallback(MouseScrolledEvent(xoffset, yoffset));
+				window_data_ptr->EventCallback(MouseScrolledEvent(static_cast<float>(xoffset), static_cast<float>(yoffset)));
 			}
 		);
 
@@ -182,7 +182,7 @@ namespace CatolYeah
 			[](GLFWwindow* window, double xpos, double ypos)
 			{
 				auto window_data_ptr = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
-				window_data_ptr->EventCallback(MouseMovedEvent(xpos, ypos));
+				window_data_ptr->EventCallback(MouseMovedEvent(static_cast<float>(xpos), static_cast<float>(ypos)));
 			}
 		);
 	}

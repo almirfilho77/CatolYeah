@@ -7,7 +7,7 @@
 
 namespace CatolYeah
 {
-	class CATOLYEAH_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

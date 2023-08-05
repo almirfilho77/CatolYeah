@@ -32,7 +32,7 @@ namespace CatolYeah {
 								virtual EventType GetEventType() const override { return GetStaticEventType(); } 
 /* ----------------- */
 
-	class CATOLYEAH_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 
@@ -60,7 +60,7 @@ namespace CatolYeah {
 		bool t_handled = false;
 	};
 
-	class CATOLYEAH_API EventDispatcher
+	class EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;

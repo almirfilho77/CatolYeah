@@ -25,7 +25,7 @@ namespace CatolYeah
 	* @class	Window
 	* @brief	Window abstraction class (platform agnostic interface)
 	*/
-	class CATOLYEAH_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

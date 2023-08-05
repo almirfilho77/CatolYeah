@@ -11,7 +11,7 @@ namespace CatolYeah {
 	 * @class MouseButtonEvent
 	 * @brief Base class to describe a mouse button event
 	 */
-	class CATOLYEAH_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		MouseCode GetMouseButton() const { return t_button; }
@@ -30,7 +30,7 @@ namespace CatolYeah {
 	 * @class MouseButtonPressedEvent
 	 * @brief Class to describe a "mouse button pressed" event
 	 */
-	class CATOLYEAH_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(const MouseCode button)
@@ -57,7 +57,7 @@ namespace CatolYeah {
 	 * @class MouseButtonReleasedEvent
 	 * @brief Class to describe a "mouse button released" event
 	 */
-	class CATOLYEAH_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(const MouseCode button)
@@ -84,7 +84,7 @@ namespace CatolYeah {
 	 * @class MouseMovedEvent
 	 * @brief Class to describe a "mouse moved" event
 	 */
-	class CATOLYEAH_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(const float x, const float y)

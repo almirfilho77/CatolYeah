@@ -6,7 +6,7 @@
 
 namespace CatolYeah {
 
-	class CATOLYEAH_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
@@ -23,7 +23,7 @@ namespace CatolYeah {
 		/* -------------- */
 	};
 
-	class CATOLYEAH_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)

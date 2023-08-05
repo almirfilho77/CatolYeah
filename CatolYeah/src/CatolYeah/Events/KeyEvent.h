@@ -10,7 +10,7 @@ namespace CatolYeah {
 	 * @class KeyEvent
 	 * @brief Base class class to describe a key event
 	 */
-	class CATOLYEAH_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		virtual int GetKeyCode() const { return t_keyCode; }
@@ -31,7 +31,7 @@ namespace CatolYeah {
 	 * @class KeyPressedEvent
 	 * @brief Class to describe a "key pressed" event
 	 */
-	class CATOLYEAH_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeat_count)
@@ -68,7 +68,7 @@ namespace CatolYeah {
 	 * @class KeyReleasedEvent
 	 * @brief Class to describe a "key released" event
 	 */
-	class CATOLYEAH_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -95,7 +95,7 @@ namespace CatolYeah {
 	 * @class KeyTypedEvent
 	 * @brief Class to describe a "key released" event
 	 */
-	class CATOLYEAH_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

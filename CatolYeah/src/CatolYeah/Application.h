@@ -11,7 +11,7 @@
 
 namespace CatolYeah {
 
-	class CATOLYEAH_API Application
+	class Application
 	{
 	public:
 		Application();
