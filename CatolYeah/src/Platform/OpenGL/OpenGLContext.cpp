@@ -25,6 +25,10 @@ namespace CatolYeah
 			CY_CORE_ERROR("Failed to initialize Glad");
 			DEBUGBREAK
 		}
+
+		const char* GPU_info = (const char*)glGetString(GL_RENDERER);
+		t_GPUInfo = static_cast<std::string>(GPU_info);
+		CY_CORE_INFO("GPU: {0}", t_GPUInfo);
 	}
 
 	void OpenGLContext::SwapBuffers()

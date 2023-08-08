@@ -21,8 +21,9 @@ public:
 
 	void OnImGuiRender() override
 	{
-		ImGui::Begin("Text");
-		ImGui::Text("This is a test!");
+		std::string gpu_info = CatolYeah::Application::Get().GetWindow().GetGPUInfo();
+		ImGui::Begin("GPU Info");
+		ImGui::Text(gpu_info.c_str());
 		ImGui::End();
 	}
 

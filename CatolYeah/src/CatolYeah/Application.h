@@ -37,6 +37,7 @@ namespace CatolYeah {
 		LayerStack m_layerStack;
 		ImGuiLayer *m_ImGuiLayer;
 
+		unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
 	};
 
 	Application* CreateApplication();

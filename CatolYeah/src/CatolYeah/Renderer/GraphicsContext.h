@@ -10,6 +10,9 @@ namespace CatolYeah
 	public:
 		virtual void Init() = 0;
 		virtual void SwapBuffers() = 0;
+		inline virtual std::string GetGPUInfo() const { return t_GPUInfo; }
+	protected:
+		std::string t_GPUInfo = "Not initialized";
 	};
 
 }//CatolYeah

@@ -27,6 +27,8 @@ namespace CatolYeah {
 
 		inline virtual void* GetNativeWindow() const override { return m_window; }
 
+		inline virtual std::string GetGPUInfo() const override { return m_context->GetGPUInfo(); }
+
 	private:
 		virtual void m_Init(const WindowProps& props);
 		virtual void m_Shutdown();
