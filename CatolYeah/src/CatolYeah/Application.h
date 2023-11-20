@@ -9,6 +9,9 @@
 
 #include "CatolYeah/ImGui/ImGuiLayer.h"
 
+#include "Renderer/Shader.h"
+
+
 namespace CatolYeah {
 
 	class Application
@@ -38,6 +41,7 @@ namespace CatolYeah {
 		ImGuiLayer *m_ImGuiLayer;
 
 		unsigned int m_vertexArray, m_vertexBuffer, m_indexBuffer;
+		std::unique_ptr<Shader> m_shader;
 	};
 
 	Application* CreateApplication();

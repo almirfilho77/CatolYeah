@@ -161,6 +161,7 @@
     <ClInclude Include="src\CatolYeah\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\CatolYeah\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\Shader.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cypch.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="src\CatolYeah\LayerStack.cpp" />
     <ClCompile Include="src\CatolYeah\Logger.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\Shader.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cypch.cpp">

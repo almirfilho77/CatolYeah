@@ -83,6 +83,7 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\cypch.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
@@ -113,5 +114,6 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\cypch.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\Shader.cpp" />
   </ItemGroup>
 </Project>
