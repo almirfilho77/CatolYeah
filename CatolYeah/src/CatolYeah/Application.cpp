@@ -24,25 +24,20 @@ namespace CatolYeah {
 		glGenVertexArrays(1, &m_vertexArray);
 		glBindVertexArray(m_vertexArray);
 
-		glGenBuffers(1, &m_vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-
 		float vertices[3 * 3] = { 
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
 			 0.0f,  0.5f, 0.0f
 		};
 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //Send data to GPU
+		unsigned int indices[3] = { 0, 1, 2 };
+
+		m_vertexBuffer.reset(VertexBuffer::Create(vertices, 3 * 3 * sizeof(float)));
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-		glGenBuffers(1, &m_indexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-
-		unsigned int indices[3] = { 0, 1, 2 };
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); //Send data to GPU
+		m_indexBuffer.reset(IndexBuffer::Create(indices, 3));
 
 		std::string vertex_shader = R"(
 			#version 330 core
@@ -67,7 +62,7 @@ namespace CatolYeah {
 			}
 		)";
 
-		m_shader = std::make_unique<Shader>(vertex_shader, fragment_shader);
+		m_shader.reset(Shader::Create(vertex_shader, fragment_shader));
 
 		m_running = true;
 	}
