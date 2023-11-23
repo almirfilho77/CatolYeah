@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CatolYeah/Renderer/VertexBuffer.h"
+#include "CatolYeah/Renderer/VertexBufferLayout.h"
 
 namespace CatolYeah
 {
@@ -8,6 +9,7 @@ namespace CatolYeah
 	{
 	private:
 		uint32_t m_rendererId;
+		VertexBufferLayout m_bufferLayout;
 
 	public:
 		OpenGLVertexBuffer(float* vertices, uint32_t size);
@@ -15,5 +17,8 @@ namespace CatolYeah
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+
+		virtual const VertexBufferLayout& GetBufferLayout() const override { return m_bufferLayout; }
+		virtual void SetBufferLayout(const VertexBufferLayout& layout) override { m_bufferLayout = layout; }
 	};
 }
