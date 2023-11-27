@@ -12,7 +12,7 @@
 #include "Renderer/Shader.h"
 #include "Renderer/VertexBuffer.h"
 #include "Renderer/IndexBuffer.h"
-
+#include "Renderer/VertexArray.h"
 
 namespace CatolYeah {
 
@@ -42,10 +42,11 @@ namespace CatolYeah {
 		LayerStack m_layerStack;
 		ImGuiLayer *m_ImGuiLayer;
 
-		unsigned int m_vertexArray;
-		std::unique_ptr<IndexBuffer> m_indexBuffer;
-		std::unique_ptr<VertexBuffer> m_vertexBuffer;
-		std::unique_ptr<Shader> m_shader;
+		std::unique_ptr<VertexArray> m_triangleVertexArray;
+		std::unique_ptr<Shader> m_triangleShader;
+
+		std::unique_ptr<VertexArray> m_squareVertexArray;
+		std::unique_ptr<Shader> m_squareShader;
 	};
 
 	Application* CreateApplication();

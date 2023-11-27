@@ -17,6 +17,6 @@ namespace CatolYeah
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		inline unsigned int GetCount() const { return m_count; }
+		virtual inline unsigned int GetCount() const override { return m_count; }
 	};
 }
