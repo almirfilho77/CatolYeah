@@ -1,9 +1,9 @@
 #include "cypch.h"
 #include "Application.h"
 
-#include "glad/glad.h"
-
 #include "CatolYeah/Renderer/VertexBufferLayout.h"
+
+#include "Renderer/Renderer.h"
 
 namespace CatolYeah {
 	
@@ -136,6 +136,8 @@ namespace CatolYeah {
 
 		m_squareShader.reset(Shader::Create(square_vertex_shader, square_fragment_shader));
 
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+
 		m_running = true;
 	}
 
@@ -183,15 +185,17 @@ namespace CatolYeah {
 		CY_CORE_TRACE("Application main loop");
 		while (m_running)
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			m_squareShader->Bind();
-			m_squareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_squareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_squareVertexArray);
 
 			m_triangleShader->Bind();
-			m_triangleVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_triangleVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_triangleVertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
 			{

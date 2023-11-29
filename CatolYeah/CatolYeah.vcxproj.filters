@@ -94,6 +94,9 @@
     <ClInclude Include="src\CatolYeah\Renderer\VertexBufferLayout.h" />
     <ClInclude Include="src\CatolYeah\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
@@ -135,5 +138,8 @@
     <ClCompile Include="src\CatolYeah\Renderer\VertexBufferLayout.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>

@@ -1,19 +1,20 @@
 #pragma once
 
+#include "RenderCommand.h"
+
 namespace CatolYeah
 {
-	enum class RendererAPI
-	{
-		None = 0, 
-		OpenGL = 1
-	};
-
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetRendererAPI() { return s_rendererAPI; }
+		// Functions to create the environment around the scene (camera, lights, etc)
+		static void BeginScene();
+		static void EndScene();
 
-	private:
-		static RendererAPI s_rendererAPI;
+		// Function to submit the meshes loaded inside the Vertex Array to the draw call
+		static void Submit(const std::shared_ptr<VertexArray>& vertex_array);
+
+		// Helper function to get the current used Graphics API
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	};
 }

@@ -8,16 +8,16 @@ namespace CatolYeah
 {
 	Shader* Shader::Create(const std::string& filepath)
 	{
-        switch (Renderer::GetRendererAPI())
+        switch (Renderer::GetAPI())
         {
-            case RendererAPI::None:
+            case RendererAPI::API::None:
             {
                 CY_CORE_ERROR("RendererAPI::None is currently not supported!");
                 DEBUGBREAK
                     return nullptr;
             }
 
-            case RendererAPI::OpenGL:
+            case RendererAPI::API::OpenGL:
             {
                 return new OpenGLShader(filepath);
             }
@@ -29,16 +29,16 @@ namespace CatolYeah
 
 	Shader* Shader::Create(const std::string& vertex_src, const std::string& fragment_src)
 	{
-        switch (Renderer::GetRendererAPI())
+        switch (Renderer::GetAPI())
         {
-            case RendererAPI::None:
+            case RendererAPI::API::None:
             {
                 CY_CORE_ERROR("RendererAPI::None is currently not supported!");
                 DEBUGBREAK
                     return nullptr;
             }
 
-            case RendererAPI::OpenGL:
+            case RendererAPI::API::OpenGL:
             {
                 return new OpenGLShader(vertex_src, fragment_src);
             }

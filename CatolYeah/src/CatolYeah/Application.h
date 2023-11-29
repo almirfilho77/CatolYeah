@@ -42,11 +42,11 @@ namespace CatolYeah {
 		LayerStack m_layerStack;
 		ImGuiLayer *m_ImGuiLayer;
 
-		std::unique_ptr<VertexArray> m_triangleVertexArray;
-		std::unique_ptr<Shader> m_triangleShader;
+		std::shared_ptr<VertexArray> m_triangleVertexArray;
+		std::shared_ptr<Shader> m_triangleShader;
 
-		std::unique_ptr<VertexArray> m_squareVertexArray;
-		std::unique_ptr<Shader> m_squareShader;
+		std::shared_ptr<VertexArray> m_squareVertexArray;
+		std::shared_ptr<Shader> m_squareShader;
 	};
 
 	Application* CreateApplication();

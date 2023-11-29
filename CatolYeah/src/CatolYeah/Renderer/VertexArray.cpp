@@ -9,16 +9,16 @@ namespace CatolYeah
 {
 	VertexArray* VertexArray::Create()
 	{
-        switch (Renderer::GetRendererAPI())
+        switch (Renderer::GetAPI())
         {
-            case RendererAPI::None:
+            case RendererAPI::API::None:
             {
                 CY_CORE_ERROR("RendererAPI::None is currently not supported!");
                 DEBUGBREAK
                     return nullptr;
             }
 
-            case RendererAPI::OpenGL:
+            case RendererAPI::API::OpenGL:
             {
                 return new OpenGLVertexArray();
             }
