@@ -158,6 +158,7 @@
     <ClInclude Include="src\CatolYeah\LayerStack.h" />
     <ClInclude Include="src\CatolYeah\Logger.h" />
     <ClInclude Include="src\CatolYeah\MouseCodes.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\Camera.h" />
     <ClInclude Include="src\CatolYeah\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\CatolYeah\Renderer\IndexBuffer.h" />
     <ClInclude Include="src\CatolYeah\Renderer\RenderCommand.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\CatolYeah\Layer.cpp" />
     <ClCompile Include="src\CatolYeah\LayerStack.cpp" />
     <ClCompile Include="src\CatolYeah\Logger.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\Camera.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\IndexBuffer.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\Renderer.cpp" />

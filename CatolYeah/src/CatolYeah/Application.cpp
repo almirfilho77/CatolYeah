@@ -5,6 +5,8 @@
 
 #include "Renderer/Renderer.h"
 
+#include "CatolYeah/KeyCodes.h"
+
 namespace CatolYeah {
 	
 	Application* Application::s_instance = nullptr;
@@ -23,14 +25,17 @@ namespace CatolYeah {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
+		// Camera creation
+		m_camera = OrthographicCamera(0.0f, (float)m_window->GetWidth(), 0.0f, (float)m_window->GetHeight());
+
 		// Triangle
 
 		m_triangleVertexArray.reset(VertexArray::Create());
 
 		float triangle_vertices[3 * 7] = { 
-			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+			 50.0f,  50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			 150.0f, 50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			 100.0f, 150.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 		};
 		std::shared_ptr<VertexBuffer> triangleVB;
 		triangleVB.reset(VertexBuffer::Create(triangle_vertices, sizeof(triangle_vertices)));
@@ -52,13 +57,15 @@ namespace CatolYeah {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ViewProjectionMatrix;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
 				v_Color = a_Color;	
 			}
 		)";
@@ -84,10 +91,10 @@ namespace CatolYeah {
 		m_squareVertexArray.reset(VertexArray::Create());
 
 		float square_vertices[4 * 7] = {
-			-0.75f, -0.75f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
-			 0.75f, -0.75f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
-			 0.75f,  0.75f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
-			-0.75f,  0.75f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
+			25.0f,  25.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
+			175.0f, 25.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
+			175.0f, 175.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
+			25.0f,  175.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
 		};
 		std::shared_ptr<VertexBuffer> squareVB;
 		squareVB.reset(VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
@@ -109,13 +116,15 @@ namespace CatolYeah {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ViewProjectionMatrix;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
 				v_Color = a_Color;	
 			}
 		)";
@@ -154,6 +163,7 @@ namespace CatolYeah {
 		}
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(CY_BIND_EVENT_FN(Application::m_OnWindowClose));
+		dispatcher.Dispatch<KeyPressedEvent>(CY_BIND_EVENT_FN(Application::m_OnKeyPressed));
 
 		for (auto it = m_layerStack.end(); it != m_layerStack.begin();)
 		{
@@ -187,13 +197,13 @@ namespace CatolYeah {
 		{
 			RenderCommand::Clear();
 
-			Renderer::BeginScene();
+			/*m_camera.SetPosition({-200.0f, -400.0f, 0});
+			m_camera.SetRotation(45.0f);*/
 
-			m_squareShader->Bind();
-			Renderer::Submit(m_squareVertexArray);
+			Renderer::BeginScene(m_camera);
 
-			m_triangleShader->Bind();
-			Renderer::Submit(m_triangleVertexArray);
+			Renderer::Submit(m_squareShader, m_squareVertexArray);
+			Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 
 			Renderer::EndScene();
 
@@ -217,6 +227,42 @@ namespace CatolYeah {
 	bool Application::m_OnWindowClose(WindowCloseEvent& e)
 	{
 		m_running = false;
+		return true;
+	}
+
+	bool Application::m_OnKeyPressed(KeyPressedEvent& e)
+	{
+		switch (e.GetKeyCode())
+		{
+			case CY_KEY_W:
+				m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(0.0f, 50.0f, 0.0f));
+				break;
+
+			case CY_KEY_S:
+				m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(0.0f, -50.0f, 0.0f));
+				break;
+
+			case CY_KEY_A:
+				m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(-50.0f, 0.0f, 0.0f));
+				break;
+
+			case CY_KEY_D:
+				m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(50.0f, 0.0f, 0.0f));
+				break;
+
+			case CY_KEY_E:
+				m_camera.SetRotation(m_camera.GetRotation() + 5.0f);
+				break;
+
+			case CY_KEY_Q:
+				m_camera.SetRotation(m_camera.GetRotation() - 5.0f);
+				break;
+
+			default:
+				CY_CORE_ERROR("Not yet implemented!");
+				break;
+		}
+
 		return true;
 	}
 }

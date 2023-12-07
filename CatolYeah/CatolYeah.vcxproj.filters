@@ -97,6 +97,7 @@
     <ClInclude Include="src\CatolYeah\Renderer\RendererAPI.h" />
     <ClInclude Include="src\CatolYeah\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
@@ -141,5 +142,6 @@
     <ClCompile Include="src\CatolYeah\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\Camera.cpp" />
   </ItemGroup>
 </Project>

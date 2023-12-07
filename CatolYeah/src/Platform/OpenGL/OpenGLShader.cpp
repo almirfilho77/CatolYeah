@@ -9,6 +9,8 @@
 
 #include "OpenGLCommon.h"
 
+#include <glm/gtc/type_ptr.hpp>
+
 namespace CatolYeah {
     OpenGLShader::OpenGLShader(const std::string& filepath)
     {
@@ -186,6 +188,6 @@ namespace CatolYeah {
     void OpenGLShader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
     {
         int location = m_GetUniformLocation(name);
-        GLCallVoid(glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]));
+        GLCallVoid(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));
     }
 }//CatolYeah

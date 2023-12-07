@@ -29,9 +29,9 @@ namespace CatolYeah {
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		void SetUniform1i(const std::string& name, int value);
-		void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
-		void SetUniformMat4f(const std::string& name, const glm::mat4& matrix);
+		virtual void SetUniform1i(const std::string& name, int value) override;
+		virtual void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3) override;
+		virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) override;
 	private:
 		ShaderSource m_ParseShaderSource(const std::string& filpath);
 		unsigned int m_CreateShader(const std::string& vertex_shader, const std::string& fragment_shader);
