@@ -43,6 +43,8 @@ public:
 		auto right = CatolYeah::Application::Get().GetWindow().GetWidth();
 		auto bottom = CatolYeah::Application::Get().GetWindow().GetHeight();
 		m_camera = CatolYeah::OrthographicCamera(0.0f, (float)right, 0.0f, (float)bottom);
+		m_cameraPosition = m_camera.GetPosition();
+		m_cameraRotation = m_camera.GetRotation();
 
 		// Triangle
 
@@ -171,54 +173,28 @@ public:
 
 	virtual void OnUpdate() override
 	{
+		if (CatolYeah::Input::IsKeyPressed(CY_KEY_D))
+			m_cameraPosition.x += m_cameraTranslationSpeed;
+		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_A))
+			m_cameraPosition.x -= m_cameraTranslationSpeed;
+
+		if (CatolYeah::Input::IsKeyPressed(CY_KEY_W))
+			m_cameraPosition.y += m_cameraTranslationSpeed;
+		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_S))
+			m_cameraPosition.y -= m_cameraTranslationSpeed;
+		m_camera.SetPosition(m_cameraPosition);
+
+		if (CatolYeah::Input::IsKeyPressed(CY_KEY_Q))
+			m_cameraRotation += m_cameraRotationSpeed;
+		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_E))
+			m_cameraRotation -= m_cameraRotationSpeed;
+		m_camera.SetRotation(m_cameraRotation);
+
 		CatolYeah::RenderCommand::Clear();
 		CatolYeah::Renderer::BeginScene(m_camera);
 		CatolYeah::Renderer::Submit(m_squareShader, m_squareVertexArray);
 		CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 		CatolYeah::Renderer::EndScene();
-	}
-
-	virtual void OnEvent(CatolYeah::Event& event)
-	{
-		CatolYeah::EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<CatolYeah::KeyPressedEvent>(CY_BIND_EVENT_FN(TestLayer::m_OnKeyPressed));
-	}
-
-private:
-	bool TestLayer::m_OnKeyPressed(CatolYeah::KeyPressedEvent& e)
-	{
-		switch (e.GetKeyCode())
-		{
-		case CY_KEY_W:
-			m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(0.0f, 50.0f, 0.0f));
-			break;
-
-		case CY_KEY_S:
-			m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(0.0f, -50.0f, 0.0f));
-			break;
-
-		case CY_KEY_A:
-			m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(-50.0f, 0.0f, 0.0f));
-			break;
-
-		case CY_KEY_D:
-			m_camera.SetPosition(m_camera.GetPosition() + glm::vec3(50.0f, 0.0f, 0.0f));
-			break;
-
-		case CY_KEY_E:
-			m_camera.SetRotation(m_camera.GetRotation() + 5.0f);
-			break;
-
-		case CY_KEY_Q:
-			m_camera.SetRotation(m_camera.GetRotation() - 5.0f);
-			break;
-
-		default:
-			CY_CORE_ERROR("Not yet implemented!");
-			break;
-		}
-
-		return EVENT_RETURN_PASS_ON;
 	}
 	
 private:
@@ -229,6 +205,12 @@ private:
 
 	std::shared_ptr<CatolYeah::VertexArray> m_squareVertexArray;
 	std::shared_ptr<CatolYeah::Shader> m_squareShader;
+
+	glm::vec3 m_cameraPosition;
+	float m_cameraTranslationSpeed = 10.0f;
+	
+	float m_cameraRotation = 0.0f;
+	float m_cameraRotationSpeed = 2.0f;
 };
 
 class Sandbox : public CatolYeah::Application
