@@ -38,6 +38,8 @@ namespace CatolYeah {
 
 		LayerStack m_layerStack;
 		ImGuiLayer *m_ImGuiLayer;
+
+		float m_lastFrameTime = 0.0f;
 	};
 
 	Application* CreateApplication();

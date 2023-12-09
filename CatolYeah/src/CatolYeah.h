@@ -9,6 +9,8 @@
 #include "CatolYeah/KeyCodes.h"
 #include "CatolYeah/MouseCodes.h"
 
+#include "CatolYeah/Core/Timestep.h"
+
 #include "CatolYeah/Layer.h"
 #include "CatolYeah/ImGui/ImGuiLayer.h"
 

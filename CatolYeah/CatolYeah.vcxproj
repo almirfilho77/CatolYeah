@@ -146,6 +146,7 @@
     <ClInclude Include="src\CatolYeah.h" />
     <ClInclude Include="src\CatolYeah\Application.h" />
     <ClInclude Include="src\CatolYeah\Core.h" />
+    <ClInclude Include="src\CatolYeah\Core\Timestep.h" />
     <ClInclude Include="src\CatolYeah\EntryPoint.h" />
     <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h" />
     <ClInclude Include="src\CatolYeah\Events\Event.h" />

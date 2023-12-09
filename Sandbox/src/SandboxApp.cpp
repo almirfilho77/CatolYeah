@@ -14,7 +14,7 @@ public:
 		CY_TRACE("DebugLayer::OnAttach!");
 	}
 
-	void OnUpdate() override
+	void OnUpdate(CatolYeah::Timestep ts) override
 	{
 		
 	}
@@ -171,23 +171,24 @@ public:
 
 	}
 
-	virtual void OnUpdate() override
+	virtual void OnUpdate(CatolYeah::Timestep ts) override
 	{
+		CY_INFO("Timestep: {0}", ts.GetSeconds());
 		if (CatolYeah::Input::IsKeyPressed(CY_KEY_D))
-			m_cameraPosition.x += m_cameraTranslationSpeed;
+			m_cameraPosition.x += m_cameraTranslationSpeed * ts;
 		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_A))
-			m_cameraPosition.x -= m_cameraTranslationSpeed;
+			m_cameraPosition.x -= m_cameraTranslationSpeed * ts;
 
 		if (CatolYeah::Input::IsKeyPressed(CY_KEY_W))
-			m_cameraPosition.y += m_cameraTranslationSpeed;
+			m_cameraPosition.y += m_cameraTranslationSpeed * ts;
 		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_S))
-			m_cameraPosition.y -= m_cameraTranslationSpeed;
+			m_cameraPosition.y -= m_cameraTranslationSpeed * ts;
 		m_camera.SetPosition(m_cameraPosition);
 
 		if (CatolYeah::Input::IsKeyPressed(CY_KEY_Q))
-			m_cameraRotation += m_cameraRotationSpeed;
+			m_cameraRotation += m_cameraRotationSpeed * ts;
 		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_E))
-			m_cameraRotation -= m_cameraRotationSpeed;
+			m_cameraRotation -= m_cameraRotationSpeed * ts;
 		m_camera.SetRotation(m_cameraRotation);
 
 		CatolYeah::RenderCommand::Clear();
@@ -207,10 +208,10 @@ private:
 	std::shared_ptr<CatolYeah::Shader> m_squareShader;
 
 	glm::vec3 m_cameraPosition;
-	float m_cameraTranslationSpeed = 10.0f;
+	float m_cameraTranslationSpeed = 500.0f;
 	
 	float m_cameraRotation = 0.0f;
-	float m_cameraRotationSpeed = 2.0f;
+	float m_cameraRotationSpeed = 180.0f;
 };
 
 class Sandbox : public CatolYeah::Application

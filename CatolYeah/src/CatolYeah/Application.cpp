@@ -7,6 +7,10 @@
 
 #include "CatolYeah/KeyCodes.h"
 
+#include "CatolYeah/Core/Timestep.h"
+
+#include <GLFW/glfw3.h>
+
 namespace CatolYeah {
 	
 	Application* Application::s_instance = nullptr;
@@ -21,6 +25,7 @@ namespace CatolYeah {
 		s_instance = this;
 		m_window = std::unique_ptr<Window>(Window::Create());
 		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
+		m_window->SetVSync(true);
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -72,9 +77,13 @@ namespace CatolYeah {
 		CY_CORE_TRACE("Application main loop");
 		while (m_running)
 		{
+			float time = static_cast<float>(glfwGetTime());
+			Timestep ts = time - m_lastFrameTime;
+			m_lastFrameTime = time;
+
 			for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
 			{
-				layer->OnUpdate();
+				layer->OnUpdate(ts);
 			}
 
 			m_ImGuiLayer->Begin();

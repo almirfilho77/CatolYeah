@@ -4,6 +4,7 @@
 
 #include "CatolYeah/Core.h"
 #include "CatolYeah/Events/Event.h"
+#include "CatolYeah/Core/Timestep.h"
 
 namespace CatolYeah 
 {
@@ -16,7 +17,7 @@ namespace CatolYeah
 		virtual void OnAttach();
 		virtual void OnDetach();
 		virtual void OnImGuiRender();
-		virtual void OnUpdate();
+		virtual void OnUpdate(Timestep ts);
 		virtual void OnEvent(Event& event);
 
 #ifdef CY_CONFIG_DEBUG
