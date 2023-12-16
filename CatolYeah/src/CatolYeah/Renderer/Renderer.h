@@ -14,7 +14,7 @@ namespace CatolYeah
 		static void EndScene();
 
 		// Function to submit the meshes loaded inside the Vertex Array to the draw call
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertex_array);
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertex_array, const glm::mat4 &model_matrix = glm::mat4(1.0f));
 
 		// Helper function to get the current used Graphics API
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
