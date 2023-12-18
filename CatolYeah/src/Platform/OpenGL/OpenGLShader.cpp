@@ -185,6 +185,12 @@ namespace CatolYeah {
         GLCallVoid(glUniform4f(location, v0, v1, v2, v3));
     }
 
+    void OpenGLShader::SetUniform4f(const std::string& name, const glm::vec4 & vector)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform4f(location, vector.x, vector.y, vector.z, vector.w));
+    }
+
     void OpenGLShader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
     {
         int location = m_GetUniformLocation(name);

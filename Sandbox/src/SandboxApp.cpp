@@ -4,6 +4,7 @@
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class DebugLayer : public CatolYeah::Layer
 {
@@ -138,6 +139,7 @@ public:
 
 			uniform mat4 u_ViewProjectionMatrix;
 			uniform mat4 u_ModelMatrix;
+			uniform vec4 u_Color;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -146,7 +148,7 @@ public:
 			{
 				v_Position = a_Position;
 				gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(a_Position, 1.0);
-				v_Color = a_Color;	
+				v_Color = u_Color;	
 			}
 		)";
 
@@ -176,7 +178,7 @@ public:
 
 	virtual void OnUpdate(CatolYeah::Timestep ts) override
 	{
-		CY_INFO("Timestep: {0}", ts.GetSeconds());
+		//CY_INFO("Timestep: {0}", ts.GetSeconds());
 
 		// Camera translation
 		if (CatolYeah::Input::IsKeyPressed(CY_KEY_RIGHT))
@@ -188,13 +190,14 @@ public:
 			m_cameraPosition.y += m_cameraTranslationSpeed * ts;
 		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_DOWN))
 			m_cameraPosition.y -= m_cameraTranslationSpeed * ts;
-		m_camera.SetPosition(m_cameraPosition);
 
 		// Camera rotation
 		if (CatolYeah::Input::IsKeyPressed(CY_KEY_Q))
 			m_cameraRotation += m_cameraRotationSpeed * ts;
 		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_E))
 			m_cameraRotation -= m_cameraRotationSpeed * ts;
+
+		m_camera.SetPosition(m_cameraPosition);
 		m_camera.SetRotation(m_cameraRotation);
 
 		// Square translation
@@ -207,14 +210,35 @@ public:
 			m_squarePosition.y += m_squareTranslationSpeed * ts;
 		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_S))
 			m_squarePosition.y -= m_squareTranslationSpeed * ts;
-		auto squareTransform = glm::translate(glm::mat4(1.0f), m_squarePosition);
 		
 		// Render commands
 		CatolYeah::RenderCommand::Clear();
 		CatolYeah::Renderer::BeginScene(m_camera);
-		CatolYeah::Renderer::Submit(m_squareShader, m_squareVertexArray, squareTransform);
+
+		auto scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		m_squareShader->Bind();
+		m_squareShader->SetUniform4f("u_Color", m_squareColor);
+		for (int y = 0; y < 10; y++)
+		{
+			for (int x = 0; x < 10; x++)
+			{
+				auto pos = glm::vec3(m_squarePosition.x + x * 20.0f, 
+					m_squarePosition.y + y * 20.0f, 
+					0.0f);
+				auto squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				CatolYeah::Renderer::Submit(m_squareShader, m_squareVertexArray, squareTransform);
+			}
+		}
+
 		CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 		CatolYeah::Renderer::EndScene();
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit4("Square color", glm::value_ptr(m_squareColor));
+		ImGui::End();
 	}
 	
 private:
@@ -226,14 +250,16 @@ private:
 	std::shared_ptr<CatolYeah::VertexArray> m_squareVertexArray;
 	std::shared_ptr<CatolYeah::Shader> m_squareShader;
 
+	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
+	glm::vec3 m_squarePosition;
+	float m_squareTranslationSpeed = 250.0f;
+
 	glm::vec3 m_cameraPosition;
 	float m_cameraTranslationSpeed = 500.0f;
 	
 	float m_cameraRotation = 0.0f;
 	float m_cameraRotationSpeed = 180.0f;
 
-	glm::vec3 m_squarePosition;
-	float m_squareTranslationSpeed = 250.0f;
 };
 
 class Sandbox : public CatolYeah::Application
