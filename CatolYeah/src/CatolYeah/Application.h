@@ -33,7 +33,7 @@ namespace CatolYeah {
 
 	private:
 		static Application* s_instance;
-		std::unique_ptr<Window> m_window;
+		Scope<Window> m_window;
 		bool m_running = false;
 
 		LayerStack m_layerStack;

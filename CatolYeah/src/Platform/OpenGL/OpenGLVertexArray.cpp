@@ -49,7 +49,7 @@ namespace CatolYeah
 		GLCallVoid(glBindVertexArray(0));
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertex_buffer)
+	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertex_buffer)
 	{
 		if (vertex_buffer->GetBufferLayout().GetElements().size() == 0)
 		{
@@ -77,7 +77,7 @@ namespace CatolYeah
 		m_vertexBuffers.push_back(vertex_buffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& index_buffer)
+	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& index_buffer)
 	{
 		GLCallVoid(glBindVertexArray(m_rendererId));
 		index_buffer->Bind();

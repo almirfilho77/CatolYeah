@@ -18,7 +18,7 @@ namespace CatolYeah
 			s_rendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertex_array)
+		inline static void DrawIndexed(const Ref<VertexArray>& vertex_array)
 		{
 			s_rendererAPI->DrawIndexed(vertex_array);
 		}

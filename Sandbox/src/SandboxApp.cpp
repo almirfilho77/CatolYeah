@@ -58,7 +58,7 @@ public:
 			 150.0f, 50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			 100.0f, 150.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 		};
-		std::shared_ptr<CatolYeah::VertexBuffer> triangleVB;
+		CatolYeah::Ref<CatolYeah::VertexBuffer> triangleVB;
 		triangleVB.reset(CatolYeah::VertexBuffer::Create(triangle_vertices, sizeof(triangle_vertices)));
 		CatolYeah::VertexBufferLayout layout = {
 			{ CatolYeah::ShaderDataType::Float3, "a_Position" },
@@ -68,7 +68,7 @@ public:
 		m_triangleVertexArray->AddVertexBuffer(triangleVB);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<CatolYeah::IndexBuffer> triangleIB;
+		CatolYeah::Ref<CatolYeah::IndexBuffer> triangleIB;
 		triangleIB.reset(CatolYeah::IndexBuffer::Create(indices, sizeof(triangle_vertices) / sizeof(uint32_t)));
 		m_triangleVertexArray->SetIndexBuffer(triangleIB);
 
@@ -117,7 +117,7 @@ public:
 			175.0f, 175.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
 			25.0f,  175.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
 		};
-		std::shared_ptr<CatolYeah::VertexBuffer> squareVB;
+		CatolYeah::Ref<CatolYeah::VertexBuffer> squareVB;
 		squareVB.reset(CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		CatolYeah::VertexBufferLayout square_layout = {
 			{ CatolYeah::ShaderDataType::Float3, "a_Position" },
@@ -127,7 +127,7 @@ public:
 		m_squareVertexArray->AddVertexBuffer(squareVB);
 
 		uint32_t square_indices[6] = { 0, 1, 2, 0, 2, 3 };
-		std::shared_ptr<CatolYeah::IndexBuffer> squareIB;
+		CatolYeah::Ref<CatolYeah::IndexBuffer> squareIB;
 		squareIB.reset(CatolYeah::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t)));
 		m_squareVertexArray->SetIndexBuffer(squareIB);
 
@@ -244,11 +244,11 @@ public:
 private:
 	CatolYeah::OrthographicCamera m_camera;
 
-	std::shared_ptr<CatolYeah::VertexArray> m_triangleVertexArray;
-	std::shared_ptr<CatolYeah::Shader> m_triangleShader;
+	CatolYeah::Ref<CatolYeah::VertexArray> m_triangleVertexArray;
+	CatolYeah::Ref<CatolYeah::Shader> m_triangleShader;
 
-	std::shared_ptr<CatolYeah::VertexArray> m_squareVertexArray;
-	std::shared_ptr<CatolYeah::Shader> m_squareShader;
+	CatolYeah::Ref<CatolYeah::VertexArray> m_squareVertexArray;
+	CatolYeah::Ref<CatolYeah::Shader> m_squareShader;
 
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
 	glm::vec3 m_squarePosition;

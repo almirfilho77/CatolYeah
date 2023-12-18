@@ -14,7 +14,7 @@ namespace CatolYeah
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertex_array, const glm::mat4& model_matrix)
+	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertex_array, const glm::mat4& model_matrix)
 	{
 		shader->Bind();
 		shader->SetUniformMat4f("u_ViewProjectionMatrix", Renderer::m_viewProjectionMatrix);

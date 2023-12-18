@@ -23,7 +23,7 @@ namespace CatolYeah {
 			DEBUGBREAK
 		}
 		s_instance = this;
-		m_window = std::unique_ptr<Window>(Window::Create());
+		m_window = Scope<Window>(Window::Create());
 		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
 		m_window->SetVSync(true);
 
