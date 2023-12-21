@@ -19,6 +19,7 @@
 #include "CatolYeah/Renderer/VertexBuffer.h"
 #include "CatolYeah/Renderer/VertexArray.h"
 #include "CatolYeah/Renderer/Shader.h"
+#include "CatolYeah/Renderer/Texture.h"
 #include "CatolYeah/Renderer/Camera.h"
 #include "CatolYeah/Renderer/Renderer.h"
 #include "CatolYeah/Renderer/RenderCommand.h"

@@ -18,6 +18,7 @@ IncludeDir["GLFW"] = "CatolYeah/vendor/GLFW/include"
 IncludeDir["Glad"] = "CatolYeah/vendor/Glad/include"
 IncludeDir["ImGui"] = "CatolYeah/vendor/imgui/"
 IncludeDir["glm"] = "CatolYeah/vendor/glm/"
+IncludeDir["stb_image"] = "CatolYeah/vendor/stb_image/"
 
 -- Similar to "add_subdirectory" of CMake
 include "CatolYeah/vendor/GLFW"
@@ -41,6 +42,10 @@ project "CatolYeah"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
 
 	includedirs
@@ -51,6 +56,7 @@ project "CatolYeah"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}",
 	}
 
 	links

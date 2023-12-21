@@ -51,7 +51,7 @@ public:
 		m_squarePosition = { 0.0f, 0.0f, 0.0f };
 
 		// Triangle
-		m_triangleVertexArray.reset(CatolYeah::VertexArray::Create());
+		m_triangleVertexArray = CatolYeah::VertexArray::Create();
 
 		float triangle_vertices[3 * 7] = {
 			 50.0f,  50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -109,19 +109,19 @@ public:
 		m_triangleShader.reset(CatolYeah::Shader::Create(triangle_vertex_shader, triangle_fragment_shader));
 
 		// Square
-		m_squareVertexArray.reset(CatolYeah::VertexArray::Create());
+		m_squareVertexArray = CatolYeah::VertexArray::Create();
 
-		float square_vertices[4 * 7] = {
-			25.0f,  25.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
-			175.0f, 25.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
-			175.0f, 175.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
-			25.0f,  175.0f, 0.0f, 0.1f, 0.4f, 0.7f, 1.0f,
+		float square_vertices[4 * 5] = {
+			25.0f,  25.0f, 0.0f, 0.0f, 0.0f, 
+			175.0f, 25.0f, 0.0f, 1.0f, 0.0f, 
+			175.0f, 175.0f, 0.0f, 1.0f, 1.0f,
+			25.0f,  175.0f, 0.0f, 0.0f, 1.0f,
 		};
 		CatolYeah::Ref<CatolYeah::VertexBuffer> squareVB;
 		squareVB.reset(CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		CatolYeah::VertexBufferLayout square_layout = {
 			{ CatolYeah::ShaderDataType::Float3, "a_Position" },
-			{ CatolYeah::ShaderDataType::Float4, "a_Color"}
+			{ CatolYeah::ShaderDataType::Float2, "a_TextureCoord" },
 		};
 		squareVB->SetBufferLayout(square_layout);
 		m_squareVertexArray->AddVertexBuffer(squareVB);
@@ -135,7 +135,6 @@ public:
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjectionMatrix;
 			uniform mat4 u_ModelMatrix;
@@ -168,6 +167,44 @@ public:
 
 		m_squareShader.reset(CatolYeah::Shader::Create(square_vertex_shader, square_fragment_shader));
 
+		// Texture Shader
+		std::string texture_vertex_shader = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TextureCoord;
+
+			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_ModelMatrix;
+
+			out vec2 v_TextureCoord;
+
+			void main()
+			{
+				gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(a_Position, 1.0);
+				v_TextureCoord = a_TextureCoord;
+			}
+		)";
+
+		std::string texture_fragment_shader = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TextureCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TextureCoord);
+			}
+		)";
+
+		m_textureShader.reset(CatolYeah::Shader::Create(texture_vertex_shader, texture_fragment_shader));
+		m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
+		m_textureShader->Bind();
+		m_textureShader->SetUniform1i("u_Texture", m_texture->GetSlot());
 		CatolYeah::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 	}
 
@@ -229,8 +266,10 @@ public:
 				CatolYeah::Renderer::Submit(m_squareShader, m_squareVertexArray, squareTransform);
 			}
 		}
+		m_texture->Bind();
+		CatolYeah::Renderer::Submit(m_textureShader, m_squareVertexArray);
 
-		CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
+		//CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 		CatolYeah::Renderer::EndScene();
 	}
 
@@ -249,6 +288,9 @@ private:
 
 	CatolYeah::Ref<CatolYeah::VertexArray> m_squareVertexArray;
 	CatolYeah::Ref<CatolYeah::Shader> m_squareShader;
+
+	CatolYeah::Ref<CatolYeah::Shader> m_textureShader;
+	CatolYeah::Ref<CatolYeah::Texture2D> m_texture;
 
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
 	glm::vec3 m_squarePosition;
