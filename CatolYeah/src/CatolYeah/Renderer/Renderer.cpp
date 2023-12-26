@@ -5,6 +5,11 @@ namespace CatolYeah
 {
 	glm::mat4 Renderer::m_viewProjectionMatrix;
 
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+	}
+
 	void Renderer::BeginScene(const OrthographicCamera &camera)
 	{
 		Renderer::m_viewProjectionMatrix = camera.GetViewProjectionMatrix();

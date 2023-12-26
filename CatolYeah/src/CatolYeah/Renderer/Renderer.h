@@ -9,6 +9,9 @@ namespace CatolYeah
 	class Renderer
 	{
 	public:
+		// Initialization code for the specifc RendererAPI
+		static void Init();
+
 		// Functions to create the environment around the scene (camera, lights, etc)
 		static void BeginScene(const OrthographicCamera &camera);
 		static void EndScene();

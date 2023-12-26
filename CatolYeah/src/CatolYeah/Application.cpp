@@ -26,6 +26,7 @@ namespace CatolYeah {
 		m_window = Scope<Window>(Window::Create());
 		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
 		m_window->SetVSync(true);
+		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

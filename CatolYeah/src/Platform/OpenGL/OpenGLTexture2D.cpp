@@ -29,9 +29,33 @@ namespace CatolYeah
 		m_width = width;
 		m_height = height;
 
+		GLenum internalFormat = 0, dataFormat = 0;
+		switch (channels)
+		{
+			case 3:
+				internalFormat = GL_RGB8;
+				dataFormat = GL_RGB;
+				break;
+
+			case 4:
+				internalFormat = GL_RGBA8;
+				dataFormat = GL_RGBA;
+				break;
+
+			default:
+				CY_CORE_ERROR("Format not supported!");
+				DEBUGBREAK
+		}
+
+		if ((internalFormat == 0) || (dataFormat == 0))
+		{
+			CY_CORE_ERROR("Format not supported!");
+			DEBUGBREAK
+		}
+
 		//GLCallVoid(glGenTextures(1, &m_rendererID));
 		GLCallVoid(glCreateTextures(GL_TEXTURE_2D, 1, &m_rendererID));
-		GLCallVoid(glTextureStorage2D(m_rendererID, 1, GL_RGB8, m_width, m_height));
+		GLCallVoid(glTextureStorage2D(m_rendererID, 1, internalFormat, m_width, m_height));
 
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
@@ -39,7 +63,7 @@ namespace CatolYeah
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
 		GLCallVoid(glTextureSubImage2D(m_rendererID, 0, 0, 0, m_width, m_height,
-			GL_RGB, GL_UNSIGNED_BYTE, data));
+			dataFormat, GL_UNSIGNED_BYTE, data));
 
 		if(data)
 		{

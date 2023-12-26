@@ -29,11 +29,6 @@ public:
 		ImGui::Text(gpu_info.c_str());
 		ImGui::End();
 	}
-
-	void OnEvent(CatolYeah::Event& event) override
-	{
-		
-	}
 };
 
 class TestLayer : public CatolYeah::Layer
@@ -202,9 +197,12 @@ public:
 		)";
 
 		m_textureShader.reset(CatolYeah::Shader::Create(texture_vertex_shader, texture_fragment_shader));
-		m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
+		//m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
+		m_texture = CatolYeah::Texture2D::Create("assets/textures/fishTank.png");
+		m_solidBGTexture = CatolYeah::Texture2D::Create("assets/textures/solid_bg.jpg");
 		m_textureShader->Bind();
 		m_textureShader->SetUniform1i("u_Texture", m_texture->GetSlot());
+
 		CatolYeah::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 	}
 
@@ -266,8 +264,12 @@ public:
 				CatolYeah::Renderer::Submit(m_squareShader, m_squareVertexArray, squareTransform);
 			}
 		}
-		m_texture->Bind();
-		CatolYeah::Renderer::Submit(m_textureShader, m_squareVertexArray);
+		glm::mat4 imagesTransform = glm::translate(glm::mat4(1.0f), glm::vec3(400.0f, 100.0f, 0.0f)) *
+									glm::scale(glm::mat4(1.0f), glm::vec3(3.0f, 3.0f, 1.0f));
+		m_solidBGTexture->Bind(0);
+		CatolYeah::Renderer::Submit(m_textureShader, m_squareVertexArray, imagesTransform);
+		m_texture->Bind(0);
+		CatolYeah::Renderer::Submit(m_textureShader, m_squareVertexArray, imagesTransform);
 
 		//CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 		CatolYeah::Renderer::EndScene();
@@ -291,6 +293,7 @@ private:
 
 	CatolYeah::Ref<CatolYeah::Shader> m_textureShader;
 	CatolYeah::Ref<CatolYeah::Texture2D> m_texture;
+	CatolYeah::Ref<CatolYeah::Texture2D> m_solidBGTexture;
 
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
 	glm::vec3 m_squarePosition;
