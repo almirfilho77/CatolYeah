@@ -5,6 +5,7 @@
 
 #include <glm/glm.hpp>
 
+#include "glad/glad.h"
 #include "CatolYeah/Renderer/Shader.h"
 
 namespace CatolYeah {
@@ -33,14 +34,17 @@ namespace CatolYeah {
 		virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) override;
 	
 	private:
-		ShaderSource m_ParseShaderSource(const std::string& filpath);
+		ShaderSource m_ParseShaderSource(const std::string& filpath);	// Think about deprecating this
+		void m_CreateShaderSourceMap(const std::string& filpath);
 		unsigned int m_CreateShader(const std::string& vertex_shader, const std::string& fragment_shader);
+		unsigned int m_CreateShader(const std::unordered_map<GLenum, std::string>& shaderSources);
 		unsigned int m_CompileShader(unsigned int type, const std::string& source);
 
 		int m_GetUniformLocation(const std::string& name);
 	
 	private:
 		unsigned int m_rendererId;
+		std::unordered_map<GLenum, std::string> m_shaderSourceMap;
 		std::unordered_map<std::string, int> m_uniformLocationMap;
 	};
 

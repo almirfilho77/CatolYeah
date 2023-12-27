@@ -14,7 +14,7 @@ namespace CatolYeah
             {
                 CY_CORE_ERROR("RendererAPI::None is currently not supported!");
                 DEBUGBREAK
-                    return nullptr;
+                return nullptr;
             }
 
             case RendererAPI::API::OpenGL:

@@ -163,40 +163,7 @@ public:
 		m_squareShader.reset(CatolYeah::Shader::Create(square_vertex_shader, square_fragment_shader));
 
 		// Texture Shader
-		std::string texture_vertex_shader = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TextureCoord;
-
-			uniform mat4 u_ViewProjectionMatrix;
-			uniform mat4 u_ModelMatrix;
-
-			out vec2 v_TextureCoord;
-
-			void main()
-			{
-				gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(a_Position, 1.0);
-				v_TextureCoord = a_TextureCoord;
-			}
-		)";
-
-		std::string texture_fragment_shader = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TextureCoord;
-
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TextureCoord);
-			}
-		)";
-
-		m_textureShader.reset(CatolYeah::Shader::Create(texture_vertex_shader, texture_fragment_shader));
+		m_textureShader.reset(CatolYeah::Shader::Create("assets/shaders/Texture.glsl"));
 		//m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
 		m_texture = CatolYeah::Texture2D::Create("assets/textures/fishTank.png");
 		m_solidBGTexture = CatolYeah::Texture2D::Create("assets/textures/solid_bg.jpg");
