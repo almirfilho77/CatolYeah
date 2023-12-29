@@ -19,12 +19,14 @@ namespace CatolYeah {
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& filepath);
-		OpenGLShader(const std::string& vertex_src, const std::string& fragment_src);
+		OpenGLShader(std::string_view filepath);
+		OpenGLShader(const std::string& name, const std::string& vertex_src, const std::string& fragment_src);
 		virtual ~OpenGLShader();
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+
+		virtual std::string_view GetName() const override { return m_name; }
 
 		virtual void SetUniform1i(const std::string& name, int value) override;
 
@@ -34,8 +36,8 @@ namespace CatolYeah {
 		virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) override;
 	
 	private:
-		ShaderSource m_ParseShaderSource(const std::string& filpath);	// Think about deprecating this
-		void m_CreateShaderSourceMap(const std::string& filpath);
+		ShaderSource m_ParseShaderSource(const std::string& filepath);	// Think about deprecating this
+		void m_CreateShaderSourceMap(std::string_view filepath);
 		unsigned int m_CreateShader(const std::string& vertex_shader, const std::string& fragment_shader);
 		unsigned int m_CreateShader(const std::unordered_map<GLenum, std::string>& shaderSources);
 		unsigned int m_CompileShader(unsigned int type, const std::string& source);
@@ -44,6 +46,7 @@ namespace CatolYeah {
 	
 	private:
 		unsigned int m_rendererId;
+		std::string m_name;
 		std::unordered_map<GLenum, std::string> m_shaderSourceMap;
 		std::unordered_map<std::string, int> m_uniformLocationMap;
 	};

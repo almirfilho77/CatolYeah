@@ -101,7 +101,7 @@ public:
 			}
 		)";
 
-		m_triangleShader.reset(CatolYeah::Shader::Create(triangle_vertex_shader, triangle_fragment_shader));
+		m_triangleShader = CatolYeah::Shader::Create("Triangle", triangle_vertex_shader, triangle_fragment_shader);
 
 		// Square
 		m_squareVertexArray = CatolYeah::VertexArray::Create();
@@ -160,15 +160,16 @@ public:
 			}
 		)";
 
-		m_squareShader.reset(CatolYeah::Shader::Create(square_vertex_shader, square_fragment_shader));
+		m_squareShader = CatolYeah::Shader::Create("Squares", square_vertex_shader, square_fragment_shader);
 
 		// Texture Shader
-		m_textureShader.reset(CatolYeah::Shader::Create("assets/shaders/Texture.glsl"));
+		m_shaderLib.Load("assets/shaders/Texture.glsl");
 		//m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
 		m_texture = CatolYeah::Texture2D::Create("assets/textures/fishTank.png");
 		m_solidBGTexture = CatolYeah::Texture2D::Create("assets/textures/solid_bg.jpg");
-		m_textureShader->Bind();
-		m_textureShader->SetUniform1i("u_Texture", m_texture->GetSlot());
+		auto textureShader = m_shaderLib.Get("Texture");
+		textureShader->Bind();
+		textureShader->SetUniform1i("u_Texture", m_texture->GetSlot());
 
 		CatolYeah::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 	}
@@ -234,9 +235,10 @@ public:
 		glm::mat4 imagesTransform = glm::translate(glm::mat4(1.0f), glm::vec3(400.0f, 100.0f, 0.0f)) *
 									glm::scale(glm::mat4(1.0f), glm::vec3(3.0f, 3.0f, 1.0f));
 		m_solidBGTexture->Bind(0);
-		CatolYeah::Renderer::Submit(m_textureShader, m_squareVertexArray, imagesTransform);
+		auto textureShader = m_shaderLib.Get("Texture");
+		CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
 		m_texture->Bind(0);
-		CatolYeah::Renderer::Submit(m_textureShader, m_squareVertexArray, imagesTransform);
+		CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
 
 		//CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 		CatolYeah::Renderer::EndScene();
@@ -258,7 +260,7 @@ private:
 	CatolYeah::Ref<CatolYeah::VertexArray> m_squareVertexArray;
 	CatolYeah::Ref<CatolYeah::Shader> m_squareShader;
 
-	CatolYeah::Ref<CatolYeah::Shader> m_textureShader;
+	CatolYeah::ShaderLibrary m_shaderLib;
 	CatolYeah::Ref<CatolYeah::Texture2D> m_texture;
 	CatolYeah::Ref<CatolYeah::Texture2D> m_solidBGTexture;
 

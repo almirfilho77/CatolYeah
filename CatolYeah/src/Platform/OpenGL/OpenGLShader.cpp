@@ -9,8 +9,14 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
+static std::string s_ExtractName(std::string_view filepath)
+{
+    std::filesystem::path Path = filepath;
+    return Path.stem().string();
+}
+
 namespace CatolYeah {
-    OpenGLShader::OpenGLShader(const std::string& filepath)
+    OpenGLShader::OpenGLShader(std::string_view filepath)
     {
         //TODO: profile this against TheCherno solution to read as binary data
         
@@ -35,10 +41,13 @@ namespace CatolYeah {
         CY_CORE_DEBUG("{0}", m_shaderSourceMap[GL_FRAGMENT_SHADER]);
 
         m_rendererId = m_CreateShader(m_shaderSourceMap);
+        m_name = s_ExtractName(filepath);
         Bind();
     }
 
-    OpenGLShader::OpenGLShader(const std::string& vertex_src, const std::string& fragment_src)
+    OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertex_src, const std::string& fragment_src)
+        :   m_rendererId(0),
+            m_name(name)
     {
         CY_CORE_DEBUG("VERTEX SHADER:");
         CY_CORE_DEBUG("{0}", vertex_src);
@@ -134,9 +143,9 @@ namespace CatolYeah {
         return program_id;
     }
 
-    void OpenGLShader::m_CreateShaderSourceMap(const std::string& filepath)
+    void OpenGLShader::m_CreateShaderSourceMap(std::string_view filepath)
     {
-        std::fstream shader_file_stream(filepath);
+        std::fstream shader_file_stream(filepath.data());
 
         enum class ShaderType : int
         {
