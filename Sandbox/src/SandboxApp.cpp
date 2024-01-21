@@ -104,12 +104,12 @@ public:
 
 		// Texture Shader
 		m_shaderLib.Load("assets/shaders/Texture.glsl");
-		//m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
-		m_texture = CatolYeah::Texture2D::Create("assets/textures/fishTank.png");
-		m_solidBGTexture = CatolYeah::Texture2D::Create("assets/textures/solid_bg.jpg");
+		//m_ronaldinhoTexture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
+		m_fishTankTexture = CatolYeah::Texture2D::Create("assets/textures/fishTank.png");
+		//m_solidBGTexture = CatolYeah::Texture2D::Create("assets/textures/solid_bg.jpg");
 		auto textureShader = m_shaderLib.Get("Texture");
 		textureShader->Bind();
-		textureShader->SetUniform1i("u_Texture", m_texture->GetSlot());
+		textureShader->SetUniform1i("u_Texture", m_fishTankTexture->GetSlot());
 
 		CatolYeah::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 	}
@@ -157,10 +157,10 @@ public:
 		}
 
 		glm::mat4 imagesTransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
-		auto textureShader = m_shaderLib.Get("Texture");
-		m_solidBGTexture->Bind(0);
-		CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
-		m_texture->Bind(0);
+		CatolYeah::Ref<CatolYeah::Shader> textureShader = m_shaderLib.Get("Texture");
+		//m_solidBGTexture->Bind(0);
+		//CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
+		m_fishTankTexture->Bind(0);
 		CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
 
 		CatolYeah::Renderer::EndScene();
@@ -183,12 +183,12 @@ private:
 	CatolYeah::Ref<CatolYeah::Shader> m_squareShader;
 
 	CatolYeah::ShaderLibrary m_shaderLib;
-	CatolYeah::Ref<CatolYeah::Texture2D> m_texture;
+	CatolYeah::Ref<CatolYeah::Texture2D> m_fishTankTexture;
 	CatolYeah::Ref<CatolYeah::Texture2D> m_solidBGTexture;
 
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
 	glm::vec3 m_squarePosition;
-	float m_squareTranslationSpeed = 250.0f;
+	float m_squareTranslationSpeed = 5.0f;
 
 };
 

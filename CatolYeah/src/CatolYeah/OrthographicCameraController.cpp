@@ -11,7 +11,7 @@ namespace CatolYeah
 	OrthographicCameraController::OrthographicCameraController(float aspect_ratio, bool enable_rotation)
 		:	m_aspectRatio(aspect_ratio),
 			m_enableRotation(enable_rotation),
-			m_camera(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, m_zoomLevel, -m_zoomLevel)
+			m_camera(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, -m_zoomLevel, m_zoomLevel)
 	{
 		m_cameraTranslationSpeed = m_zoomLevel * ZOOM_LEVEL_TO_TRANSLATION_SPEED;
 	}
@@ -50,7 +50,7 @@ namespace CatolYeah
 	bool OrthographicCameraController::m_OnWindowResize(WindowResizeEvent& e)
 	{
 		m_aspectRatio = (float)e.GetWindowWidth() / (float)e.GetWindowHeight();
-		m_camera.SetProjection(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, m_zoomLevel, -m_zoomLevel);
+		m_camera.SetProjection(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, -m_zoomLevel, m_zoomLevel);
 		return EVENT_RETURN_PASS_ON;
 	}
 
@@ -58,7 +58,7 @@ namespace CatolYeah
 	{
 		m_zoomLevel -= e.GetYOffset();
 		m_zoomLevel = std::max(m_zoomLevel, 0.25f);
-		m_camera.SetProjection(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, m_zoomLevel, -m_zoomLevel);
+		m_camera.SetProjection(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, -m_zoomLevel, m_zoomLevel);
 		m_cameraTranslationSpeed = m_zoomLevel * ZOOM_LEVEL_TO_TRANSLATION_SPEED;
 		return EVENT_RETURN_PASS_ON;
 	}

@@ -102,6 +102,9 @@
     <ClInclude Include="src\CatolYeah\MouseCodes.h">
       <Filter>src\CatolYeah</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\OrthographicCameraController.h">
+      <Filter>src\CatolYeah</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Renderer\Camera.h">
       <Filter>src\CatolYeah\Renderer</Filter>
     </ClInclude>
@@ -1422,7 +1425,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Application.cpp">
@@ -1441,6 +1443,9 @@
       <Filter>src\CatolYeah</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\Logger.cpp">
+      <Filter>src\CatolYeah</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\OrthographicCameraController.cpp">
       <Filter>src\CatolYeah</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\Renderer\Camera.cpp">
@@ -1509,6 +1514,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\CatolYeah\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>
