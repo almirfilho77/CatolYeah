@@ -1,8 +1,6 @@
 #include "cypch.h"
 #include "Application.h"
 
-#include "CatolYeah/Renderer/VertexBufferLayout.h"
-
 #include "Renderer/Renderer.h"
 
 #include "CatolYeah/KeyCodes.h"

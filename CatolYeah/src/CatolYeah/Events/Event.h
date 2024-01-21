@@ -62,18 +62,16 @@ namespace CatolYeah {
 
 	class EventDispatcher
 	{
-		template<typename EventTy>
-		using EventFn = std::function<bool(EventTy&)>;
 	public:
 		EventDispatcher(Event& event)
 			:	m_event(event) {}
 
-		template<typename EventTy>
-		bool Dispatch(EventFn<EventTy> func)
+		template<typename EventTy, typename EventFn>
+		bool Dispatch(const EventFn& func)
 		{
 			if (m_event.GetEventType() == EventTy::GetStaticEventType())
 			{
-				m_event.t_handled = func(*(EventTy*)&m_event);
+				m_event.t_handled = func(static_cast<EventTy&>(m_event));
 				return true;
 			}
 			return false;

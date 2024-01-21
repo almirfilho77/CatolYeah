@@ -13,31 +13,25 @@ namespace CatolYeah
 	class OrthographicCamera
 	{
 	public:
-		OrthographicCamera();
+		OrthographicCamera() = delete;
 		OrthographicCamera(float left, float right, float top, float bottom);
-		OrthographicCamera(const glm::vec3 &position);
+
+		void SetProjection(float left, float right, float top, float bottom);
 
 		OrthographicCamera(	const OrthographicCamera &other) = default;
 
 		~OrthographicCamera();
 
-		inline const glm::vec3& GetPosition() const { return m_position; }
-
 		inline const glm::mat4& GetProjectionMatrix() const { return m_projectionMatrix; }
 		inline const glm::mat4& GetViewMatrix() const { return m_viewMatrix; }
 		inline const glm::mat4& GetViewProjectionMatrix() const { return m_viewProjectionMatrix; }
 
-		inline float GetRotation() const { return m_zAxisRotation; }
-		inline float GetWidth() const { return m_width; }
-		inline float GetHeight() const { return m_height; }
-
+		inline const glm::vec3& GetPosition() const { return m_position; }
 		void SetPosition(float x, float y, float z);
 		void SetPosition(const glm::vec3& position);
 
+		inline float GetRotation() const { return m_rotation; }
 		void SetRotation(float angle);
-
-		void SetWidth(float width);
-		void SetHeight(float height);
 
 	private:
 		void m_RecalculateViewProjectionMatrix();
@@ -46,11 +40,9 @@ namespace CatolYeah
 		glm::mat4 m_projectionMatrix;
 		glm::mat4 m_viewMatrix;
 		glm::mat4 m_viewProjectionMatrix;
-
-		glm::vec3 m_position;
-
-		float m_zAxisRotation;
-		float m_width, m_height;
+		
+		glm::vec3 m_position = { 0.0f, 0.0f, 0.0f };
+		float m_rotation = 0.0f;
 	};
 
 }

@@ -35,82 +35,22 @@ class TestLayer : public CatolYeah::Layer
 {
 public:
 	TestLayer()
-		: Layer("Test Layer")
+		:	Layer("Test Layer"), m_cameraController(16.0f/9.0f)
 	{
 		// Camera creation
-		auto right = CatolYeah::Application::Get().GetWindow().GetWidth();
-		auto bottom = CatolYeah::Application::Get().GetWindow().GetHeight();
-		m_camera = CatolYeah::OrthographicCamera(0.0f, (float)right, 0.0f, (float)bottom);
-		m_cameraPosition = m_camera.GetPosition();
-		m_cameraRotation = m_camera.GetRotation();
+		auto width = CatolYeah::Application::Get().GetWindow().GetWidth();
+		auto height = CatolYeah::Application::Get().GetWindow().GetHeight();
+		m_cameraController = CatolYeah::OrthographicCameraController((float)width / (float)height);
 		m_squarePosition = { 0.0f, 0.0f, 0.0f };
-
-		// Triangle
-		m_triangleVertexArray = CatolYeah::VertexArray::Create();
-
-		float triangle_vertices[3 * 7] = {
-			 50.0f,  50.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-			 150.0f, 50.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-			 100.0f, 150.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-		};
-		CatolYeah::Ref<CatolYeah::VertexBuffer> triangleVB;
-		triangleVB.reset(CatolYeah::VertexBuffer::Create(triangle_vertices, sizeof(triangle_vertices)));
-		CatolYeah::VertexBufferLayout layout = {
-			{ CatolYeah::ShaderDataType::Float3, "a_Position" },
-			{ CatolYeah::ShaderDataType::Float4, "a_Color"}
-		};
-		triangleVB->SetBufferLayout(layout);
-		m_triangleVertexArray->AddVertexBuffer(triangleVB);
-
-		uint32_t indices[3] = { 0, 1, 2 };
-		CatolYeah::Ref<CatolYeah::IndexBuffer> triangleIB;
-		triangleIB.reset(CatolYeah::IndexBuffer::Create(indices, sizeof(triangle_vertices) / sizeof(uint32_t)));
-		m_triangleVertexArray->SetIndexBuffer(triangleIB);
-
-		std::string triangle_vertex_shader = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ViewProjectionMatrix;
-			uniform mat4 u_ModelMatrix;
-
-			out vec3 v_Position;
-			out vec4 v_Color;
-
-			void main()
-			{
-				v_Position = a_Position;
-				gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * vec4(a_Position, 1.0);
-				v_Color = a_Color;	
-			}
-		)";
-
-		std::string triangle_fragment_shader = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec3 v_Position;
-			in vec4 v_Color;
-
-			void main()
-			{
-				color = v_Color;
-			}
-		)";
-
-		m_triangleShader = CatolYeah::Shader::Create("Triangle", triangle_vertex_shader, triangle_fragment_shader);
 
 		// Square
 		m_squareVertexArray = CatolYeah::VertexArray::Create();
 
 		float square_vertices[4 * 5] = {
-			25.0f,  25.0f, 0.0f, 0.0f, 0.0f, 
-			175.0f, 25.0f, 0.0f, 1.0f, 0.0f, 
-			175.0f, 175.0f, 0.0f, 1.0f, 1.0f,
-			25.0f,  175.0f, 0.0f, 0.0f, 1.0f,
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		};
 		CatolYeah::Ref<CatolYeah::VertexBuffer> squareVB;
 		squareVB.reset(CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
@@ -174,73 +114,55 @@ public:
 		CatolYeah::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 	}
 
-	virtual void OnAttach() override
+	virtual void OnEvent(CatolYeah::Event& e) override
 	{
-
+		m_cameraController.OnEvent(e);
 	}
 
 	virtual void OnUpdate(CatolYeah::Timestep ts) override
 	{
 		//CY_INFO("Timestep: {0}", ts.GetSeconds());
-
-		// Camera translation
-		if (CatolYeah::Input::IsKeyPressed(CY_KEY_RIGHT))
-			m_cameraPosition.x += m_cameraTranslationSpeed * ts;
-		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_LEFT))
-			m_cameraPosition.x -= m_cameraTranslationSpeed * ts;
-
-		if (CatolYeah::Input::IsKeyPressed(CY_KEY_UP))
-			m_cameraPosition.y += m_cameraTranslationSpeed * ts;
-		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_DOWN))
-			m_cameraPosition.y -= m_cameraTranslationSpeed * ts;
-
-		// Camera rotation
-		if (CatolYeah::Input::IsKeyPressed(CY_KEY_Q))
-			m_cameraRotation += m_cameraRotationSpeed * ts;
-		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_E))
-			m_cameraRotation -= m_cameraRotationSpeed * ts;
-
-		m_camera.SetPosition(m_cameraPosition);
-		m_camera.SetRotation(m_cameraRotation);
+		m_cameraController.OnUpdate(ts);
 
 		// Square translation
-		if (CatolYeah::Input::IsKeyPressed(CY_KEY_D))
+		if (CatolYeah::Input::IsKeyPressed(CY_KEY_L))
 			m_squarePosition.x += m_squareTranslationSpeed * ts;
-		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_A))
+		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_J))
 			m_squarePosition.x -= m_squareTranslationSpeed * ts;
 
-		if (CatolYeah::Input::IsKeyPressed(CY_KEY_W))
+		if (CatolYeah::Input::IsKeyPressed(CY_KEY_I))
 			m_squarePosition.y += m_squareTranslationSpeed * ts;
-		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_S))
+		else if (CatolYeah::Input::IsKeyPressed(CY_KEY_K))
 			m_squarePosition.y -= m_squareTranslationSpeed * ts;
 		
 		// Render commands
 		CatolYeah::RenderCommand::Clear();
-		CatolYeah::Renderer::BeginScene(m_camera);
 
-		auto scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		CatolYeah::Renderer::BeginScene(m_cameraController.GetCamera());
+
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 		m_squareShader->Bind();
 		m_squareShader->SetUniform4f("u_Color", m_squareColor);
+
 		for (int y = 0; y < 10; y++)
 		{
 			for (int x = 0; x < 10; x++)
 			{
-				auto pos = glm::vec3(m_squarePosition.x + x * 20.0f, 
-					m_squarePosition.y + y * 20.0f, 
-					0.0f);
+				auto pos = glm::vec3(m_squarePosition.x + x * 0.11f, 
+									 m_squarePosition.y + y * 0.11f,
+									 0.0f);
 				auto squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
 				CatolYeah::Renderer::Submit(m_squareShader, m_squareVertexArray, squareTransform);
 			}
 		}
-		glm::mat4 imagesTransform = glm::translate(glm::mat4(1.0f), glm::vec3(400.0f, 100.0f, 0.0f)) *
-									glm::scale(glm::mat4(1.0f), glm::vec3(3.0f, 3.0f, 1.0f));
-		m_solidBGTexture->Bind(0);
+
+		glm::mat4 imagesTransform = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
 		auto textureShader = m_shaderLib.Get("Texture");
+		m_solidBGTexture->Bind(0);
 		CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
 		m_texture->Bind(0);
 		CatolYeah::Renderer::Submit(textureShader, m_squareVertexArray, imagesTransform);
 
-		//CatolYeah::Renderer::Submit(m_triangleShader, m_triangleVertexArray);
 		CatolYeah::Renderer::EndScene();
 	}
 
@@ -252,7 +174,7 @@ public:
 	}
 	
 private:
-	CatolYeah::OrthographicCamera m_camera;
+	CatolYeah::OrthographicCameraController m_cameraController;
 
 	CatolYeah::Ref<CatolYeah::VertexArray> m_triangleVertexArray;
 	CatolYeah::Ref<CatolYeah::Shader> m_triangleShader;
@@ -267,12 +189,6 @@ private:
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
 	glm::vec3 m_squarePosition;
 	float m_squareTranslationSpeed = 250.0f;
-
-	glm::vec3 m_cameraPosition;
-	float m_cameraTranslationSpeed = 500.0f;
-	
-	float m_cameraRotation = 0.0f;
-	float m_cameraRotationSpeed = 180.0f;
 
 };
 

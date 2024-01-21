@@ -8,6 +8,7 @@
 #include "CatolYeah/Input.h"
 #include "CatolYeah/KeyCodes.h"
 #include "CatolYeah/MouseCodes.h"
+#include "CatolYeah/OrthographicCameraController.h"
 
 #include "CatolYeah/Core/Timestep.h"
 
@@ -20,7 +21,6 @@
 #include "CatolYeah/Renderer/VertexArray.h"
 #include "CatolYeah/Renderer/Shader.h"
 #include "CatolYeah/Renderer/Texture.h"
-#include "CatolYeah/Renderer/Camera.h"
 #include "CatolYeah/Renderer/Renderer.h"
 #include "CatolYeah/Renderer/RenderCommand.h"
 /* ----------------------------------------- */
