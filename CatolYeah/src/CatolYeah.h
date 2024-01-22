@@ -25,8 +25,4 @@
 #include "CatolYeah/Renderer/RenderCommand.h"
 /* ----------------------------------------- */
 
-/* ----- Entry point -----*/
-#include "CatolYeah/EntryPoint.h"
-/* -----------------------*/
-
 #endif /* __CATOLYEAH_H__ */

@@ -1,10 +1,13 @@
 #include <CatolYeah.h>
+#include <CatolYeah/EntryPoint.h>
 #include <iostream>
 
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "BlockBall.h"
 
 class DebugLayer : public CatolYeah::Layer
 {
@@ -17,11 +20,6 @@ public:
 		CY_TRACE("DebugLayer::OnAttach!");
 	}
 
-	void OnUpdate(CatolYeah::Timestep ts) override
-	{
-		
-	}
-
 	void OnImGuiRender() override
 	{
 		std::string gpu_info = CatolYeah::Application::Get().GetWindow().GetGPUInfo();
@@ -30,7 +28,7 @@ public:
 		ImGui::End();
 	}
 };
-
+/*
 class TestLayer : public CatolYeah::Layer
 {
 public:
@@ -53,7 +51,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		};
 		CatolYeah::Ref<CatolYeah::VertexBuffer> squareVB;
-		squareVB.reset(CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
+		squareVB = CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
 		CatolYeah::VertexBufferLayout square_layout = {
 			{ CatolYeah::ShaderDataType::Float3, "a_Position" },
 			{ CatolYeah::ShaderDataType::Float2, "a_TextureCoord" },
@@ -63,7 +61,7 @@ public:
 
 		uint32_t square_indices[6] = { 0, 1, 2, 0, 2, 3 };
 		CatolYeah::Ref<CatolYeah::IndexBuffer> squareIB;
-		squareIB.reset(CatolYeah::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t)));
+		squareIB = CatolYeah::IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
 		m_squareVertexArray->SetIndexBuffer(squareIB);
 
 		std::string square_vertex_shader = R"(
@@ -190,7 +188,7 @@ private:
 	glm::vec3 m_squarePosition;
 	float m_squareTranslationSpeed = 5.0f;
 
-};
+};*/
 
 class Sandbox : public CatolYeah::Application
 {
@@ -198,7 +196,8 @@ public:
 	Sandbox()
 	{
 		CY_TRACE("Sandbox c'tor");
-		PushLayer(new TestLayer());
+		//PushLayer(new TestLayer());
+		PushLayer(new BlockBall::BlockBall());
 		PushLayer(new DebugLayer());
 	}
 

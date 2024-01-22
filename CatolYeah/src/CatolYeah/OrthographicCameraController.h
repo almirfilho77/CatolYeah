@@ -14,6 +14,7 @@ namespace CatolYeah
 
 		void OnEvent(Event& e);
 		void OnUpdate(float ts);
+		void SetAspectRatio(float aspectRatio);
 
 		inline OrthographicCamera& GetCamera() { return m_camera; }
 		inline const OrthographicCamera& GetCamera() const { return m_camera; }

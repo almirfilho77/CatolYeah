@@ -47,6 +47,12 @@ namespace CatolYeah
 		}
 	}
 
+	void OrthographicCameraController::SetAspectRatio(float aspect_ratio)
+	{
+		m_aspectRatio = aspect_ratio;
+		m_camera.SetProjection(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, -m_zoomLevel, m_zoomLevel);
+	}
+
 	bool OrthographicCameraController::m_OnWindowResize(WindowResizeEvent& e)
 	{
 		m_aspectRatio = (float)e.GetWindowWidth() / (float)e.GetWindowHeight();

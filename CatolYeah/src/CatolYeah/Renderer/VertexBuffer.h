@@ -15,6 +15,6 @@ namespace CatolYeah
 		virtual const VertexBufferLayout& GetBufferLayout() const = 0;
 		virtual void SetBufferLayout(const VertexBufferLayout& layout) = 0;
 
-		static VertexBuffer* Create(float* vertices, uint32_t size);
+		static Ref<VertexBuffer> Create(float* vertices, uint32_t size);
 	};
 }
