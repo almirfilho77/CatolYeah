@@ -68,9 +68,9 @@ namespace BlockBall
 		else if (playerB_position.y > -0.75f && CatolYeah::Input::IsKeyPressed(CY_KEY_L))
 			m_playerB.SetPosition(playerB_position.y - m_rectTranslationSpeed * ts);
 
-		CY_INFO("Aspect Ratio: {0}", m_aspectRatio);
-		CY_INFO("Player A position Y: {0}", m_playerA.GetPosition().y);
-		CY_INFO("Player B position Y: {0}", m_playerB.GetPosition().y);
+		//CY_INFO("Aspect Ratio: {0}", m_aspectRatio);
+		//CY_INFO("Player A position Y: {0}", m_playerA.GetPosition().y);
+		//CY_INFO("Player B position Y: {0}", m_playerB.GetPosition().y);
 
 		auto playerA_transform = glm::translate(glm::mat4(1.0f), m_playerA.GetPosition());
 		auto playerB_transform = glm::translate(glm::mat4(1.0f), m_playerB.GetPosition());
@@ -83,6 +83,11 @@ namespace BlockBall
 		CatolYeah::Renderer::Submit(m_playerB.GetShader(), m_playerB.GetVertexArray(), playerB_transform);
 
 		CatolYeah::Renderer::EndScene();
+	}
+
+	void BlockBall::OnEvent(CatolYeah::Event& e)
+	{
+		m_cameraController.OnEvent(e);
 	}
 	
 }// BlockBall

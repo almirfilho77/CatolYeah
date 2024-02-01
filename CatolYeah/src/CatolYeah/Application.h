@@ -30,11 +30,13 @@ namespace CatolYeah {
 
 	private:
 		bool m_OnWindowClose(WindowCloseEvent &e);
+		bool m_OnWindowResize(WindowResizeEvent &e);
 
 	private:
 		static Application* s_instance;
 		Scope<Window> m_window;
 		bool m_running = false;
+		bool m_minimized = false;
 
 		LayerStack m_layerStack;
 		ImGuiLayer *m_ImGuiLayer;

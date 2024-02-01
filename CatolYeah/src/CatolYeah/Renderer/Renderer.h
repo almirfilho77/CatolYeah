@@ -11,6 +11,7 @@ namespace CatolYeah
 	public:
 		// Initialization code for the specifc RendererAPI
 		static void Init();
+		static void OnWindowResize(uint32_t width, uint32_t height);
 
 		// Functions to create the environment around the scene (camera, lights, etc)
 		static void BeginScene(const OrthographicCamera &camera);

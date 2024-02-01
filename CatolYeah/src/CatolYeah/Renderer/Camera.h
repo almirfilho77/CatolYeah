@@ -14,9 +14,9 @@ namespace CatolYeah
 	{
 	public:
 		OrthographicCamera() = delete;
-		OrthographicCamera(float left, float right, float top, float bottom);
+		OrthographicCamera(float left, float right, float bottom, float top);
 
-		void SetProjection(float left, float right, float top, float bottom);
+		void SetProjection(float left, float right, float bottom, float top);
 
 		OrthographicCamera(	const OrthographicCamera &other) = default;
 

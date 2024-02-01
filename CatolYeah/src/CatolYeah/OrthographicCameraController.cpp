@@ -15,6 +15,7 @@ namespace CatolYeah
 	{
 		m_cameraTranslationSpeed = m_zoomLevel * ZOOM_LEVEL_TO_TRANSLATION_SPEED;
 	}
+
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
@@ -55,7 +56,8 @@ namespace CatolYeah
 
 	bool OrthographicCameraController::m_OnWindowResize(WindowResizeEvent& e)
 	{
-		m_aspectRatio = (float)e.GetWindowWidth() / (float)e.GetWindowHeight();
+		CY_CORE_INFO("Window Resize Event!!");
+		m_aspectRatio = (float)(e.GetWindowWidth()) / (float)(e.GetWindowHeight());
 		m_camera.SetProjection(-m_aspectRatio * m_zoomLevel, m_aspectRatio * m_zoomLevel, -m_zoomLevel, m_zoomLevel);
 		return EVENT_RETURN_PASS_ON;
 	}

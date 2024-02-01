@@ -38,6 +38,7 @@ namespace BlockBall
 		~BlockBall() {}
 
 		virtual void OnUpdate(CatolYeah::Timestep ts) override;
+		virtual void OnEvent(CatolYeah::Event& e) override;
 
 	private:
 		float m_aspectRatio;

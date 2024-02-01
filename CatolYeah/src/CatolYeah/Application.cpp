@@ -39,12 +39,9 @@ namespace CatolYeah {
 
 	void Application::OnEvent(Event& e)
 	{
-		if (e.IsInCategory(EventCategoryKeyboard) || e.IsInCategory(EventCategoryMouseButton))
-		{
-			CY_CORE_DEBUG("{0}", e);
-		}
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(CY_BIND_EVENT_FN(Application::m_OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(CY_BIND_EVENT_FN(Application::m_OnWindowResize));
 
 		for (auto it = m_layerStack.end(); it != m_layerStack.begin();)
 		{
@@ -80,9 +77,12 @@ namespace CatolYeah {
 			Timestep ts = time - m_lastFrameTime;
 			m_lastFrameTime = time;
 
-			for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
+			if (m_minimized == false)
 			{
-				layer->OnUpdate(ts);
+				for (Layer* layer : m_layerStack) //For ranged loop possible due to begin() and end() functions defined in the class
+				{
+					layer->OnUpdate(ts);
+				}
 			}
 
 			m_ImGuiLayer->Begin();
@@ -100,6 +100,23 @@ namespace CatolYeah {
 	bool Application::m_OnWindowClose(WindowCloseEvent& e)
 	{
 		m_running = false;
-		return true;
+		return EVENT_RETURN_HANDLED;
+	}
+
+	bool Application::m_OnWindowResize(WindowResizeEvent& e)
+	{
+		uint32_t width = e.GetWindowWidth();
+		uint32_t height = e.GetWindowHeight();
+
+		CY_CORE_INFO("Window resize event: new width [{0}] / new height [{1}]", width, height);
+		if (width == 0 || height == 0)
+		{
+			m_minimized = true;
+			return EVENT_RETURN_PASS_ON;
+		}
+		m_minimized = false;
+		Renderer::OnWindowResize(width, height);
+
+		return EVENT_RETURN_PASS_ON;
 	}
 }

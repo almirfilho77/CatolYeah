@@ -28,17 +28,17 @@ public:
 		ImGui::End();
 	}
 };
-/*
+
 class TestLayer : public CatolYeah::Layer
 {
 public:
 	TestLayer()
-		:	Layer("Test Layer"), m_cameraController(16.0f/9.0f)
+		:	Layer("Test Layer"), m_aspectRatio(16.0f / 9.0f), m_cameraController(m_aspectRatio)
 	{
 		// Camera creation
 		auto width = CatolYeah::Application::Get().GetWindow().GetWidth();
 		auto height = CatolYeah::Application::Get().GetWindow().GetHeight();
-		m_cameraController = CatolYeah::OrthographicCameraController((float)width / (float)height);
+		m_cameraController.SetAspectRatio((float)width / (float)height);
 		m_squarePosition = { 0.0f, 0.0f, 0.0f };
 
 		// Square
@@ -51,7 +51,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		};
 		CatolYeah::Ref<CatolYeah::VertexBuffer> squareVB;
-		squareVB = CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices)));
+		squareVB = CatolYeah::VertexBuffer::Create(square_vertices, sizeof(square_vertices));
 		CatolYeah::VertexBufferLayout square_layout = {
 			{ CatolYeah::ShaderDataType::Float3, "a_Position" },
 			{ CatolYeah::ShaderDataType::Float2, "a_TextureCoord" },
@@ -173,6 +173,7 @@ public:
 	
 private:
 	CatolYeah::OrthographicCameraController m_cameraController;
+	float m_aspectRatio;
 
 	CatolYeah::Ref<CatolYeah::VertexArray> m_triangleVertexArray;
 	CatolYeah::Ref<CatolYeah::Shader> m_triangleShader;
@@ -188,7 +189,7 @@ private:
 	glm::vec3 m_squarePosition;
 	float m_squareTranslationSpeed = 5.0f;
 
-};*/
+};
 
 class Sandbox : public CatolYeah::Application
 {
