@@ -1,8 +1,8 @@
 #include "cypch.h"
 #include "OrthographicCameraController.h"
 
-#include "CatolYeah/Input.h"
-#include "CatolYeah/KeyCodes.h"
+#include "CatolYeah/Core/Input.h"
+#include "CatolYeah/Core/KeyCodes.h"
 
 #define ZOOM_LEVEL_TO_TRANSLATION_SPEED 0.25f
 

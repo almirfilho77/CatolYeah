@@ -7,8 +7,8 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
-#include "CatolYeah/Application.h"
-#include "CatolYeah/Input.h"
+#include "CatolYeah/Core/Application.h"
+#include "CatolYeah/Core/Input.h"
 
 namespace CatolYeah {
 

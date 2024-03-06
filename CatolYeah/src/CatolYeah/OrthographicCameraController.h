@@ -1,8 +1,10 @@
+#ifndef __ORTHOGRAPHIC_CAMERA_CONTROLLER_H__
+#define __ORTHOGRAPHIC_CAMERA_CONTROLLER_H__
 #pragma once
 
-#include "CatolYeah/Renderer/Camera.h"
 #include "CatolYeah/Events/MouseEvent.h"
 #include "CatolYeah/Events/ApplicationEvent.h"
+#include "CatolYeah/Renderer/Camera.h"
 
 namespace CatolYeah
 {
@@ -38,3 +40,5 @@ namespace CatolYeah
 	};
 
 }//CatolYeah
+
+#endif /* __ORTHOGRAPHIC_CAMERA_CONTROLLER_H__ */

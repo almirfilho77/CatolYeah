@@ -2,8 +2,8 @@
 #define __LAYER_STACK_H__
 #pragma once
 
-#include "CatolYeah/Core.h"
-#include "CatolYeah/Layer.h"
+#include "CatolYeah/Core/Core.h"
+#include "CatolYeah/Core/Layer.h"
 
 namespace CatolYeah
 {

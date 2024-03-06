@@ -1,4 +1,4 @@
--- premake5.lua
+-- ConfigureCatolYeah.lua
 
 workspace "CatolYeah"
 	architecture "x64"
@@ -71,6 +71,9 @@ project "CatolYeah"
 	{
 		"_CRT_SECURE_NO_WARNINGS"
 	}
+
+	-- TODO: Fix all warnings 
+	-- flags { "FatalWarnings", }
 
 	filter "system:windows"
 		systemversion "latest"

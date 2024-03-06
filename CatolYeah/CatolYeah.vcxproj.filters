@@ -57,17 +57,38 @@
     <ClInclude Include="src\CatolYeah.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\Application.h">
-      <Filter>src\CatolYeah</Filter>
+    <ClInclude Include="src\CatolYeah\Core\Application.h">
+      <Filter>src\CatolYeah\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\Core.h">
-      <Filter>src\CatolYeah</Filter>
+    <ClInclude Include="src\CatolYeah\Core\Core.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\EntryPoint.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\Input.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\KeyCodes.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\Layer.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\LayerStack.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\Logger.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\MouseCodes.h">
+      <Filter>src\CatolYeah\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\Core\Timestep.h">
       <Filter>src\CatolYeah\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\EntryPoint.h">
-      <Filter>src\CatolYeah</Filter>
+    <ClInclude Include="src\CatolYeah\Core\Window.h">
+      <Filter>src\CatolYeah\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h">
       <Filter>src\CatolYeah\Events</Filter>
@@ -83,24 +104,6 @@
     </ClInclude>
     <ClInclude Include="src\CatolYeah\ImGui\ImGuiLayer.h">
       <Filter>src\CatolYeah\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\Input.h">
-      <Filter>src\CatolYeah</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\KeyCodes.h">
-      <Filter>src\CatolYeah</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\Layer.h">
-      <Filter>src\CatolYeah</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\LayerStack.h">
-      <Filter>src\CatolYeah</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\Logger.h">
-      <Filter>src\CatolYeah</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\MouseCodes.h">
-      <Filter>src\CatolYeah</Filter>
     </ClInclude>
     <ClInclude Include="src\CatolYeah\OrthographicCameraController.h">
       <Filter>src\CatolYeah</Filter>
@@ -137,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="src\CatolYeah\Renderer\VertexBufferLayout.h">
       <Filter>src\CatolYeah\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CatolYeah\Window.h">
-      <Filter>src\CatolYeah</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLCommon.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1427,23 +1427,23 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CatolYeah\Application.cpp">
-      <Filter>src\CatolYeah</Filter>
+    <ClCompile Include="src\CatolYeah\Core\Application.cpp">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\Core\Layer.cpp">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\Core\LayerStack.cpp">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\Core\Logger.cpp">
+      <Filter>src\CatolYeah\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiBuild.cpp">
       <Filter>src\CatolYeah\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiLayer.cpp">
       <Filter>src\CatolYeah\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CatolYeah\Layer.cpp">
-      <Filter>src\CatolYeah</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CatolYeah\LayerStack.cpp">
-      <Filter>src\CatolYeah</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CatolYeah\Logger.cpp">
-      <Filter>src\CatolYeah</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\OrthographicCameraController.cpp">
       <Filter>src\CatolYeah</Filter>

@@ -2,7 +2,7 @@
 #define __WINDOWS_INPUT_H__
 #pragma once
 
-#include "CatolYeah/Input.h"
+#include "CatolYeah/Core/Input.h"
 
 namespace CatolYeah
 {

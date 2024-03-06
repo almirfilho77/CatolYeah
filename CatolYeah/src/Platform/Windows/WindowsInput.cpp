@@ -2,7 +2,7 @@
 #include "WindowsInput.h"
 
 #include "GLFW/glfw3.h"
-#include "CatolYeah/Application.h"
+#include "CatolYeah/Core/Application.h"
 
 namespace CatolYeah
 {

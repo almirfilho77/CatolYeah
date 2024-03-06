@@ -3,8 +3,8 @@
 #pragma once
 
 #include "Core.h"
-#include "CatolYeah/Window.h"
-#include "CatolYeah/LayerStack.h"
+#include "CatolYeah/Core/Window.h"
+#include "CatolYeah/Core/LayerStack.h"
 #include "CatolYeah/Events/ApplicationEvent.h"
 
 #include "CatolYeah/ImGui/ImGuiLayer.h"

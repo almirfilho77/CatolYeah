@@ -3,7 +3,7 @@
 #pragma once
 
 #include "cypch.h"
-#include "Events/Event.h"
+#include "CatolYeah/Events/Event.h"
 
 namespace CatolYeah
 {

@@ -1,11 +1,12 @@
 #include "cypch.h"
 #include "Application.h"
 
-#include "Renderer/Renderer.h"
-
-#include "CatolYeah/KeyCodes.h"
-
+#include "CatolYeah/Core/KeyCodes.h"
+#include "CatolYeah/Core/Layer.h"
+#include "CatolYeah/Core/Logger.h"
 #include "CatolYeah/Core/Timestep.h"
+#include "CatolYeah/Core/Window.h"
+#include "CatolYeah/Renderer/Renderer.h"
 
 #include <GLFW/glfw3.h>
 

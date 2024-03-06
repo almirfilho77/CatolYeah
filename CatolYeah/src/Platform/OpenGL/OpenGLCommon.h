@@ -17,8 +17,8 @@
     }()
 #else
 
-#define GlCallVoid(x) x
-#define GlCall(x) x
+#define GLCallVoid(x) x
+#define GLCall(x) x
 
 #endif
 

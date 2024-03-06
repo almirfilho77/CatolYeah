@@ -144,21 +144,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\CatolYeah.h" />
-    <ClInclude Include="src\CatolYeah\Application.h" />
-    <ClInclude Include="src\CatolYeah\Core.h" />
+    <ClInclude Include="src\CatolYeah\Core\Application.h" />
+    <ClInclude Include="src\CatolYeah\Core\Core.h" />
+    <ClInclude Include="src\CatolYeah\Core\EntryPoint.h" />
+    <ClInclude Include="src\CatolYeah\Core\Input.h" />
+    <ClInclude Include="src\CatolYeah\Core\KeyCodes.h" />
+    <ClInclude Include="src\CatolYeah\Core\Layer.h" />
+    <ClInclude Include="src\CatolYeah\Core\LayerStack.h" />
+    <ClInclude Include="src\CatolYeah\Core\Logger.h" />
+    <ClInclude Include="src\CatolYeah\Core\MouseCodes.h" />
     <ClInclude Include="src\CatolYeah\Core\Timestep.h" />
-    <ClInclude Include="src\CatolYeah\EntryPoint.h" />
+    <ClInclude Include="src\CatolYeah\Core\Window.h" />
     <ClInclude Include="src\CatolYeah\Events\ApplicationEvent.h" />
     <ClInclude Include="src\CatolYeah\Events\Event.h" />
     <ClInclude Include="src\CatolYeah\Events\KeyEvent.h" />
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h" />
     <ClInclude Include="src\CatolYeah\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\CatolYeah\Input.h" />
-    <ClInclude Include="src\CatolYeah\KeyCodes.h" />
-    <ClInclude Include="src\CatolYeah\Layer.h" />
-    <ClInclude Include="src\CatolYeah\LayerStack.h" />
-    <ClInclude Include="src\CatolYeah\Logger.h" />
-    <ClInclude Include="src\CatolYeah\MouseCodes.h" />
     <ClInclude Include="src\CatolYeah\OrthographicCameraController.h" />
     <ClInclude Include="src\CatolYeah\Renderer\Camera.h" />
     <ClInclude Include="src\CatolYeah\Renderer\GraphicsContext.h" />
@@ -171,7 +172,6 @@
     <ClInclude Include="src\CatolYeah\Renderer\VertexArray.h" />
     <ClInclude Include="src\CatolYeah\Renderer\VertexBuffer.h" />
     <ClInclude Include="src\CatolYeah\Renderer\VertexBufferLayout.h" />
-    <ClInclude Include="src\CatolYeah\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLCommon.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h" />
@@ -602,12 +602,12 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CatolYeah\Application.cpp" />
+    <ClCompile Include="src\CatolYeah\Core\Application.cpp" />
+    <ClCompile Include="src\CatolYeah\Core\Layer.cpp" />
+    <ClCompile Include="src\CatolYeah\Core\LayerStack.cpp" />
+    <ClCompile Include="src\CatolYeah\Core\Logger.cpp" />
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\CatolYeah\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\CatolYeah\Layer.cpp" />
-    <ClCompile Include="src\CatolYeah\LayerStack.cpp" />
-    <ClCompile Include="src\CatolYeah\Logger.cpp" />
     <ClCompile Include="src\CatolYeah\OrthographicCameraController.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\Camera.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\IndexBuffer.cpp" />

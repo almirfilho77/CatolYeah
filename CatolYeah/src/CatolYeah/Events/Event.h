@@ -2,7 +2,7 @@
 #define __EVENT_H__
 #pragma once
 
-#include "CatolYeah/Core.h"
+#include "CatolYeah/Core/Core.h"
 
 namespace CatolYeah {
 

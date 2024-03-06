@@ -1,5 +1,5 @@
 #include <CatolYeah.h>
-#include <CatolYeah/EntryPoint.h>
+#include <CatolYeah/Core/EntryPoint.h>
 #include <iostream>
 
 #include "imgui/imgui.h"

@@ -2,7 +2,7 @@
 #define __WINDOWS_WINDOW_H__
 #pragma once
 
-#include "CatolYeah/Window.h"
+#include "CatolYeah/Core/Window.h"
 #include "GLFW/glfw3.h"
 
 #include "CatolYeah/Renderer/GraphicsContext.h"
