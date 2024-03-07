@@ -82,7 +82,8 @@ project "CatolYeah"
 		{
 			"CY_PLATFORM_WINDOWS",
 			"CY_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"GLFW_INCLUDE_NONE",
+			"CY_ASSERT_ENABLED",
 		}
 
 	filter "configurations:Debug"

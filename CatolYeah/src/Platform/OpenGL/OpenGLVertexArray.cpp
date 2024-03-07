@@ -3,6 +3,7 @@
 
 #include "OpenGLCommon.h"
 
+#include "CatolYeah/Core/Assert.h"
 #include "CatolYeah/Renderer/VertexBufferLayout.h"
 
 namespace CatolYeah
@@ -23,8 +24,7 @@ namespace CatolYeah
 			case ShaderDataType::Int4:		return GL_INT;
 			case ShaderDataType::Bool:		return GL_BOOL;
 		}
-		CY_CORE_ERROR("Unknown ShaderDataType");
-		DEBUGBREAK
+		CY_ASSERT(false, "Unknown ShaderDataType");
 		return 0;
 	}
 
@@ -53,8 +53,7 @@ namespace CatolYeah
 	{
 		if (vertex_buffer->GetBufferLayout().GetElements().size() == 0)
 		{
-			CY_CORE_ERROR("There is no buffer layout associated to the vertex buffer");
-			DEBUGBREAK
+			CY_ASSERT(false, "There is no buffer layout associated to the vertex buffer");
 		}
 
 		GLCallVoid(glBindVertexArray(m_rendererId));

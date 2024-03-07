@@ -1,5 +1,7 @@
 #pragma once
 
+#include "CatolYeah/Core/Assert.h"
+
 namespace CatolYeah 
 {
 	
@@ -28,8 +30,7 @@ namespace CatolYeah
 			case ShaderDataType::Int4:		return sizeof(int) * 4;
 			case ShaderDataType::Bool:		return sizeof(bool);
 		}
-		CY_CORE_ERROR("Unknown ShaderDataType");
-		DEBUGBREAK
+		CY_ASSERT(false, "Unknown ShaderDataType");
 		return 0;
 	}
 
@@ -41,7 +42,10 @@ namespace CatolYeah
 		bool Normalized;
 		uint32_t Offset;
 
-		VertexBufferElement() {}
+		VertexBufferElement()
+			: Name("element"), Type(ShaderDataType::None), Size(0), Normalized(false), Offset(0)
+		{
+		}
 
 		VertexBufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
 			: Name(name), Type(type), Size(ShaderDataTypeSize(type)), Normalized(normalized), Offset(0)
@@ -64,8 +68,7 @@ namespace CatolYeah
 				case ShaderDataType::Int4:		return 4;
 				case ShaderDataType::Bool:		return 1;
 			}
-			CY_CORE_ERROR("Unknown ShaderDataType");
-			DEBUGBREAK
+			CY_ASSERT(false, "Unknown ShaderDataType");
 			return 0;
 		}
 	};
@@ -73,7 +76,7 @@ namespace CatolYeah
 	class VertexBufferLayout
 	{
 	public:
-		VertexBufferLayout() {}
+		VertexBufferLayout() = default;
 		VertexBufferLayout(const std::initializer_list<VertexBufferElement>& elements);
 
 		inline uint32_t GetStride() const { return m_stride; }

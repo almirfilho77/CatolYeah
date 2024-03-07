@@ -6,6 +6,8 @@
 
 #include "OpenGLCommon.h"
 
+#include "CatolYeah/Core/Assert.h"
+
 namespace CatolYeah
 {
 
@@ -22,8 +24,7 @@ namespace CatolYeah
 
 		if (data == nullptr)
 		{
-			CY_CORE_ERROR("Failed to load texture image");
-			DEBUGBREAK
+			CY_ASSERT(false, "Failed to load texture image");
 		}
 
 		m_width = width;
@@ -43,14 +44,12 @@ namespace CatolYeah
 				break;
 
 			default:
-				CY_CORE_ERROR("Format not supported!");
-				DEBUGBREAK
+				CY_ASSERT(false, "Format not supported!");
 		}
 
 		if ((internalFormat == 0) || (dataFormat == 0))
 		{
-			CY_CORE_ERROR("Format not supported!");
-			DEBUGBREAK
+			CY_ASSERT(false, "Format not supported!");
 		}
 
 		//GLCallVoid(glGenTextures(1, &m_rendererID));

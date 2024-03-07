@@ -2,6 +2,7 @@
 #include "IndexBuffer.h"
 
 #include "Renderer.h"
+#include "CatolYeah/Core/Assert.h"
 #include "Platform/OpenGL/OpenGLIndexBuffer.h"
 
 namespace CatolYeah
@@ -12,9 +13,8 @@ namespace CatolYeah
         {
         case RendererAPI::API::None:
             {
-                CY_CORE_ERROR("RendererAPI::None is currently not supported!");
-                DEBUGBREAK
-                    return nullptr;
+                CY_ASSERT(false, "RendererAPI::None is currently not supported!");
+                return nullptr;
             }
 
             case RendererAPI::API::OpenGL:
@@ -22,8 +22,7 @@ namespace CatolYeah
                 return std::make_shared<OpenGLIndexBuffer>(indices, count);
             }
         }
-        CY_CORE_ERROR("Unkown RendererAPI!");
-        DEBUGBREAK
+        CY_ASSERT(false, "Unkown RendererAPI!");
         return nullptr;
 	}
 }

@@ -1,7 +1,8 @@
 #include "cypch.h"
 #include "OpenGLIndexBuffer.h"
-
 #include "OpenGLCommon.h"
+
+#include "CatolYeah/Core/Assert.h"
 
 namespace CatolYeah
 {
@@ -9,7 +10,7 @@ namespace CatolYeah
         :   m_rendererId(0),
             m_count(count)
     {
-        ASSERT(sizeof(uint32_t) == sizeof(GLuint));
+        CY_ASSERT(sizeof(uint32_t) == sizeof(GLuint), "Incompatible sizes of uint32_t and GLuint");
 
         // Generate an internal buffer and assign an index to it
         GLCallVoid(glCreateBuffers(1, &m_rendererId));

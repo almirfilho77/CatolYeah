@@ -7,6 +7,8 @@
 
 #include "OpenGLCommon.h"
 
+#include "CatolYeah/Core/Assert.h"
+
 #include <glm/gtc/type_ptr.hpp>
 
 static std::string s_ExtractName(std::string_view filepath)

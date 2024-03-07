@@ -2,6 +2,7 @@
 #include "Shader.h"
 
 #include "Renderer.h"
+#include "CatolYeah/Core/Assert.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace CatolYeah
@@ -12,8 +13,7 @@ namespace CatolYeah
         {
             case RendererAPI::API::None:
             {
-                CY_CORE_ERROR("RendererAPI::None is currently not supported!");
-                DEBUGBREAK
+                CY_ASSERT(false, "RendererAPI::None is currently not supported!");
                 return nullptr;
             }
 
@@ -22,8 +22,7 @@ namespace CatolYeah
                 return std::make_shared<OpenGLShader>(filepath);
             }
         }
-        CY_CORE_ERROR("Unkown RendererAPI!");
-        DEBUGBREAK
+        CY_ASSERT(false, "Unkown RendererAPI!");
         return nullptr;
 	}
 
@@ -33,9 +32,8 @@ namespace CatolYeah
         {
             case RendererAPI::API::None:
             {
-                CY_CORE_ERROR("RendererAPI::None is currently not supported!");
-                DEBUGBREAK
-                    return nullptr;
+                CY_ASSERT(false, "RendererAPI::None is currently not supported!");
+                return nullptr;
             }
 
             case RendererAPI::API::OpenGL:
@@ -43,8 +41,7 @@ namespace CatolYeah
                 return std::make_shared<OpenGLShader>(name, vertex_src, fragment_src);
             }
         }
-        CY_CORE_ERROR("Unkown RendererAPI!");
-        DEBUGBREAK
+        CY_ASSERT(false, "Unkown RendererAPI!");
         return nullptr;
 	}
 
@@ -53,8 +50,7 @@ namespace CatolYeah
         std::string shader_name = name.data();
         if (Exists(shader_name))
         {
-            CY_CORE_ERROR("Shader already exists");
-            DEBUGBREAK
+            CY_ASSERT(false, "Shader already exists");
         }
         m_shaders[shader_name] = shader;
     }
@@ -84,8 +80,7 @@ namespace CatolYeah
         std::string shader_name = name.data();
         if (!Exists(shader_name))
         {
-            CY_CORE_ERROR("Shader does not exist");
-            DEBUGBREAK
+            CY_ASSERT(false, "Shader does not exist");
         }
         return m_shaders[shader_name];
     }
