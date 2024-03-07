@@ -44,13 +44,18 @@ namespace BlockBall
 			m_aspectRatio(16.0f / 9.0f),
 			m_cameraController(m_aspectRatio)
 	{
+		
+	}
+
+	void BlockBall::OnAttach()
+	{
 		auto win_width = CatolYeah::Application::Get().GetWindow().GetWidth();
 		auto win_height = CatolYeah::Application::Get().GetWindow().GetHeight();
 		m_aspectRatio = (float)win_width / (float)win_height;
 		m_cameraController.SetAspectRatio(m_aspectRatio);
 
-		m_playerA = Rect({ -m_aspectRatio+0.15, 0.25, 0.0f }, { 0.8f, 0.2f, 0.2f, 1.0f });
-		m_playerB = Rect({ m_aspectRatio-0.15, 0.25, 0.0f }, { 0.2f, 0.2f, 0.8f, 1.0f });
+		m_playerA = Rect({ -m_aspectRatio + 0.15, 0.25, 0.0f }, { 0.8f, 0.2f, 0.2f, 1.0f });
+		m_playerB = Rect({ m_aspectRatio - 0.15, 0.25, 0.0f }, { 0.2f, 0.2f, 0.8f, 1.0f });
 	}
 
 	void BlockBall::OnUpdate(CatolYeah::Timestep ts)

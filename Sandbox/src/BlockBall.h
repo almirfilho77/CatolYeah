@@ -37,6 +37,7 @@ namespace BlockBall
 		BlockBall();
 		~BlockBall() {}
 
+		virtual void OnAttach() override;
 		virtual void OnUpdate(CatolYeah::Timestep ts) override;
 		virtual void OnEvent(CatolYeah::Event& e) override;
 
