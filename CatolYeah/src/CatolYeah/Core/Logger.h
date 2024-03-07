@@ -2,7 +2,7 @@
 #define __LOGGER_H__
 #pragma once
 
-#include "Core.h"
+#include "CatolYeah/Core/Core.h"
 
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 #include "spdlog/spdlog.h"

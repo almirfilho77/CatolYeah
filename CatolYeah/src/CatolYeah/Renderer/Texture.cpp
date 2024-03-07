@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "RendererAPI.h"
 
+#include "CatolYeah/Core/Assert.h"
 #include "Platform/OpenGL/OpenGLTexture2D.h"
 
 namespace CatolYeah
@@ -15,8 +16,7 @@ namespace CatolYeah
         {
             case RendererAPI::API::None:
             {
-                CY_CORE_ERROR("RendererAPI::None is currently not supported!");
-                DEBUGBREAK
+                CY_ASSERT(false, "RendererAPI::None is currently not supported!");
                 return nullptr;
             }
 
@@ -25,8 +25,7 @@ namespace CatolYeah
                 return std::make_shared<OpenGLTexture2D>(path);
             }
         }
-        CY_CORE_ERROR("Unkown RendererAPI!");
-        DEBUGBREAK
+        CY_ASSERT(false, "Unkown RendererAPI!");
         return nullptr;
 	}
 

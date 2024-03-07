@@ -4,8 +4,8 @@
 namespace CatolYeah
 {
 	VertexBufferLayout::VertexBufferLayout(const std::initializer_list<VertexBufferElement>& elements)
-		: m_stride(0),
-		m_elements(elements)
+		:	m_stride(0),
+			m_elements(elements)
 	{
 		m_CalculateOffsetAndStride();
 	}

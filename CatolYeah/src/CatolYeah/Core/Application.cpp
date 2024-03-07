@@ -1,6 +1,7 @@
 #include "cypch.h"
 #include "Application.h"
 
+#include "CatolYeah/Core/Assert.h"
 #include "CatolYeah/Core/KeyCodes.h"
 #include "CatolYeah/Core/Layer.h"
 #include "CatolYeah/Core/Logger.h"
@@ -16,11 +17,7 @@ namespace CatolYeah {
 
 	Application::Application()
 	{
-		if (s_instance != nullptr)
-		{
-			CY_CORE_ERROR("Application already exists");
-			DEBUGBREAK
-		}
+		CY_ASSERT(s_instance == nullptr, "Application already exists");
 		s_instance = this;
 		m_window = Scope<Window>(Window::Create());
 		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));

@@ -2,17 +2,16 @@
 
 #include "glad/glad.h"
 
-#define ASSERT(x) if (!(x)) __debugbreak();
 #ifdef _DEBUG
 
 #define GLCallVoid(x) GLClearError();\
     x;\
-    ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+    CY_ASSERT(GLLogCall(#x, __FILE__, __LINE__), "OpenGL Error!");
 
 #define GLCall(x) [&](){\
     GLClearError();\
     auto retval = x;\
-    ASSERT(GLLogCall(#x, __FILE__, __LINE__))\
+    CY_ASSERT(GLLogCall(#x, __FILE__, __LINE__), "OpenGL Error!")\
     return retval;\
     }()
 #else

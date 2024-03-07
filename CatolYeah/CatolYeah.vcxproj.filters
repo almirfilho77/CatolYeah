@@ -60,6 +60,9 @@
     <ClInclude Include="src\CatolYeah\Core\Application.h">
       <Filter>src\CatolYeah\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\Core\Assert.h">
+      <Filter>src\CatolYeah\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Core\Core.h">
       <Filter>src\CatolYeah\Core</Filter>
     </ClInclude>

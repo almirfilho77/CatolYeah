@@ -1,6 +1,8 @@
 #include "cypch.h"
 #include "WindowsWindow.h"
 
+#include "CatolYeah/Core/Assert.h"
+
 #include "CatolYeah/Events/ApplicationEvent.h"
 #include "CatolYeah/Events/KeyEvent.h"
 #include "CatolYeah/Events/MouseEvent.h"
@@ -68,15 +70,13 @@ namespace CatolYeah
 																 m_windowData.Width,
 																 m_windowData.Height);
 
-
 		if (!s_ISGLFWInitialized)
 		{
 			CY_CORE_DEBUG("Initializing GLFW");
 			int success = glfwInit();
 			if (success == GLFW_FALSE)
 			{
-				CY_CORE_ERROR("Could not initialize GLFW!");
-				DEBUGBREAK
+				CY_ASSERT(false, "Could not initialize GLFW!");
 			}
 			glfwSetErrorCallback(s_GlfwErrorCallback);
 			s_ISGLFWInitialized = true;
