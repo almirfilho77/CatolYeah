@@ -21,6 +21,7 @@
 #include "CatolYeah/Renderer/Shader.h"
 #include "CatolYeah/Renderer/Texture.h"
 #include "CatolYeah/Renderer/Renderer.h"
+#include "CatolYeah/Renderer/Renderer2D.h"
 #include "CatolYeah/Renderer/RenderCommand.h"
 /* ----------------------------------------- */
 

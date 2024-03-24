@@ -167,6 +167,7 @@
     <ClInclude Include="src\CatolYeah\Renderer\IndexBuffer.h" />
     <ClInclude Include="src\CatolYeah\Renderer\RenderCommand.h" />
     <ClInclude Include="src\CatolYeah\Renderer\Renderer.h" />
+    <ClInclude Include="src\CatolYeah\Renderer\Renderer2D.h" />
     <ClInclude Include="src\CatolYeah\Renderer\RendererAPI.h" />
     <ClInclude Include="src\CatolYeah\Renderer\Shader.h" />
     <ClInclude Include="src\CatolYeah\Renderer\Texture.h" />
@@ -614,6 +615,7 @@
     <ClCompile Include="src\CatolYeah\Renderer\IndexBuffer.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\CatolYeah\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\Shader.cpp" />
     <ClCompile Include="src\CatolYeah\Renderer\Texture.cpp" />
