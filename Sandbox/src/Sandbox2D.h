@@ -24,6 +24,7 @@ private:
 	CatolYeah::Ref<CatolYeah::Shader> m_solidColorShader = nullptr;
 
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
+	glm::vec4 m_barColor = { 0.2f, 0.8f, 0.3f, 1.0f };
 	glm::vec3 m_squarePosition = { 0.0f, 0.0f, 0.0f };
 	
 	float m_aspectRatio;

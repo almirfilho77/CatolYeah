@@ -30,7 +30,7 @@ namespace BlockBall
 		// Shader
 		m_shader = CatolYeah::Shader::Create("assets/shaders/SolidColor.glsl");
 		m_shader->Bind();
-		m_shader->SetUniform4f("u_Color", m_color);
+		m_shader->SetUniformFloat4("u_Color", m_color);
 	}
 
 	void Rect::SetPosition(float position_y)

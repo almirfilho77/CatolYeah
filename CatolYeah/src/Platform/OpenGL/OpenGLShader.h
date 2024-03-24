@@ -28,12 +28,15 @@ namespace CatolYeah {
 
 		virtual std::string_view GetName() const override { return m_name; }
 
-		virtual void SetUniform1i(const std::string& name, int value) override;
+		virtual void SetUniformInt1(const std::string& name, int value) override;
 
-		virtual void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3) override;
-		virtual void SetUniform4f(const std::string& name, const glm::vec4& vector) override;
+		virtual void SetUniformFloat3(const std::string& name, float v0, float v1, float v2) override;
+		virtual void SetUniformFloat3(const std::string& name, const glm::vec3& vector) override;
+
+		virtual void SetUniformFloat4(const std::string& name, float v0, float v1, float v2, float v3) override;
+		virtual void SetUniformFloat4(const std::string& name, const glm::vec4& vector) override;
 		
-		virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) override;
+		virtual void SetUniformMatFloat4(const std::string& name, const glm::mat4& matrix) override;
 	
 	private:
 		ShaderSource m_ParseShaderSource(const std::string& filepath);	// Think about deprecating this
