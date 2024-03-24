@@ -56,7 +56,7 @@ namespace CatolYeah
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		s_Data->shader->Bind();
-		s_Data->shader->SetUniformMat4f("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
+		s_Data->shader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
 		//s_Data->shader->SetUniformMat4f("u_ModelMatrix", glm::mat4(1.0f));
 	}
 
@@ -72,8 +72,8 @@ namespace CatolYeah
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
 		s_Data->shader->Bind();
-		s_Data->shader->SetUniform4f("u_Color", color);
-		s_Data->shader->SetUniformMat4f("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position));
+		s_Data->shader->SetUniformFloat4("u_Color", color);
+		s_Data->shader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
 
 		s_Data->vao->Bind();
 		RenderCommand::DrawIndexed(s_Data->vao);

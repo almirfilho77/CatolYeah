@@ -75,6 +75,42 @@ namespace CatolYeah {
         GLCallVoid(glUseProgram(m_rendererId));
     }
 
+    void OpenGLShader::SetUniformInt1(const std::string& name, int value)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform1i(location, value));
+    }
+
+    void OpenGLShader::SetUniformFloat3(const std::string& name, float v0, float v1, float v2)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform3f(location, v0, v1, v2));
+    }
+
+    void OpenGLShader::SetUniformFloat3(const std::string& name, const glm::vec3& vector)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform3f(location, vector.x, vector.y, vector.z));
+    }
+
+    void OpenGLShader::SetUniformFloat4(const std::string& name, float v0, float v1, float v2, float v3)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform4f(location, v0, v1, v2, v3));
+    }
+
+    void OpenGLShader::SetUniformFloat4(const std::string& name, const glm::vec4& vector)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform4f(location, vector.x, vector.y, vector.z, vector.w));
+    }
+
+    void OpenGLShader::SetUniformMatFloat4(const std::string& name, const glm::mat4& matrix)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));
+    }
+
     ShaderSource OpenGLShader::m_ParseShaderSource(const std::string& filepath)
     {
         std::fstream shader_file_stream(filepath);
@@ -257,29 +293,5 @@ namespace CatolYeah {
 
         m_uniformLocationMap[name] = location;
         return location;
-    }
-
-    void OpenGLShader::SetUniform1i(const std::string& name, int value)
-    {
-        int location = m_GetUniformLocation(name);
-        GLCallVoid(glUniform1i(location, value));
-    }
-
-    void OpenGLShader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
-    {
-        int location = m_GetUniformLocation(name);
-        GLCallVoid(glUniform4f(location, v0, v1, v2, v3));
-    }
-
-    void OpenGLShader::SetUniform4f(const std::string& name, const glm::vec4 & vector)
-    {
-        int location = m_GetUniformLocation(name);
-        GLCallVoid(glUniform4f(location, vector.x, vector.y, vector.z, vector.w));
-    }
-
-    void OpenGLShader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
-    {
-        int location = m_GetUniformLocation(name);
-        GLCallVoid(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix)));
     }
 }//CatolYeah
