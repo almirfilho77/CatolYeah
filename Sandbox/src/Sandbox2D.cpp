@@ -9,6 +9,7 @@ Sandbox2D::Sandbox2D()
 	:	Layer("Sandbox2D"), m_cameraController(16.0f/9.0f, false)
 {
 	m_squarePosition = { 0.0f, 0.0f, 0.0f };
+	m_texture = CatolYeah::Texture2D::Create("assets/textures/ronaldinho.png");
 }
 
 void Sandbox2D::OnAttach()
@@ -55,7 +56,7 @@ void Sandbox2D::OnUpdate(CatolYeah::Timestep ts)
 	CatolYeah::Renderer2D::BeginScene(m_cameraController.GetCamera());
 
 	//CY_INFO("Square position [x:{0}] [y:{1}", m_squarePosition.x, m_squarePosition.y);
-	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y }, {1.0f, 1.0f}, m_squareColor);
+	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y }, {1.0f, 1.0f}, m_texture);
 	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x-0.75f, m_squarePosition.y-0.5f }, {0.2f, 2.0f}, m_barColor);
 	CatolYeah::Renderer2D::EndScene();
 }

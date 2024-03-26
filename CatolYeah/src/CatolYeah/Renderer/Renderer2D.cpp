@@ -12,7 +12,8 @@ namespace CatolYeah
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> vao;
-		Ref<Shader> shader;
+		Ref<Shader> solidColorShader;
+		Ref<Shader> textureShader;
 	};
 
 	static Renderer2DStorage* s_Data = nullptr;
@@ -26,16 +27,17 @@ namespace CatolYeah
 
 		s_Data->vao = VertexArray::Create();
 
-		float square_vertices[4 * 3] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+		float square_vertices[4 * 5] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f,	1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f,	0.0f, 1.0f,
 		};
 		Ref<VertexBuffer> squareVB;
 		squareVB = VertexBuffer::Create(square_vertices, sizeof(square_vertices));
 		VertexBufferLayout square_layout = {
 			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float2, "a_TextureCoord" },
 		};
 		squareVB->SetBufferLayout(square_layout);
 		s_Data->vao->AddVertexBuffer(squareVB);
@@ -45,7 +47,8 @@ namespace CatolYeah
 		squareIB = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
 		s_Data->vao->SetIndexBuffer(squareIB);
 
-		s_Data->shader = Shader::Create("assets/shaders/SolidColor.glsl");
+		s_Data->solidColorShader = Shader::Create("assets/shaders/SolidColor.glsl");
+		s_Data->textureShader = Shader::Create("assets/shaders/Texture.glsl");
 	}
 
 	void Renderer2D::Shutdown()
@@ -55,8 +58,10 @@ namespace CatolYeah
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		s_Data->shader->Bind();
-		s_Data->shader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
+		s_Data->solidColorShader->Bind();
+		s_Data->solidColorShader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
+		s_Data->textureShader->Bind();
+		s_Data->textureShader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
 		//s_Data->shader->SetUniformMat4f("u_ModelMatrix", glm::mat4(1.0f));
 	}
 
@@ -71,9 +76,25 @@ namespace CatolYeah
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		s_Data->shader->Bind();
-		s_Data->shader->SetUniformFloat4("u_Color", color);
-		s_Data->shader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
+		s_Data->solidColorShader->Bind();
+		s_Data->solidColorShader->SetUniformFloat4("u_Color", color);
+		s_Data->solidColorShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
+
+		s_Data->vao->Bind();
+		RenderCommand::DrawIndexed(s_Data->vao);
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture)
+	{
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture)
+	{
+		s_Data->textureShader->Bind();
+		s_Data->textureShader->SetUniformInt1("u_Texture", texture->GetSlot());
+		texture->Bind();
+		s_Data->textureShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
 
 		s_Data->vao->Bind();
 		RenderCommand::DrawIndexed(s_Data->vao);
