@@ -8,8 +8,12 @@ namespace CatolYeah
 {
 	void OpenGLRendererAPI::Init()
 	{
+		// Enable blending: what to do with alpha channel
 		GLCallVoid(glEnable(GL_BLEND));
 		GLCallVoid(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
+		// Enable Depth test: what to do if a pixel is behind another
+		GLCallVoid(glEnable(GL_DEPTH_TEST));
 	}
 
 	void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
