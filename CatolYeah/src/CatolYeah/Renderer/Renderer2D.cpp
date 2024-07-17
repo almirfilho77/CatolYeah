@@ -12,8 +12,8 @@ namespace CatolYeah
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> vao;
-		Ref<Shader> solidColorShader;
 		Ref<Shader> textureShader;
+		Ref<Texture2D> whiteTexture;
 	};
 
 	static Renderer2DStorage* s_Data = nullptr;
@@ -47,7 +47,10 @@ namespace CatolYeah
 		squareIB = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
 		s_Data->vao->SetIndexBuffer(squareIB);
 
-		s_Data->solidColorShader = Shader::Create("assets/shaders/SolidColor.glsl");
+		s_Data->whiteTexture = Texture2D::Create(1, 1, 4);
+		uint32_t whiteTextureData = 0xffffffff;
+		s_Data->whiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
 		s_Data->textureShader = Shader::Create("assets/shaders/Texture.glsl");
 	}
 
@@ -58,8 +61,6 @@ namespace CatolYeah
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		s_Data->solidColorShader->Bind();
-		s_Data->solidColorShader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
 		s_Data->textureShader->Bind();
 		s_Data->textureShader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
 		//s_Data->shader->SetUniformMat4f("u_ModelMatrix", glm::mat4(1.0f));
@@ -76,24 +77,26 @@ namespace CatolYeah
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		s_Data->solidColorShader->Bind();
-		s_Data->solidColorShader->SetUniformFloat4("u_Color", color);
-		s_Data->solidColorShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
+		s_Data->whiteTexture->Bind(0);
+		s_Data->textureShader->SetUniformInt1("u_Texture", s_Data->whiteTexture->GetSlot());
+		s_Data->textureShader->SetUniformFloat4("u_Color", color);
+		s_Data->textureShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
 
 		s_Data->vao->Bind();
 		RenderCommand::DrawIndexed(s_Data->vao);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture, color);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color)
 	{
-		s_Data->textureShader->Bind();
+		s_Data->textureShader->SetUniformFloat4("u_Color", color);
+
+		texture->Bind(1);
 		s_Data->textureShader->SetUniformInt1("u_Texture", texture->GetSlot());
-		texture->Bind();
 		s_Data->textureShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
 
 		s_Data->vao->Bind();

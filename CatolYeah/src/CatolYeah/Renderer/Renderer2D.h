@@ -17,8 +17,8 @@ namespace CatolYeah
 
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
-		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture);
-		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture);
+		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
+		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
 
 	};
 
