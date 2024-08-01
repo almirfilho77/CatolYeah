@@ -40,7 +40,7 @@ public:
 
 	~Sandbox()
 	{
-		CY_TRACE("Sandbox d'tor");
+		CY_TRACE("Sandbox d'tor");  
 	}
 };
 

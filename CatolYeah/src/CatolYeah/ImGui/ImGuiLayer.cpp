@@ -17,7 +17,7 @@ namespace CatolYeah {
     static GLFWwindow* s_GetNativeWindow();
 
 	ImGuiLayer::ImGuiLayer()
-		:	Layer("ImGuiLayer")
+		:	Layer("ImGuiLayer", true)
 	{
 	}
 

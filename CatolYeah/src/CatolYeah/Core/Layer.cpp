@@ -4,8 +4,8 @@
 namespace CatolYeah
 {
 
-	Layer::Layer(const std::string& name)
-		:	t_name(name)
+	Layer::Layer(const std::string& name, bool isImGuiLayer)
+		:	t_name(name), t_isImGuiLayer(isImGuiLayer)
 	{
 
 	}

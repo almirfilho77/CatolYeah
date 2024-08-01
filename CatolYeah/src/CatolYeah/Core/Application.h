@@ -15,6 +15,7 @@ namespace CatolYeah {
 	{
 	public:
 		Application();
+		Application(std::string_view assetsPath);
 		virtual ~Application();
 
 		void Run();
@@ -39,7 +40,7 @@ namespace CatolYeah {
 		bool m_minimized = false;
 
 		LayerStack m_layerStack;
-		ImGuiLayer *m_ImGuiLayer;
+		ImGuiLayer *m_ImGuiLayer = nullptr;
 
 		float m_lastFrameTime = 0.0f;
 	};
