@@ -12,6 +12,13 @@ namespace CatolYeah
 		Renderer2D::Init();
 	}
 
+	// TODO: remove code duplication
+	void Renderer::Init(std::string_view assetsPath)
+	{
+		RenderCommand::Init();
+		Renderer2D::Init(assetsPath);
+	}
+
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
 	{
 		RenderCommand::SetViewport(0, 0, width, height);

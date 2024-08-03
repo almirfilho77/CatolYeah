@@ -15,6 +15,7 @@ namespace CatolYeah {
 	{
 	public:
 		Application();
+		Application(std::string_view assetsPath);
 		virtual ~Application();
 
 		void Run();

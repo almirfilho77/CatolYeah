@@ -7,6 +7,8 @@
 #include "Shader.h"
 #include "VertexArray.h"
 
+namespace fs = std::filesystem;
+
 namespace CatolYeah
 {
 	struct Renderer2DStorage
@@ -45,7 +47,41 @@ namespace CatolYeah
 		squareIB = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
 		s_Data->vao->SetIndexBuffer(squareIB);
 
-		s_Data->shader = Shader::Create("assets/shaders/SolidColor.glsl");
+		fs::path shaderPath = fs::path("assets") / "shaders" / "SolidColor.glsl";
+		s_Data->shader = Shader::Create(shaderPath.string());
+	}
+
+	// TODO: remove code duplication
+	void Renderer2D::Init(std::string_view assetsPath)
+	{
+		if (s_Data == nullptr)
+		{
+			s_Data = new Renderer2DStorage();
+		}
+
+		s_Data->vao = VertexArray::Create();
+
+		float square_vertices[4 * 3] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f,
+		};
+		Ref<VertexBuffer> squareVB;
+		squareVB = VertexBuffer::Create(square_vertices, sizeof(square_vertices));
+		VertexBufferLayout square_layout = {
+			{ ShaderDataType::Float3, "a_Position" },
+		};
+		squareVB->SetBufferLayout(square_layout);
+		s_Data->vao->AddVertexBuffer(squareVB);
+
+		uint32_t square_indices[6] = { 0, 1, 2, 0, 2, 3 };
+		Ref<IndexBuffer> squareIB;
+		squareIB = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
+		s_Data->vao->SetIndexBuffer(squareIB);
+
+		fs::path shaderPath = fs::path(assetsPath) / "SolidColor.glsl";
+		s_Data->shader = Shader::Create(shaderPath.string());
 	}
 
 	void Renderer2D::Shutdown()
