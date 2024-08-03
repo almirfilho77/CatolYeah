@@ -8,6 +8,7 @@
 #include "CatolYeah/Core/Timestep.h"
 #include "CatolYeah/Core/Window.h"
 #include "CatolYeah/Renderer/Renderer.h"
+#include "CatolYeah/Renderer/RenderCommand.h"
 
 #include <GLFW/glfw3.h>
 

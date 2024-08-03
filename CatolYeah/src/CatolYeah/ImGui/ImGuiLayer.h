@@ -24,6 +24,7 @@ namespace CatolYeah {
 
 	private:
 		float m_time = 0.0f;
+		static bool s_isBackendInitialized;
 	};
 
 }//CatolYeah

@@ -15,6 +15,7 @@ namespace CatolYeah {
     static ImGuiKey s_GLFWKeyToImGuiKey(int key);
     static void s_UpdateKeyModifiers();
     static GLFWwindow* s_GetNativeWindow();
+    bool ImGuiLayer::s_isBackendInitialized = false;
 
 	ImGuiLayer::ImGuiLayer()
 		:	Layer("ImGuiLayer", true)
@@ -55,8 +56,12 @@ namespace CatolYeah {
         GLFWwindow* window = s_GetNativeWindow();
 
         // Setup Platform/Renderer backends
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init("#version 410");
+        if (s_isBackendInitialized == false)
+        {
+            ImGui_ImplGlfw_InitForOpenGL(window, true);
+            ImGui_ImplOpenGL3_Init("#version 410");
+            s_isBackendInitialized = true;
+        }
 	}
 
 	void ImGuiLayer::OnDetach()
@@ -67,6 +72,7 @@ namespace CatolYeah {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
+        s_isBackendInitialized = false;
 	}
 
     void ImGuiLayer::OnImGuiRender()
