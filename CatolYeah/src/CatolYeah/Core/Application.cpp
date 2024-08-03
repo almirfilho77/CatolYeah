@@ -30,6 +30,22 @@ namespace CatolYeah {
 		m_running = true;
 	}
 
+	// TODO: remove code duplication
+	Application::Application(std::string_view assetsPath)
+	{
+		CY_ASSERT(s_instance == nullptr, "Application already exists");
+		s_instance = this;
+		m_window = Scope<Window>(Window::Create());
+		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
+		m_window->SetVSync(true);
+		Renderer::Init(assetsPath);
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
+
+		m_running = true;
+	}
+
 	Application::~Application()
 	{
 		m_running = false;

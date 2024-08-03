@@ -5,7 +5,7 @@ project "CatolYeah"
     language "C++"
     cppdialect "C++17"
     targetdir "bin/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-    staticruntime "off"
+    staticruntime "on"
 
     pchheader "cypch.h"
 	pchsource "src/cypch.cpp"
