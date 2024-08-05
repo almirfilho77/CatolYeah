@@ -17,6 +17,7 @@ void Sandbox2D::OnAttach()
 	auto width = CatolYeah::Application::Get().GetWindow().GetWidth();
 	auto height = CatolYeah::Application::Get().GetWindow().GetHeight();
 	m_cameraController.SetAspectRatio((float)width / (float)height);
+	m_texture = CatolYeah::Texture2D::Create("assets/textures/zeca.png");
 }
 
 void Sandbox2D::OnDetach()
@@ -55,8 +56,8 @@ void Sandbox2D::OnUpdate(CatolYeah::Timestep ts)
 	CatolYeah::Renderer2D::BeginScene(m_cameraController.GetCamera());
 
 	//CY_INFO("Square position [x:{0}] [y:{1}", m_squarePosition.x, m_squarePosition.y);
-	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y }, {1.0f, 1.0f}, m_squareColor);
-	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x-0.75f, m_squarePosition.y-0.5f }, {0.2f, 2.0f}, m_barColor);
+	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x-0.75f, m_squarePosition.y-0.5f, 0.1f }, {2.0f, 2.0f}, m_barColor);	// Setting Z-axis with depth test enabled
+	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y, 0.2f }, {1.0f, 1.0f}, m_texture);				// Texture closes to the screen than flat color quad
 	CatolYeah::Renderer2D::EndScene();
 }
 

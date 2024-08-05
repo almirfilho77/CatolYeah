@@ -126,6 +126,9 @@
     <ClInclude Include="src\CatolYeah\Renderer\Renderer.h">
       <Filter>src\CatolYeah\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\CatolYeah\Renderer\Renderer2D.h">
+      <Filter>src\CatolYeah\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\CatolYeah\Renderer\RendererAPI.h">
       <Filter>src\CatolYeah\Renderer</Filter>
     </ClInclude>
@@ -1428,7 +1431,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\CatolYeah\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CatolYeah\Core\Application.cpp">
@@ -1462,6 +1464,9 @@
       <Filter>src\CatolYeah\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\Renderer\Renderer.cpp">
+      <Filter>src\CatolYeah\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CatolYeah\Renderer\Renderer2D.cpp">
       <Filter>src\CatolYeah\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CatolYeah\Renderer\RendererAPI.cpp">
@@ -1518,6 +1523,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\CatolYeah\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

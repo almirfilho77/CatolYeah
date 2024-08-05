@@ -21,7 +21,8 @@ private:
 	CatolYeah::OrthographicCameraController m_cameraController;
 
 	CatolYeah::Ref<CatolYeah::VertexArray> m_squareVAO = nullptr;
-	CatolYeah::Ref<CatolYeah::Shader> m_solidColorShader = nullptr;
+	CatolYeah::Ref<CatolYeah::Texture2D> m_texture = nullptr;
+
 
 	glm::vec4 m_squareColor = { 0.8f, 0.2f, 0.3f, 1.0f };
 	glm::vec4 m_barColor = { 0.2f, 0.8f, 0.3f, 1.0f };
