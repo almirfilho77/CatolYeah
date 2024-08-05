@@ -10,6 +10,7 @@ namespace CatolYeah
 	{
 	public:
 		static void Init();
+		static void Init(std::string_view assetsPath);
 		static void Shutdown();
 
 		static void BeginScene(const OrthographicCamera& camera);

@@ -7,6 +7,8 @@
 #include "Shader.h"
 #include "VertexArray.h"
 
+namespace fs = std::filesystem;
+
 namespace CatolYeah
 {
 	struct Renderer2DStorage
@@ -47,11 +49,50 @@ namespace CatolYeah
 		squareIB = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
 		s_Data->vao->SetIndexBuffer(squareIB);
 
-		s_Data->whiteTexture = Texture2D::Create(1, 1, 4);
+        s_Data->whiteTexture = Texture2D::Create(1, 1, 4);
 		uint32_t whiteTextureData = 0xffffffff;
 		s_Data->whiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
-		s_Data->textureShader = Shader::Create("assets/shaders/Texture.glsl");
+		fs::path shaderPath = fs::path("assets") / "shaders" / "Texture.glsl";
+		s_Data->textureShader = Shader::Create(shaderPath.string());
+	}
+
+	// TODO: remove code duplication
+	void Renderer2D::Init(std::string_view assetsPath)
+	{
+		if (s_Data == nullptr)
+		{
+			s_Data = new Renderer2DStorage();
+		}
+
+		s_Data->vao = VertexArray::Create();
+
+		float square_vertices[4 * 5] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f,	1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f,	0.0f, 1.0f,
+		};
+		Ref<VertexBuffer> squareVB;
+		squareVB = VertexBuffer::Create(square_vertices, sizeof(square_vertices));
+		VertexBufferLayout square_layout = {
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float2, "a_TextureCoord" },
+		};
+		squareVB->SetBufferLayout(square_layout);
+		s_Data->vao->AddVertexBuffer(squareVB);
+
+		uint32_t square_indices[6] = { 0, 1, 2, 0, 2, 3 };
+		Ref<IndexBuffer> squareIB;
+		squareIB = IndexBuffer::Create(square_indices, sizeof(square_indices) / sizeof(uint32_t));
+		s_Data->vao->SetIndexBuffer(squareIB);
+
+		s_Data->whiteTexture = Texture2D::Create(1, 1, 4);
+		uint32_t whiteTextureData = 0xffffffff;
+		s_Data->whiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+        
+        fs::path shaderPath = fs::path(assetsPath) / "Texture.glsl";
+		s_Data->textureShader = Shader::Create(shaderPath.string());
 	}
 
 	void Renderer2D::Shutdown()
