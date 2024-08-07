@@ -13,6 +13,7 @@ namespace CatolYeah
 		static void Init(std::string_view assetsPath);
 		static void Shutdown();
 
+		static void BeginScene();
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
 
