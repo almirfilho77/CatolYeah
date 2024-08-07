@@ -30,10 +30,10 @@ namespace CatolYeah
 		s_Data->vao = VertexArray::Create();
 
 		float square_vertices[4 * 5] = {
-			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-			 0.5f,  0.5f, 0.0f,	1.0f, 1.0f,
-			-0.5f,  0.5f, 0.0f,	0.0f, 1.0f,
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f,	1.0f, 1.0f,
+			-1.0f,  1.0f, 0.0f,	0.0f, 1.0f,
 		};
 		Ref<VertexBuffer> squareVB;
 		squareVB = VertexBuffer::Create(square_vertices, sizeof(square_vertices));
@@ -68,10 +68,10 @@ namespace CatolYeah
 		s_Data->vao = VertexArray::Create();
 
 		float square_vertices[4 * 5] = {
-			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-			 0.5f,  0.5f, 0.0f,	1.0f, 1.0f,
-			-0.5f,  0.5f, 0.0f,	0.0f, 1.0f,
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f,	1.0f, 1.0f,
+			-1.0f,  1.0f, 0.0f,	0.0f, 1.0f,
 		};
 		Ref<VertexBuffer> squareVB;
 		squareVB = VertexBuffer::Create(square_vertices, sizeof(square_vertices));
@@ -98,6 +98,12 @@ namespace CatolYeah
 	void Renderer2D::Shutdown()
 	{
 		delete s_Data;
+	}
+
+	void Renderer2D::BeginScene()
+	{
+		s_Data->textureShader->Bind();
+		s_Data->textureShader->SetUniformMatFloat4("u_ViewProjectionMatrix", glm::mat4(1.0f));
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
