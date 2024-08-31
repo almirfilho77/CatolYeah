@@ -14,8 +14,11 @@ namespace CatolYeah {
 	class Application
 	{
 	public:
-		Application();
-		Application(std::string_view assetsPath);
+		Application(const std::string& windowTitle = "MyApp",
+			uint32_t windowWidth = 1920,
+			uint32_t windowHeight = 1080,
+			std::string_view assetsPath = "",
+			bool setVSync = true);
 		virtual ~Application();
 
 		void Run();
@@ -32,6 +35,11 @@ namespace CatolYeah {
 	private:
 		bool m_OnWindowClose(WindowCloseEvent &e);
 		bool m_OnWindowResize(WindowResizeEvent &e);
+		void m_CreateApplication(const std::string &windowTitle = "MyApp",
+			uint32_t windowWidth = 1920,
+			uint32_t windowHeight = 1080,
+			std::string_view assetsPath = "",
+			bool setVSync = true);
 
 	private:
 		static Application* s_instance;
