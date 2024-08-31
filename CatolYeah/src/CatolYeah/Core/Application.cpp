@@ -15,40 +15,57 @@ namespace CatolYeah {
 	
 	Application* Application::s_instance = nullptr;
 
-	Application::Application()
+	// TODO: remove code duplication
+	Application::Application(const std::string& windowTitle,
+		uint32_t windowWidth,
+		uint32_t windowHeight,
+		std::string_view assetsPath,
+		bool setVSync)
 	{
-		CY_ASSERT(s_instance == nullptr, "Application already exists");
-		s_instance = this;
-		m_window = Scope<Window>(Window::Create());
-		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
-		m_window->SetVSync(true);
-		Renderer::Init();
-
-		m_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(m_ImGuiLayer);
-
-		m_running = true;
+		m_CreateApplication(windowTitle, windowWidth, windowHeight, assetsPath, setVSync);
 	}
 
-	// TODO: remove code duplication
-	Application::Application(std::string_view assetsPath)
+	Application::Application(const ApplicationSpecs& applicationSpecs)
 	{
-		CY_ASSERT(s_instance == nullptr, "Application already exists");
-		s_instance = this;
-		m_window = Scope<Window>(Window::Create());
-		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
-		m_window->SetVSync(true);
-		Renderer::Init(assetsPath);
-
-		m_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(m_ImGuiLayer);
-
-		m_running = true;
+		m_CreateApplication(applicationSpecs.Title, 
+			applicationSpecs.Width,
+			applicationSpecs.Height,
+			applicationSpecs.AssetsPath,
+			applicationSpecs.VSyncEnabled);
 	}
 
 	Application::~Application()
 	{
 		m_running = false;
+	}
+
+	void Application::m_CreateApplication(const std::string &windowTitle, 
+		uint32_t windowWidth, 
+		uint32_t windowHeight, 
+		std::string_view assetsPath, 
+		bool setVSync)
+	{
+		CY_CORE_INFO("Creating Application");
+		CY_ASSERT(s_instance == nullptr, "Application already exists");
+		s_instance = this;
+		WindowProps windowProps(windowTitle, windowWidth, windowHeight);
+		m_window = Scope<Window>(Window::Create(windowProps));
+		m_window->SetEventCallback(CY_BIND_EVENT_FN(Application::OnEvent));
+		m_window->SetVSync(setVSync);
+		if (!assetsPath.empty())
+		{
+			Renderer::Init(assetsPath);
+		}
+		else
+		{
+			Renderer::Init();
+		}
+
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
+
+		m_running = true;
 	}
 
 	void Application::OnEvent(Event& e)

@@ -11,11 +11,24 @@
 
 namespace CatolYeah {
 
+	typedef struct ApplicationSpecs
+	{
+		std::string Title;
+		uint32_t Width;
+		uint32_t Height;
+		std::string AssetsPath;
+		bool VSyncEnabled;
+	};
+
 	class Application
 	{
 	public:
-		Application();
-		Application(std::string_view assetsPath);
+		Application(const std::string& windowTitle = "MyApp",
+			uint32_t windowWidth = 1920,
+			uint32_t windowHeight = 1080,
+			std::string_view assetsPath = "",
+			bool setVSync = true);
+		Application(const ApplicationSpecs& applicationSpecs);
 		virtual ~Application();
 
 		void Run();
@@ -32,6 +45,11 @@ namespace CatolYeah {
 	private:
 		bool m_OnWindowClose(WindowCloseEvent &e);
 		bool m_OnWindowResize(WindowResizeEvent &e);
+		void m_CreateApplication(const std::string &windowTitle = "MyApp",
+			uint32_t windowWidth = 1920,
+			uint32_t windowHeight = 1080,
+			std::string_view assetsPath = "",
+			bool setVSync = true);
 
 	private:
 		static Application* s_instance;
