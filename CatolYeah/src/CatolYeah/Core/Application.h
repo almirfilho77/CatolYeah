@@ -11,6 +11,15 @@
 
 namespace CatolYeah {
 
+	typedef struct ApplicationSpecs
+	{
+		std::string Title;
+		uint32_t Width;
+		uint32_t Height;
+		std::string AssetsPath;
+		bool VSyncEnabled;
+	};
+
 	class Application
 	{
 	public:
@@ -19,6 +28,7 @@ namespace CatolYeah {
 			uint32_t windowHeight = 1080,
 			std::string_view assetsPath = "",
 			bool setVSync = true);
+		Application(const ApplicationSpecs& applicationSpecs);
 		virtual ~Application();
 
 		void Run();

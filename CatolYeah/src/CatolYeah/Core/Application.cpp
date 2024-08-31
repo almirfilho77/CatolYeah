@@ -22,8 +22,16 @@ namespace CatolYeah {
 		std::string_view assetsPath,
 		bool setVSync)
 	{
-		WindowProps windowProps;
 		m_CreateApplication(windowTitle, windowWidth, windowHeight, assetsPath, setVSync);
+	}
+
+	Application::Application(const ApplicationSpecs& applicationSpecs)
+	{
+		m_CreateApplication(applicationSpecs.Title, 
+			applicationSpecs.Width,
+			applicationSpecs.Height,
+			applicationSpecs.AssetsPath,
+			applicationSpecs.VSyncEnabled);
 	}
 
 	Application::~Application()
@@ -37,6 +45,7 @@ namespace CatolYeah {
 		std::string_view assetsPath, 
 		bool setVSync)
 	{
+		CY_CORE_INFO("Creating Application");
 		CY_ASSERT(s_instance == nullptr, "Application already exists");
 		s_instance = this;
 		WindowProps windowProps(windowTitle, windowWidth, windowHeight);
