@@ -54,20 +54,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\bin\Debug-windows-x86_64\CatolYeah\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\CatolYeah\</IntDir>
+    <OutDir>..\..\bin\Debug-windows-x86_64\CatolYeah\</OutDir>
+    <IntDir>..\..\bin-int\Debug-windows-x86_64\CatolYeah\</IntDir>
     <TargetName>CatolYeah</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\bin\Release-windows-x86_64\CatolYeah\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\CatolYeah\</IntDir>
+    <OutDir>..\..\bin\Release-windows-x86_64\CatolYeah\</OutDir>
+    <IntDir>..\..\bin-int\Release-windows-x86_64\CatolYeah\</IntDir>
     <TargetName>CatolYeah</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <OutDir>..\bin\Dist-windows-x86_64\CatolYeah\</OutDir>
-    <IntDir>..\bin-int\Dist-windows-x86_64\CatolYeah\</IntDir>
+    <OutDir>..\..\bin\Dist-windows-x86_64\CatolYeah\</OutDir>
+    <IntDir>..\..\bin-int\Dist-windows-x86_64\CatolYeah\</IntDir>
     <TargetName>CatolYeah</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -80,7 +80,7 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -104,7 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -129,7 +129,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
