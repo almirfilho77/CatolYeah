@@ -33,8 +33,8 @@ public:
 	Sandbox()
 	{
 		CY_TRACE("Sandbox c'tor");
-		PushLayer(new Sandbox2D());
-		//PushLayer(new BlockBall::BlockBall());
+		//PushLayer(new Sandbox2D());
+		PushLayer(new BlockBall::BlockBall());
 		PushLayer(new DebugLayer());
 	}
 

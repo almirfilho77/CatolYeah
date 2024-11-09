@@ -40,6 +40,7 @@ namespace BlockBall
 		virtual void OnAttach() override;
 		virtual void OnUpdate(CatolYeah::Timestep ts) override;
 		virtual void OnEvent(CatolYeah::Event& e) override;
+		virtual void OnImGuiRender() override;
 
 	private:
 		float m_aspectRatio;
@@ -49,6 +50,13 @@ namespace BlockBall
 		uint8_t m_scorePlayerA = 0, m_scorePlayerB = 0;
 
 		CatolYeah::OrthographicCameraController m_cameraController;
+
+		struct ProfileResult
+		{
+			const char* Name;
+			float Time;
+		};
+		std::vector<ProfileResult> m_profileResults;
 	};
 
 }// BlockBall
