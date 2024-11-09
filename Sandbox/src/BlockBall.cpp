@@ -11,6 +11,8 @@ namespace BlockBall
 		:	m_position(position),
 			m_color(color)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		m_vertexArray = CatolYeah::VertexArray::Create();
 
 		// Vertex Buffer
@@ -45,6 +47,8 @@ namespace BlockBall
 
 	void Rect::SetColor(float r, float g, float b, float a)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		m_color = { r, g, b, a };
 		m_shader->Bind();
 		m_shader->SetUniformFloat4("u_Color", m_color);
@@ -52,6 +56,8 @@ namespace BlockBall
 
 	void Rect::SetColor(glm::vec4& color)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		m_color = color;
 		m_shader->Bind();
 		m_shader->SetUniformFloat4("u_Color", m_color);
@@ -67,11 +73,13 @@ namespace BlockBall
 
 	BlockBall::~BlockBall()
 	{
-		CY_PROFILING_END_SESSION();
+		
 	}
 
 	void BlockBall::OnAttach()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		auto win_width = CatolYeah::Application::Get().GetWindow().GetWidth();
 		auto win_height = CatolYeah::Application::Get().GetWindow().GetHeight();
 		m_aspectRatio = (float)win_width / (float)win_height;
@@ -83,8 +91,8 @@ namespace BlockBall
 
 	void BlockBall::OnUpdate(CatolYeah::Timestep ts)
 	{
-		CY_PROFILING_BEGIN_SESSION("BlockBall::OnUpdate", "results-OnUpdate.json");
 		CY_PROFILING_FUNCTION_TIMER();
+
 		// Square translation
 		auto &playerA_position = m_playerA.GetPosition();
 		if (playerA_position.y < 0.75f && CatolYeah::Input::IsKeyPressed(CY_KEY_W))

@@ -22,6 +22,8 @@ namespace CatolYeah
 
 	void Renderer2D::Init()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		if (s_Data == nullptr)
 		{
 			s_Data = new Renderer2DStorage();
@@ -60,6 +62,8 @@ namespace CatolYeah
 	// TODO: remove code duplication
 	void Renderer2D::Init(std::string_view assetsPath)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		if (s_Data == nullptr)
 		{
 			s_Data = new Renderer2DStorage();
@@ -102,12 +106,16 @@ namespace CatolYeah
 
 	void Renderer2D::BeginScene()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		s_Data->textureShader->Bind();
 		s_Data->textureShader->SetUniformMatFloat4("u_ViewProjectionMatrix", glm::mat4(1.0f));
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		s_Data->textureShader->Bind();
 		s_Data->textureShader->SetUniformMatFloat4("u_ViewProjectionMatrix", camera.GetViewProjectionMatrix());
 		//s_Data->shader->SetUniformMat4f("u_ModelMatrix", glm::mat4(1.0f));
@@ -124,6 +132,8 @@ namespace CatolYeah
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		s_Data->whiteTexture->Bind(0);
 		s_Data->textureShader->SetUniformInt1("u_Texture", s_Data->whiteTexture->GetSlot());
 		s_Data->textureShader->SetUniformFloat4("u_Color", color);
@@ -140,6 +150,8 @@ namespace CatolYeah
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		s_Data->textureShader->SetUniformFloat4("u_Color", color);
 
 		texture->Bind(1);

@@ -45,6 +45,8 @@ namespace CatolYeah {
 		std::string_view assetsPath, 
 		bool setVSync)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_INFO("Creating Application");
 		CY_ASSERT(s_instance == nullptr, "Application already exists");
 		s_instance = this;
@@ -87,6 +89,8 @@ namespace CatolYeah {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_TRACE("Push regular layer into the stack");
 		m_layerStack.PushLayer(layer);
 		layer->OnAttach();
@@ -94,6 +98,8 @@ namespace CatolYeah {
 
 	void Application::PushOverlay(Layer* overlay)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_TRACE("Push overlay into the stack");
 		m_layerStack.PushOverlay(overlay);
 		overlay->OnAttach();
@@ -101,6 +107,8 @@ namespace CatolYeah {
 
 	void Application::Run()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_TRACE("Application main loop");
 		while (m_running)
 		{
@@ -136,6 +144,8 @@ namespace CatolYeah {
 
 	bool Application::m_OnWindowResize(WindowResizeEvent& e)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+		
 		uint32_t width = e.GetWindowWidth();
 		uint32_t height = e.GetWindowHeight();
 

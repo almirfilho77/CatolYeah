@@ -25,18 +25,24 @@ namespace CatolYeah
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_TRACE("WindowsWindow c'tor");
 		m_Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_TRACE("WindowsWindow d'tor");
 		m_Shutdown();
 	}
 
 	bool WindowsWindow::OnUpdate()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		glfwPollEvents();
 		m_context->SwapBuffers();
 		return true;
@@ -49,6 +55,8 @@ namespace CatolYeah
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		if (enabled)
 		{
 			glfwSwapInterval(1);
@@ -62,6 +70,8 @@ namespace CatolYeah
 
 	void WindowsWindow::m_Init(const WindowProps& props)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		m_windowData.Title = props.Title;
 		m_windowData.Width = props.Width;
 		m_windowData.Height = props.Height;

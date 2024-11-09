@@ -15,6 +15,8 @@ namespace CatolYeah
 	// TODO: remove code duplication
 	void Renderer::Init(std::string_view assetsPath)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		RenderCommand::Init();
 		Renderer2D::Init(assetsPath);
 	}
@@ -26,6 +28,8 @@ namespace CatolYeah
 
 	void Renderer::BeginScene(const OrthographicCamera &camera)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		Renderer::m_viewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
@@ -35,6 +39,8 @@ namespace CatolYeah
 
 	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertex_array, const glm::mat4& model_matrix)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		shader->Bind();
 		shader->SetUniformMatFloat4("u_ViewProjectionMatrix", Renderer::m_viewProjectionMatrix);
 		shader->SetUniformMatFloat4("u_ModelMatrix", model_matrix);

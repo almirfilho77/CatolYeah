@@ -8,6 +8,8 @@ namespace CatolYeah
 {
 	void OpenGLRendererAPI::Init()
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		// Enable blending: what to do with alpha channel
 		GLCallVoid(glEnable(GL_BLEND));
 		GLCallVoid(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
@@ -18,6 +20,8 @@ namespace CatolYeah
 
 	void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		CY_CORE_INFO("Setting the viewport here to W: {0}, H: {1}", width, height);
 		GLCallVoid(glViewport(x, y, width, height));
 	}
@@ -34,6 +38,8 @@ namespace CatolYeah
 
 	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertex_array)
 	{
+		CY_PROFILING_FUNCTION_TIMER();
+
 		GLCallVoid(glDrawElements(GL_TRIANGLES, vertex_array->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr));
 	}
 }

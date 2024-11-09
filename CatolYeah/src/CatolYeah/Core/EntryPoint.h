@@ -10,7 +10,9 @@ int main(int argc, char **argv)
 	CatolYeah::Logger::Init();
 	CY_CORE_INFO("Initialized logger");
 	auto app = CatolYeah::CreateApplication();
+	
 	app->Run();
+
 	delete app;
 	return 0;
 }
