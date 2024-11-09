@@ -161,6 +161,7 @@
     <ClInclude Include="src\CatolYeah\Events\KeyEvent.h" />
     <ClInclude Include="src\CatolYeah\Events\MouseEvent.h" />
     <ClInclude Include="src\CatolYeah\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\CatolYeah\Instrumentation\ScopedTimer.h" />
     <ClInclude Include="src\CatolYeah\OrthographicCameraController.h" />
     <ClInclude Include="src\CatolYeah\Renderer\Camera.h" />
     <ClInclude Include="src\CatolYeah\Renderer\GraphicsContext.h" />

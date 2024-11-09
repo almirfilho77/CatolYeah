@@ -16,6 +16,7 @@
 
 #include "CatolYeah/Core/Logger.h"
 
+#include "CatolYeah/Instrumentation/ScopedTimer.h"
 
 #ifdef CY_PLATFORM_WINDOWS
 #include <Windows.h>

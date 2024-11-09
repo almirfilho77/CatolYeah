@@ -32,10 +32,12 @@ class Sandbox : public CatolYeah::Application
 public:
 	Sandbox()
 	{
+		CY_PROFILING_BEGIN_SESSION("Initialization", "results-Initialization.json");
 		CY_TRACE("Sandbox c'tor");
 		//PushLayer(new Sandbox2D());
 		PushLayer(new BlockBall::BlockBall());
 		PushLayer(new DebugLayer());
+		CY_PROFILING_END_SESSION();
 	}
 
 	~Sandbox()

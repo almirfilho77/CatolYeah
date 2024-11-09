@@ -12,11 +12,16 @@ namespace BlockBall
 		Rect(const glm::vec3 &position, const glm::vec4 &color);
 
 		void SetPosition(float position_y);
+		void Rect::SetColor(float r, float g, float b, float a);
+		void Rect::SetColor(glm::vec4 &color);
 
 		inline CatolYeah::Ref<CatolYeah::VertexArray>& GetVertexArray() { return m_vertexArray; }
 		inline CatolYeah::Ref<CatolYeah::Shader>& GetShader() { return m_shader; }
 		inline glm::vec3& GetPosition() { return m_position; }
 		inline const glm::vec3& GetPosition() const { return m_position; }
+
+		inline glm::vec4& GetColor() { return m_color; }
+		inline const glm::vec4& GetColor() const { return m_color; }
 
 	private:
 		CatolYeah::Ref<CatolYeah::VertexArray> m_vertexArray;
@@ -35,7 +40,7 @@ namespace BlockBall
 	{
 	public:
 		BlockBall();
-		~BlockBall() {}
+		~BlockBall();
 
 		virtual void OnAttach() override;
 		virtual void OnUpdate(CatolYeah::Timestep ts) override;
@@ -50,13 +55,6 @@ namespace BlockBall
 		uint8_t m_scorePlayerA = 0, m_scorePlayerB = 0;
 
 		CatolYeah::OrthographicCameraController m_cameraController;
-
-		struct ProfileResult
-		{
-			const char* Name;
-			float Time;
-		};
-		std::vector<ProfileResult> m_profileResults;
 	};
 
 }// BlockBall

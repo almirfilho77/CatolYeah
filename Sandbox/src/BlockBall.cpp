@@ -2,45 +2,8 @@
 
 #include "imgui/imgui.h"
 
-template<typename Fn>
-class Timer
-{
-public:
-	Timer(const char* name, Fn&& callback)
-		: m_name(name), m_callback(callback), m_stopped(false)
-	{
-		m_startTimepoint = std::chrono::high_resolution_clock::now();
-	}
-
-	void Stop()
-	{
-		auto endTimepoint = std::chrono::high_resolution_clock::now();
-
-		long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_startTimepoint).time_since_epoch().count();
-		long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
-
-		m_stopped = true;
-
-		float duration = (end - start)*0.001f;
-		m_callback({ m_name, duration });
-	}
-
-	~Timer()
-	{
-		if (!m_stopped)
-		{
-			Stop();
-		}
-	}
-
-private:
-	const char* m_name;
-	Fn m_callback;
-	std::chrono::time_point<std::chrono::high_resolution_clock> m_startTimepoint;
-	bool m_stopped;
-};
-
-#define PROFILE_SCOPE(name) Timer timer##__LINE__(name, [&](ProfileResult ProfileResult) { m_profileResults.push_back(ProfileResult); })
+#include "CatolYeah/Instrumentation/ScopedTimer.h"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace BlockBall
 {
@@ -80,6 +43,19 @@ namespace BlockBall
 		m_position.y = position_y;
 	}
 
+	void Rect::SetColor(float r, float g, float b, float a)
+	{
+		m_color = { r, g, b, a };
+		m_shader->Bind();
+		m_shader->SetUniformFloat4("u_Color", m_color);
+	}
+
+	void Rect::SetColor(glm::vec4& color)
+	{
+		m_color = color;
+		m_shader->Bind();
+		m_shader->SetUniformFloat4("u_Color", m_color);
+	}
 
 	BlockBall::BlockBall()
 		:	Layer("BlockBall"),
@@ -87,6 +63,11 @@ namespace BlockBall
 			m_cameraController(m_aspectRatio)
 	{
 		
+	}
+
+	BlockBall::~BlockBall()
+	{
+		CY_PROFILING_END_SESSION();
 	}
 
 	void BlockBall::OnAttach()
@@ -102,7 +83,8 @@ namespace BlockBall
 
 	void BlockBall::OnUpdate(CatolYeah::Timestep ts)
 	{
-		PROFILE_SCOPE("BlockBall::OnUpdate");
+		CY_PROFILING_BEGIN_SESSION("BlockBall::OnUpdate", "results-OnUpdate.json");
+		CY_PROFILING_FUNCTION_TIMER();
 		// Square translation
 		auto &playerA_position = m_playerA.GetPosition();
 		if (playerA_position.y < 0.75f && CatolYeah::Input::IsKeyPressed(CY_KEY_W))
@@ -140,16 +122,18 @@ namespace BlockBall
 
 	void BlockBall::OnImGuiRender()
 	{
-		ImGui::Begin("Profilling");
-		for (auto& result : m_profileResults)
-		{
-			char label[50];
-			strcpy(label, "%.3fms   ");
-			strcat(label, result.Name);
-			ImGui::Text(label, result.Time);
-		}
-		m_profileResults.clear();
+		auto vA = m_playerA.GetColor();
+		auto vB = m_playerB.GetColor();
+		ImGui::Begin("Colors");
+		ImGui::ColorEdit4("Player A", glm::value_ptr(vA));
+		ImGui::ColorEdit4("Player B", glm::value_ptr(vB));
 		ImGui::End();
+
+		{
+			CY_PROFILING_SCOPED_TIMER("SetPlayersColors");
+			m_playerA.SetColor(vA);
+			m_playerB.SetColor(vB);
+		}
 	}
 	
 }// BlockBall
