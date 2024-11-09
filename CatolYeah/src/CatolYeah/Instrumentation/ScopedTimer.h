@@ -83,6 +83,15 @@ namespace CatolYeah
 				}
 			}
 
+			bool IsSessionValid() const
+			{
+				if (m_currentSession != nullptr)
+				{
+					return true;
+				}
+				return false;
+			}
+
 			static Instrumentor &Get()
 			{
 				static Instrumentor instance;
@@ -133,6 +142,12 @@ namespace CatolYeah
 
 			void Stop()
 			{
+				if (Instrumentor::Get().IsSessionValid() == false)
+				{
+					m_stopped = true;
+					return;
+				}
+
 				auto endTimepoint = steady_clock_t::now();
 
 				std::chrono::microseconds start = std::chrono::time_point_cast<std::chrono::microseconds>(m_startTimepoint).time_since_epoch();
