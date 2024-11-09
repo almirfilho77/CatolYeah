@@ -32,7 +32,7 @@ namespace CatolYeah {
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        ImGuiIO& io = ImGui::GetIO(); //(void)io;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
         //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
@@ -68,12 +68,6 @@ namespace CatolYeah {
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
 	}
-
-    void ImGuiLayer::OnImGuiRender()
-    {
-        static bool show = true;
-        //ImGui::ShowDemoWindow(&show);
-    }
 
     void ImGuiLayer::Begin()
     {

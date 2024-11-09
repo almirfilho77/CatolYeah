@@ -1,5 +1,10 @@
 #include "BlockBall.h"
 
+#include "imgui/imgui.h"
+
+#include "CatolYeah/Instrumentation/ScopedTimer.h"
+#include <glm/gtc/type_ptr.hpp>
+
 namespace BlockBall
 {
 	Rect::Rect(const glm::vec3 &position, const glm::vec4 &color)
@@ -38,6 +43,19 @@ namespace BlockBall
 		m_position.y = position_y;
 	}
 
+	void Rect::SetColor(float r, float g, float b, float a)
+	{
+		m_color = { r, g, b, a };
+		m_shader->Bind();
+		m_shader->SetUniformFloat4("u_Color", m_color);
+	}
+
+	void Rect::SetColor(glm::vec4& color)
+	{
+		m_color = color;
+		m_shader->Bind();
+		m_shader->SetUniformFloat4("u_Color", m_color);
+	}
 
 	BlockBall::BlockBall()
 		:	Layer("BlockBall"),
@@ -45,6 +63,11 @@ namespace BlockBall
 			m_cameraController(m_aspectRatio)
 	{
 		
+	}
+
+	BlockBall::~BlockBall()
+	{
+		CY_PROFILING_END_SESSION();
 	}
 
 	void BlockBall::OnAttach()
@@ -60,6 +83,8 @@ namespace BlockBall
 
 	void BlockBall::OnUpdate(CatolYeah::Timestep ts)
 	{
+		CY_PROFILING_BEGIN_SESSION("BlockBall::OnUpdate", "results-OnUpdate.json");
+		CY_PROFILING_FUNCTION_TIMER();
 		// Square translation
 		auto &playerA_position = m_playerA.GetPosition();
 		if (playerA_position.y < 0.75f && CatolYeah::Input::IsKeyPressed(CY_KEY_W))
@@ -93,6 +118,22 @@ namespace BlockBall
 	void BlockBall::OnEvent(CatolYeah::Event& e)
 	{
 		m_cameraController.OnEvent(e);
+	}
+
+	void BlockBall::OnImGuiRender()
+	{
+		auto vA = m_playerA.GetColor();
+		auto vB = m_playerB.GetColor();
+		ImGui::Begin("Colors");
+		ImGui::ColorEdit4("Player A", glm::value_ptr(vA));
+		ImGui::ColorEdit4("Player B", glm::value_ptr(vB));
+		ImGui::End();
+
+		{
+			CY_PROFILING_SCOPED_TIMER("SetPlayersColors");
+			m_playerA.SetColor(vA);
+			m_playerB.SetColor(vB);
+		}
 	}
 	
 }// BlockBall
