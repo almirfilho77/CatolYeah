@@ -29,6 +29,7 @@ namespace CatolYeah {
 		virtual std::string_view GetName() const override { return m_name; }
 
 		virtual void SetUniformInt1(const std::string& name, int value) override;
+		virtual void SetUniformFloat1(const std::string& name, float value) override;
 
 		virtual void SetUniformFloat3(const std::string& name, float v0, float v1, float v2) override;
 		virtual void SetUniformFloat3(const std::string& name, const glm::vec3& vector) override;

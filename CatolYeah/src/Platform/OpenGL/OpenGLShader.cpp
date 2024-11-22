@@ -81,6 +81,12 @@ namespace CatolYeah {
         GLCallVoid(glUniform1i(location, value));
     }
 
+    void OpenGLShader::SetUniformFloat1(const std::string& name, float value)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform1f(location, value));
+    }
+
     void OpenGLShader::SetUniformFloat3(const std::string& name, float v0, float v1, float v2)
     {
         int location = m_GetUniformLocation(name);

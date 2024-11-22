@@ -137,22 +137,24 @@ namespace CatolYeah
 		s_Data->whiteTexture->Bind(0);
 		s_Data->textureShader->SetUniformInt1("u_Texture", s_Data->whiteTexture->GetSlot());
 		s_Data->textureShader->SetUniformFloat4("u_Color", color);
+		s_Data->textureShader->SetUniformFloat1("u_TilingFactor", 1.0f);
 		s_Data->textureShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
 
 		s_Data->vao->Bind();
 		RenderCommand::DrawIndexed(s_Data->vao);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color, float tiling_factor)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture, color);
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture, color, tiling_factor);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color, float tiling_factor)
 	{
 		CY_PROFILING_FUNCTION_TIMER();
 
 		s_Data->textureShader->SetUniformFloat4("u_Color", color);
+		s_Data->textureShader->SetUniformFloat1("u_TilingFactor", tiling_factor);
 
 		texture->Bind(1);
 		s_Data->textureShader->SetUniformInt1("u_Texture", texture->GetSlot());

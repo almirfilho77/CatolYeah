@@ -21,6 +21,7 @@ private:
 	CatolYeah::OrthographicCameraController m_cameraController;
 
 	CatolYeah::Ref<CatolYeah::VertexArray> m_squareVAO = nullptr;
+	CatolYeah::Ref<CatolYeah::Texture2D> m_backgroundTexture = nullptr;
 	CatolYeah::Ref<CatolYeah::Texture2D> m_texture = nullptr;
 
 
