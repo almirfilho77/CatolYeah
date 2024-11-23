@@ -17,6 +17,7 @@ void Sandbox2D::OnAttach()
 	auto width = CatolYeah::Application::Get().GetWindow().GetWidth();
 	auto height = CatolYeah::Application::Get().GetWindow().GetHeight();
 	m_cameraController.SetAspectRatio((float)width / (float)height);
+	m_backgroundTexture = CatolYeah::Texture2D::Create("assets/textures/Checkerboard.png");
 	m_texture = CatolYeah::Texture2D::Create("assets/textures/zeca.png");
 }
 
@@ -56,8 +57,10 @@ void Sandbox2D::OnUpdate(CatolYeah::Timestep ts)
 	CatolYeah::Renderer2D::BeginScene(m_cameraController.GetCamera());
 
 	//CY_INFO("Square position [x:{0}] [y:{1}", m_squarePosition.x, m_squarePosition.y);
-	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x-0.75f, m_squarePosition.y-0.5f, 0.1f }, {2.0f, 2.0f}, m_barColor);	// Setting Z-axis with depth test enabled
-	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y, 0.2f }, {1.0f, 1.0f}, m_texture);				// Texture closes to the screen than flat color quad
+	//CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x-0.75f, m_squarePosition.y-0.5f, 0.1f }, {2.0f, 2.0f}, m_barColor);	// Setting Z-axis with depth test enabled
+	CatolYeah::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f }, {2.0f, 2.0f}, m_backgroundTexture, { 1.0f, 1.0f, 1.0f, 1.0f }, 10.0f);				// Texture closes to the screen than flat color quad
+	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y, 0.2f }, {0.1f, 0.1f}, m_texture);				// Texture closes to the screen than flat color quad
+	CatolYeah::Renderer2D::DrawRotatedQuad({ -m_squarePosition.x, -m_squarePosition.y, 0.3f }, {0.1f, 0.1f}, glm::radians(45.0f), m_texture);				// Texture closes to the screen than flat color quad
 	CatolYeah::Renderer2D::EndScene();
 }
 

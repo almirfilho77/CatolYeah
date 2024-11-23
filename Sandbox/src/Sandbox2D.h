@@ -21,6 +21,7 @@ private:
 	CatolYeah::OrthographicCameraController m_cameraController;
 
 	CatolYeah::Ref<CatolYeah::VertexArray> m_squareVAO = nullptr;
+	CatolYeah::Ref<CatolYeah::Texture2D> m_backgroundTexture = nullptr;
 	CatolYeah::Ref<CatolYeah::Texture2D> m_texture = nullptr;
 
 
@@ -29,6 +30,6 @@ private:
 	glm::vec3 m_squarePosition = { 0.0f, 0.0f, 0.0f };
 	
 	float m_aspectRatio;
-	float m_squareTranslationSpeed = 5.0f;
+	float m_squareTranslationSpeed = 4.0f;
 };
 #endif //__SANDBOX2D_H__

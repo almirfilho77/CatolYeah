@@ -15,6 +15,7 @@ namespace CatolYeah
 		virtual std::string_view GetName() const = 0;
 
 		virtual void SetUniformInt1(const std::string& name, int value) = 0;
+		virtual void SetUniformFloat1(const std::string& name, float value) = 0;
 
 		virtual void SetUniformFloat3(const std::string& name, float v0, float v1, float v2) = 0;
 		virtual void SetUniformFloat3(const std::string& name, const glm::vec3& vector) = 0;

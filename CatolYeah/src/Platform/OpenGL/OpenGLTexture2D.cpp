@@ -96,8 +96,8 @@ namespace CatolYeah
 
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
+		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
 
 		GLCallVoid(glTextureSubImage2D(m_rendererID, 0, 0, 0, m_width, m_height,
 			m_dataFormat, GL_UNSIGNED_BYTE, data));
