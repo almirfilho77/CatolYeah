@@ -36,10 +36,22 @@ namespace CatolYeah
 		GLCallVoid(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	}
 
-	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertex_array)
+	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertex_array, uint32_t indexCount)
 	{
 		CY_PROFILING_FUNCTION_TIMER();
 
-		GLCallVoid(glDrawElements(GL_TRIANGLES, vertex_array->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr));
+		uint32_t count = 0;
+		if (indexCount == 0)
+		{
+			count = vertex_array->GetIndexBuffer()->GetCount();
+		}
+		else
+		{
+			count = indexCount;
+		}
+
+		GLCallVoid(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr));
+
+		
 	}
 }

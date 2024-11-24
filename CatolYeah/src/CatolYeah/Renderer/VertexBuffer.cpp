@@ -7,6 +7,25 @@
 
 namespace CatolYeah
 {
+    Ref<VertexBuffer> VertexBuffer::Create(uint32_t size)
+    {
+        switch (Renderer::GetAPI())
+        {
+        case RendererAPI::API::None:
+        {
+            CY_ASSERT(false, "RendererAPI::None is currently not supported!");
+            return nullptr;
+        }
+
+        case RendererAPI::API::OpenGL:
+        {
+            return std::make_shared<OpenGLVertexBuffer>(size);
+        }
+        }
+        CY_ASSERT(false, "Unkown RendererAPI!");
+        return nullptr;
+    }
+
     Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
     {
         switch (Renderer::GetAPI())
@@ -25,4 +44,5 @@ namespace CatolYeah
         CY_ASSERT(false, "Unkown RendererAPI!");
         return nullptr;
     }
+
 }

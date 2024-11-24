@@ -12,6 +12,7 @@ namespace CatolYeah
 		VertexBufferLayout m_bufferLayout;
 
 	public:
+		OpenGLVertexBuffer(uint32_t size);
 		OpenGLVertexBuffer(float* vertices, uint32_t size);
 		virtual ~OpenGLVertexBuffer();
 
@@ -20,5 +21,6 @@ namespace CatolYeah
 
 		virtual const VertexBufferLayout& GetBufferLayout() const override { return m_bufferLayout; }
 		virtual void SetBufferLayout(const VertexBufferLayout& layout) override { m_bufferLayout = layout; }
+		virtual void SetData(const void *data, uint32_t size) override;
 	};
 }

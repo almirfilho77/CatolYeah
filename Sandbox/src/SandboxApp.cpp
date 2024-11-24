@@ -17,6 +17,7 @@ public:
 		: Layer("DebugLayer"), isProfilerActive(false)
 	{
 		profileBuffer = new char[100];
+		memset(profileBuffer, 0, sizeof(profileBuffer));
 	}
 
 	~DebugLayer()

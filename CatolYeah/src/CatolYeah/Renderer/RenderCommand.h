@@ -28,9 +28,9 @@ namespace CatolYeah
 			s_rendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const Ref<VertexArray>& vertex_array)
+		inline static void DrawIndexed(const Ref<VertexArray>& vertex_array, uint32_t indexCount = 0)
 		{
-			s_rendererAPI->DrawIndexed(vertex_array);
+			s_rendererAPI->DrawIndexed(vertex_array, indexCount);
 		}
 
 	private:
