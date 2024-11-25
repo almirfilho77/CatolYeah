@@ -28,6 +28,8 @@ namespace CatolYeah {
 
 		virtual std::string_view GetName() const override { return m_name; }
 
+		virtual void SetUniformIntArray(const std::string& name, int* values, uint32_t count) override;
+
 		virtual void SetUniformInt1(const std::string& name, int value) override;
 		virtual void SetUniformFloat1(const std::string& name, float value) override;
 

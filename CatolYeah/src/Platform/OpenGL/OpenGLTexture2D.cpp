@@ -43,7 +43,7 @@ namespace CatolYeah
 		GLCallVoid(glTextureStorage2D(m_rendererID, 1, m_internalFormat, m_width, m_height));
 
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
 	}
@@ -95,7 +95,7 @@ namespace CatolYeah
 		GLCallVoid(glTextureStorage2D(m_rendererID, 1, m_internalFormat, m_width, m_height));
 
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
 		GLCallVoid(glTextureParameteri(m_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
 

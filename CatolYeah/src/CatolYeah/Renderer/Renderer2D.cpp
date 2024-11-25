@@ -20,6 +20,8 @@ namespace CatolYeah
 		glm::vec3 Position;
 		glm::vec4 Color;
 		glm::vec2 TextureCoord;
+		float TextureIndex;			// Specifies the sampler2D in the shader
+		float TilingFactor;
 	};
 
 	struct Renderer2DStorage
@@ -27,6 +29,7 @@ namespace CatolYeah
 		const uint32_t MaxQuadsPerDrawCall = MAXQUADSPERDRAWCALL;
 		const uint32_t MaxVerticesPerDrawCall = MaxQuadsPerDrawCall * VERTICESPERQUAD;
 		const uint32_t MaxIndicesPerDrawCall = MaxQuadsPerDrawCall * INDICESPERQUAD;
+		static const uint32_t MaxTextureSlots = 32;
 
 		Ref<VertexArray> vao;
 		Ref<VertexBuffer> quadVBO;
@@ -37,6 +40,9 @@ namespace CatolYeah
 
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPtr = nullptr;
+
+		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
+		uint32_t TextureSlotIndex = 1; // Slot 0 is reserved for White Texture
 	};
 
 	static Renderer2DStorage s_Data;
@@ -59,6 +65,8 @@ namespace CatolYeah
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float4, "a_Color" }, 
 			{ ShaderDataType::Float2, "a_TextureCoord" },
+			{ ShaderDataType::Float, "a_TextureIndex" },
+			{ ShaderDataType::Float, "a_TilingFactor" }
 		};
 		s_Data.quadVBO->SetBufferLayout(quadVBLayout);
 		s_Data.vao->AddVertexBuffer(s_Data.quadVBO);
@@ -84,19 +92,30 @@ namespace CatolYeah
 		s_Data.vao->SetIndexBuffer(quadIB);
 		delete[] quadIndices;
 
+		int samplers[s_Data.MaxTextureSlots];
+		for (uint32_t i = 0; i < s_Data.MaxTextureSlots; i++)
+		{
+			samplers[i] = i;
+		}
+		s_Data.textureShader->Bind();
+		s_Data.textureShader->SetUniformIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
+
 		s_Data.whiteTexture = Texture2D::Create(1, 1, 4);
 		uint32_t whiteTextureData = 0xffffffff;
 		s_Data.whiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
+		s_Data.TextureSlots[0] = s_Data.whiteTexture;
 	}
 
 	void Renderer2D::Init()
 	{
 		CY_PROFILING_FUNCTION_TIMER();
 
-		m_InitializeBuffers();
-
 		fs::path shaderPath = fs::path("assets") / "shaders" / "Texture.glsl";
 		s_Data.textureShader = Shader::Create(shaderPath.string());
+
+		m_InitializeBuffers();
+
 	}
 
 	// TODO: remove code duplication
@@ -104,10 +123,10 @@ namespace CatolYeah
 	{
 		CY_PROFILING_FUNCTION_TIMER();
 
-		m_InitializeBuffers();
-        
         fs::path shaderPath = fs::path(assetsPath) / "Texture.glsl";
 		s_Data.textureShader = Shader::Create(shaderPath.string());
+        
+		m_InitializeBuffers();
 	}
 
 	void Renderer2D::Shutdown()
@@ -122,8 +141,6 @@ namespace CatolYeah
 
 		s_Data.textureShader->Bind();
 		s_Data.textureShader->SetUniformMatFloat4("u_ViewProjectionMatrix", glm::mat4(1.0f));
-
-		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
@@ -136,6 +153,7 @@ namespace CatolYeah
 
 		s_Data.QuadIndexCount = 0;
 		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+		s_Data.TextureSlotIndex = 1;
 	}
 
 	void Renderer2D::EndScene()
@@ -152,6 +170,10 @@ namespace CatolYeah
 
 	void Renderer2D::Flush()
 	{
+		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
+		{
+			s_Data.TextureSlots[i]->Bind(i);
+		}
 		RenderCommand::DrawIndexed(s_Data.vao, s_Data.QuadIndexCount);
 	}
 
@@ -164,35 +186,37 @@ namespace CatolYeah
 	{
 		CY_PROFILING_FUNCTION_TIMER();
 
+		const float textureIndex = 0.0f;
+
 		s_Data.QuadVertexBufferPtr->Position = position;
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TextureCoord = { 0.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = 1.0f;
 		s_Data.QuadVertexBufferPtr++;
 		
 		s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y, 0.0f };
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TextureCoord = { 1.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = 1.0f;
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y + size.y, 0.0f };
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TextureCoord = { 1.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = 1.0f;
 		s_Data.QuadVertexBufferPtr++;
 		
 		s_Data.QuadVertexBufferPtr->Position = { position.x, position.y + size.y, 0.0f };
 		s_Data.QuadVertexBufferPtr->Color = color;
 		s_Data.QuadVertexBufferPtr->TextureCoord = { 0.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = 1.0f;
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadIndexCount += 6;
-
-		//s_Data.whiteTexture->Bind(0);
-		////s_Data.textureShader->SetUniformInt1("u_Texture", s_Data.whiteTexture->GetSlot());
-		//s_Data.textureShader->SetUniformFloat1("u_TilingFactor", 1.0f);
-		//s_Data.textureShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
-
-		//s_Data.vao->Bind();
-		//RenderCommand::DrawIndexed(s_Data.vao);
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, Ref<Texture2D> texture, const glm::vec4& color, float tiling_factor)
@@ -204,15 +228,52 @@ namespace CatolYeah
 	{
 		CY_PROFILING_FUNCTION_TIMER();
 
-		s_Data.textureShader->SetUniformFloat4("u_Color", color);
-		s_Data.textureShader->SetUniformFloat1("u_TilingFactor", tiling_factor);
+		float textureIndex = 0.0f;
+		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
+		{
+			if (s_Data.TextureSlots[i]->GetTextureId() == texture->GetTextureId())
+			{
+				textureIndex = static_cast<float>(i);
+				break;
+			}
+		}
 
-		texture->Bind(1);
-		s_Data.textureShader->SetUniformInt1("u_Texture", texture->GetSlot());
-		s_Data.textureShader->SetUniformMatFloat4("u_ModelMatrix", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f)));
+		if (textureIndex == 0.0f)
+		{
+			textureIndex = static_cast<float>(s_Data.TextureSlotIndex);
+			s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
+			s_Data.TextureSlotIndex++;
+		}
 
-		s_Data.vao->Bind();
-		RenderCommand::DrawIndexed(s_Data.vao);
+		s_Data.QuadVertexBufferPtr->Position = position;
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TextureCoord = { 0.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = tiling_factor;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y, 0.0f };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TextureCoord = { 1.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = tiling_factor;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y + size.y, 0.0f };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TextureCoord = { 1.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = tiling_factor;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadVertexBufferPtr->Position = { position.x, position.y + size.y, 0.0f };
+		s_Data.QuadVertexBufferPtr->Color = color;
+		s_Data.QuadVertexBufferPtr->TextureCoord = { 0.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TextureIndex = textureIndex;
+		s_Data.QuadVertexBufferPtr->TilingFactor = tiling_factor;
+		s_Data.QuadVertexBufferPtr++;
+
+		s_Data.QuadIndexCount += 6;
 	}
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)

@@ -14,6 +14,8 @@ namespace CatolYeah
 
 		virtual std::string_view GetName() const = 0;
 
+		virtual void SetUniformIntArray(const std::string& name, int *values, uint32_t count) = 0;
+
 		virtual void SetUniformInt1(const std::string& name, int value) = 0;
 		virtual void SetUniformFloat1(const std::string& name, float value) = 0;
 

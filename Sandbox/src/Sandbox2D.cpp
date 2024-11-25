@@ -18,7 +18,8 @@ void Sandbox2D::OnAttach()
 	auto height = CatolYeah::Application::Get().GetWindow().GetHeight();
 	m_cameraController.SetAspectRatio((float)width / (float)height);
 	m_backgroundTexture = CatolYeah::Texture2D::Create("assets/textures/Checkerboard.png");
-	m_texture = CatolYeah::Texture2D::Create("assets/textures/zeca.png");
+	m_zeca = CatolYeah::Texture2D::Create("assets/textures/zeca.png");
+	m_carinha = CatolYeah::Texture2D::Create("assets/textures/carinha.png");
 }
 
 void Sandbox2D::OnDetach()
@@ -30,6 +31,7 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Square color", glm::value_ptr(m_squareColor));
 	ImGui::ColorEdit4("Bar color", glm::value_ptr(m_barColor));
+	ImGui::ColorEdit4("BG tinting color", glm::value_ptr(m_bgTintingColor));
 
 	ImGui::End();
 }
@@ -56,12 +58,17 @@ void Sandbox2D::OnUpdate(CatolYeah::Timestep ts)
 
 	CatolYeah::Renderer2D::BeginScene(m_cameraController.GetCamera());
 
-	//CY_INFO("Square position [x:{0}] [y:{1}", m_squarePosition.x, m_squarePosition.y);
-	//CatolYeah::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f }, {2.0f, 2.0f}, m_backgroundTexture, { 1.0f, 1.0f, 1.0f, 1.0f }, 10.0f);				// Texture closes to the screen than flat color quad
-	//CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y, 0.2f }, {0.1f, 0.1f}, m_texture);				// Texture closes to the screen than flat color quad
-	//CatolYeah::Renderer2D::DrawRotatedQuad({ -m_squarePosition.x, -m_squarePosition.y, 0.3f }, {0.1f, 0.1f}, glm::radians(45.0f), m_texture);				// Texture closes to the screen than flat color quad
-	CatolYeah::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.1f  }, {0.4f, 0.4f}, m_squareColor);	// Setting Z-axis with depth test enabled
-	CatolYeah::Renderer2D::DrawQuad({  0.5f, -0.5f, 0.2f }, {0.2f, 0.3f}, m_barColor);	// Setting Z-axis with depth test enabled
+	//CY_DEBUG("Square position [x:{0}] [y:{1}", m_squarePosition.x, m_squarePosition.y);
+
+	CatolYeah::Renderer2D::DrawQuad({ -0.5f, -0.5f, -0.1f }, {0.1f, 0.1f}, m_carinha);										// Carinha
+	CatolYeah::Renderer2D::DrawQuad({ m_squarePosition.x, m_squarePosition.y, 0.0f }, {0.5f, 0.5f}, m_zeca);				// Zeca
+	CatolYeah::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.2f }, {10.0f, 10.0f}, m_backgroundTexture, m_bgTintingColor, 10.0f);	// Checkerboard
+
+	CatolYeah::Renderer2D::DrawQuad({ -1.0f,  0.0f, 0.1f }, {0.4f, 0.4f}, m_squareColor);	// Setting Z-axis with depth test enabled
+	CatolYeah::Renderer2D::DrawQuad({  0.5f, -0.5f, 0.1f }, {0.2f, 0.3f}, m_barColor);		// Setting Z-axis with depth test enabled
+
+	//CatolYeah::Renderer2D::DrawRotatedQuad({ -m_squarePosition.x, -m_squarePosition.y, 0.3f }, {0.1f, 0.1f}, glm::radians(45.0f), m_zeca);
+	
 	CatolYeah::Renderer2D::EndScene();
 }
 

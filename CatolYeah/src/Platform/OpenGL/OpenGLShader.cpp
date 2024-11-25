@@ -75,6 +75,12 @@ namespace CatolYeah {
         GLCallVoid(glUseProgram(m_rendererId));
     }
 
+    void OpenGLShader::SetUniformIntArray(const std::string& name, int* values, uint32_t count)
+    {
+        int location = m_GetUniformLocation(name);
+        GLCallVoid(glUniform1iv(location, count, values));
+    }
+
     void OpenGLShader::SetUniformInt1(const std::string& name, int value)
     {
         int location = m_GetUniformLocation(name);
